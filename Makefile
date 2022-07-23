@@ -12,25 +12,29 @@
 
 NAME = minishell
 
-SRC = minishell.c
+SRCS = minishell.c \
+	execute_minishell.c \
+	./parsing/parse.c 
 
-OBJS = $(SRC:.c=.o)
-
+OBJS = $(SRCS:%.c=%.o)
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
+LIBFT = ./libft/libft.a
 
 all: $(NAME)
-
-%.o : %.c
-	$(CC) $(CFLAGS) -c $< -o $@
 	
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) $(LIBFT)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) 
 
+$(LIBFT) :
+	cd ./libft && make
 
-clean:
+clean :
 	rm -f $(OBJS)
+	cd ./libft && make clean
 
-fclean: clean
+fclean : clean
 	rm -f $(NAME)
+	cd ./libft && make fclean
 
 re: fclean all

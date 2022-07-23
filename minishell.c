@@ -10,3 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
+
+int main(int ac, char **av)
+{
+    char	*str;
+
+    (void)ac;
+    (void)av;
+	while (1)
+	{
+		str = readline("minishell>");
+		if (!str)
+		{
+			printf("exit");
+			exit(0);
+		}
+	}
+}
