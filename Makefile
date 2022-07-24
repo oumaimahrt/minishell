@@ -17,14 +17,14 @@ SRCS = minishell.c \
 	./parsing/parse.c 
 
 OBJS = $(SRCS:%.c=%.o)
-CC = cc
+LFLAGS = -lreadline -L/Users/ohrete/.brew/opt/readline/lib -I/Users/ohrete/.brew/opt/readline/include
 CFLAGS = -Wall -Wextra -Werror
 LIBFT = ./libft/libft.a
 
 all: $(NAME)
 	
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) 
+	$(CC) $(CFLAGS) $(OBJS) $(LFLAGS) $(LIBFT) -o $(NAME) 
 
 $(LIBFT) :
 	cd ./libft && make

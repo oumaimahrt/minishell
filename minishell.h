@@ -21,4 +21,12 @@
 # include <readline/history.h>
 # include "./libft/libft.h"
 
+typedef struct s_global
+{
+    char    **line;
+    char    **str;
+}   t_global;
+
+t_global    g_var;
+
 #endif
