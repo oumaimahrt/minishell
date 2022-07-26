@@ -18,7 +18,7 @@ SRCS = minishell.c \
 
 OBJS = $(SRCS:%.c=%.o)
 LFLAGS = -lreadline -L/Users/ohrete/.brew/opt/readline/lib -I/Users/ohrete/.brew/opt/readline/include
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
 LIBFT = ./libft/libft.a
 
 all: $(NAME)
