@@ -12,27 +12,26 @@
 
 #include "minishell.h"
 
-char	*line_reading(char *line)
-{
-	line = ft_strdup(line);
-	return (line);
-}
-
 int main(int ac, char **av)
 {
-	char	*str;
+	char	*line;
 
     (void)ac;
     (void)av;
 	while (1)
 	{
-		str = readline("minishell~ ");
-		str = line_reading(str);
-		//if (!str)
+		line = readline("minishell~ ");
+		if (line[0] != '\0')
+		{
+			//parsing
+			add_history(line);
+		}
+		// if (!line )
 		// {
 		// 	//printf("exit");
 		// 	exit(0);
 		// }
-		add_history(str);
+		free(line);
+		//execution;
 	}
 }

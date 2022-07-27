@@ -21,12 +21,25 @@
 # include <readline/history.h>
 # include "./libft/libft.h"
 
-typedef struct s_global
-{
-    char    **line;
-    char    **str;
-}   t_global;
+// typedef struct s_global
+// {
+//     char    **line;
+//     char    **str;
+// }   t_global;
 
-t_global    g_var;
+// t_global    g_var;
+
+typedef struct s_words
+{
+    char *name;
+    int id;
+    t_words *next;
+}   t_words;
+
+typedef struct  s_gencmd
+{
+    struct *s_words;
+    t_gencmd *next; 
+}   t_gencmd;
 
 #endif
