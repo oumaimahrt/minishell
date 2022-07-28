@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	char	*line;
 
@@ -23,12 +23,12 @@ int main(int ac, char **av)
 		line = readline("minishell~ ");
 		if (line[0] != '\0')
 		{
-			//parsing
 			add_history(line);
+			parsing(line); //parsing
 		}
-		// if (!line )
+		// if (!line)
 		// {
-		// 	//printf("exit");
+		// 	printf("exit");
 		// 	exit(0);
 		// }
 		free(line);

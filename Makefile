@@ -13,8 +13,9 @@
 NAME = minishell
 
 SRCS = minishell.c \
+	parse.c \
 	execute_minishell.c \
-	./parsing/parse.c 
+	#./parsing/parse.c 
 
 OBJS = $(SRCS:%.c=%.o)
 LFLAGS = -lreadline -L/Users/ohrete/.brew/opt/readline/lib -I/Users/ohrete/.brew/opt/readline/include

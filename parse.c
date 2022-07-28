@@ -10,9 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
-// t_gencmd    check_line(t_gencmd *s_words)
-// {
-    
-// }
+void	parsing(char *line)
+{
+	t_tokenization	*
+
+}

@@ -29,17 +29,26 @@
 
 // t_global    g_var;
 
-typedef struct s_words
-{
-    char *name;
-    int id;
-    t_words *next;
-}   t_words;
+// typedef struct s_words
+// {
+//     char *name;
+//     int id;
+//     t_words *next;
+// }   t_words;
 
-typedef struct  s_gencmd
+// typedef struct  s_gencmd
+// {
+//     struct *s_words;
+//     t_gencmd *next; 
+// }   t_gencmd;
+
+typedef struct s_tokenization
 {
-    struct *s_words;
-    t_gencmd *next; 
-}   t_gencmd;
+    char    *line;
+    char    c;
+}   t_tokenization;
+
+
+void	parsing(char *line);
 
 #endif
