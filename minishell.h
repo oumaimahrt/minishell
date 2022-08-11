@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:11:06 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/11 04:53:20 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/11 23:49:20 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,6 @@ char	tokenizer(char **env);
 
 
 
-char	**copy_env(char **env);
-void    expansion_env(char **env);
+//char	**copy_env(char **env);
+void    expansion_env(t_env **fst_link, char **env);
 #endif

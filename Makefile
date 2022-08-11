@@ -6,14 +6,16 @@
 #    By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/22 09:56:57 by ohrete            #+#    #+#              #
-#    Updated: 2022/08/10 01:56:22 by ohrete           ###   ########.fr        #
+#    Updated: 2022/08/11 23:57:36 by ohrete           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 SRCS = minishell.c \
-	parse.c \
+	expanding.c \
+	tokenizer.c \
+	parser.c \
 	execute_minishell.c \
 	#./parsing/parse.c 
 

@@ -6,40 +6,40 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 18:06:24 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/11 05:18:44 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/11 23:21:51 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int counting_line(char **line)
-{
-    int i;
+// int counting_line(char **line)
+// {
+//     int i;
 
-    i = 0;
-    while(line[i])
-        i++;
-    return (i);
-}
+//     i = 0;
+//     while(line[i])
+//         i++;
+//     return (i);
+// }
 
-char	**copy_env(char **env)
-{
-    char    **table;
-    //char    **split;
-    int     i;
+// char	**copy_env(char **env)
+// {
+//     char    **table;
+//     //char    **split;
+//     int     i;
 
-    i = 0;
-    //printf("%d\n",counting_line(env));
-    table = malloc(sizeof(char *) * counting_line(env) + 1);
-    while (env[i])
-    {
-        table[i] = ft_strdup(env[i]);
-        printf("%s\n",table[i]);
-        i++;
-    }
-    table[i] = 0;
-    return (table);
-}
+//     i = 0;
+//     //printf("%d\n",counting_line(env));
+//     table = malloc(sizeof(char *) * counting_line(env) + 1);
+//     while (env[i])
+//     {
+//         table[i] = ft_strdup(env[i]);
+//         printf("%s\n",table[i]);
+//         i++;
+//     }
+//     table[i] = 0;
+//     return (table);
+// }
 
 char    *search_name(char *name, int i)
 {
@@ -117,27 +117,28 @@ void    add_last(t_env **fst_link, t_env *new)
     }
 }
 
-void    expansion_env(char **env)
+void    expansion_env(t_env **fst_link, char **env)
 {
-    t_env **line;
+    //t_env **line;
     char *name;
     char *value;
     int     i;
-    char    **table;
+    //char    **table;
     //char    **split;
    // char *s;
 
-    line = NULL;
-    table = copy_env(env);
+    //line = NULL;
+    //table = copy_env(env);
     i = 0;
    // split = ft_split(env[i], '=');
     while(env[i])
     {
         name = search_name(env[i], '=');
-        printf("name ==> [%s]\n",name);
+       // printf("name ==> [%s]\n",name);
         value = search_value(env[i], '=');
-        printf("value ==> [%s]\n",value);
-        add_last(line, fill_struct(name, value));
+        //printf("value ==> [%s]\n",value);
+        add_last(fst_link, fill_struct(name, value));
+        //printf("hahahahahhahahahahahah\n");
         i++;
     }
 }
