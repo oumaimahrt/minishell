@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:26:50 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/11 01:41:59 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/11 03:46:51 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	main(int ac, char **av, char **env)
 {
-	char	**table;
 	//char *line;
 	// int		i;
 
@@ -26,8 +25,7 @@ int	main(int ac, char **av, char **env)
 	// 	printf("%s %d\n", env[i], i);
 	// 	i++;
 	// }
-	table = copy_env(env);
-	expansion_env(table);
+	expansion_env(env);
 // 	while (1)
 // 	{
 // 		line = readline("minishell~ ");

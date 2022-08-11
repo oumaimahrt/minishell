@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:11:06 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/11 01:52:04 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/11 04:53:20 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@ typedef struct s_env
     char *value;
     struct s_env *next;
 }   t_env;
+
+// //linked list
+// typedef struct s_node
+// {
+//     char    *data;
+//     struct s_node *next;
+// }   t_node;
+// //typedef struct s_head = NULL;
 
 //tokenizer
 typedef struct s_token
@@ -52,12 +60,12 @@ typedef struct s_redir
     struct s_redir  *next;
 }   t_redir;
 
-typedef struct  s_node
+typedef struct  s_line
 {
     t_cmd           *cmd;
     t_redir         *redir;
     struct s_node   *next;
-}   t_node;
+}   t_line;
 
 
 char	tokenizer(char **env);

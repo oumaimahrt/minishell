@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 18:06:24 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/11 02:09:00 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/11 05:18:44 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,19 +67,68 @@ char    *search_value(char *name, int i)
     return (str);
 }
 
-t_env   fill_struct(char *name, char *value)
+t_env   *fill_struct(char *name, char *value)
 {
-    t_env 
+    t_env *new;
+    
+    new = malloc(sizeof(t_env));
+    new->name = name;
+    new->value = value;
+    new->next = NULL;
+    return (new);
+}
+
+void    add_first(t_env **fst_link, t_env *new)
+{
+    if (!new || !fst_link)
+        return ;
+    new->next = *fst_link;
+    *fst_link = new;
+}
+
+t_env   *search_last(t_env *fst_link)
+{
+    t_env *tmp;
+    
+    if (!fst_link)
+        return (NULL);
+    tmp = fst_link;
+    while (tmp->next != NULL)
+        tmp = tmp->next;
+    return (tmp);
+}
+
+void    add_last(t_env **fst_link, t_env *new)
+{
+    t_env *last;
+    
+    if (!(*fst_link))
+    {
+        add_first(fst_link, new);
+        return ;
+    }
+    last = search_last(*fst_link);
+    if(new->next == NULL)
+        last->next = new;
+    while (new->next != NULL)
+    {
+        last->next = new;
+        new = new->next;
+    }
 }
 
 void    expansion_env(char **env)
 {
+    t_env **line;
     char *name;
     char *value;
     int     i;
+    char    **table;
     //char    **split;
    // char *s;
 
+    line = NULL;
+    table = copy_env(env);
     i = 0;
    // split = ft_split(env[i], '=');
     while(env[i])
@@ -88,6 +137,7 @@ void    expansion_env(char **env)
         printf("name ==> [%s]\n",name);
         value = search_value(env[i], '=');
         printf("value ==> [%s]\n",value);
+        add_last(line, fill_struct(name, value));
         i++;
     }
 }
