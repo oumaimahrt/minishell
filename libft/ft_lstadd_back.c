@@ -1,39 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/08 16:29:04 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/11 01:23:21 by ohrete           ###   ########.fr       */
+/*   Created: 2022/08/10 01:52:46 by ohrete            #+#    #+#             */
+/*   Updated: 2022/08/10 01:52:55 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include"libft.h"
 
-char	*ft_strdup(char *s1)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	char	*dup;
-	int		i;
+	t_list	*last;
 
-	dup = malloc(sizeof(char) * (ft_strlen(s1) + 1));
-	if (!dup)
-		return (NULL);
-	i = 0;
-	while (s1[i])
+	if (!(*lst))
 	{
-		dup[i] = s1[i];
-		i++;
+		ft_lstadd_front(lst, new);
+		return ;
 	}
-	dup[i] = '\0';
-	return (dup);
+	last = ft_lstlast(*lst);
+	while (new->next)
+	{
+		last->next = new;
+		new = new->next;
+	}
 }
-
-// #include<stdio.h>
-// int main()
-// {
-// 	char s[] = "hello world";
-// 	char *dup = ft_strdup(s);
-// 	printf("%s\n", dup);
-// }

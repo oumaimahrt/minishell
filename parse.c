@@ -6,14 +6,88 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 18:06:24 by ohrete            #+#    #+#             */
-/*   Updated: 2022/07/23 18:06:24 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/11 02:09:00 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	parsing(char *line)
+int counting_line(char **line)
 {
-	t_tokenization	*
+    int i;
 
+    i = 0;
+    while(line[i])
+        i++;
+    return (i);
+}
+
+char	**copy_env(char **env)
+{
+    char    **table;
+    //char    **split;
+    int     i;
+
+    i = 0;
+    //printf("%d\n",counting_line(env));
+    table = malloc(sizeof(char *) * counting_line(env) + 1);
+    while (env[i])
+    {
+        table[i] = ft_strdup(env[i]);
+        printf("%s\n",table[i]);
+        i++;
+    }
+    table[i] = 0;
+    return (table);
+}
+
+char    *search_name(char *name, int i)
+{
+    char    *str;
+    int     len;
+    char    *c;
+
+    c = ft_strchr(name, i);
+   // printf("c ==> [%s]\n",c);
+    len = ft_strlen(c);
+    str = ft_substr(name, 0, ft_strlen(name) - len);
+    
+    return (str);
+}
+
+char    *search_value(char *name, int i)
+{
+    char    *str;
+    int     len;
+    char    *c;
+
+    c = ft_strchr(name, i);
+    len = ft_strlen(c);
+    str = ft_substr(name, ft_strlen(name) - len + 1, len);
+    return (str);
+}
+
+t_env   fill_struct(char *name, char *value)
+{
+    t_env 
+}
+
+void    expansion_env(char **env)
+{
+    char *name;
+    char *value;
+    int     i;
+    //char    **split;
+   // char *s;
+
+    i = 0;
+   // split = ft_split(env[i], '=');
+    while(env[i])
+    {
+        name = search_name(env[i], '=');
+        printf("name ==> [%s]\n",name);
+        value = search_value(env[i], '=');
+        printf("value ==> [%s]\n",value);
+        i++;
+    }
 }

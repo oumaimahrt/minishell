@@ -1,39 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/08 16:29:04 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/11 01:23:21 by ohrete           ###   ########.fr       */
+/*   Created: 2022/08/08 09:50:24 by ohrete            #+#    #+#             */
+/*   Updated: 2022/08/08 09:53:18 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../minishell.h"
 
-char	*ft_strdup(char *s1)
+void    my_pwd(void)
 {
-	char	*dup;
-	int		i;
-
-	dup = malloc(sizeof(char) * (ft_strlen(s1) + 1));
-	if (!dup)
-		return (NULL);
-	i = 0;
-	while (s1[i])
-	{
-		dup[i] = s1[i];
-		i++;
-	}
-	dup[i] = '\0';
-	return (dup);
+    char    *str;
+    
+    str = getcwd(NULL, 0);
+    printf("%s\n", str);
+    free(str);
 }
 
-// #include<stdio.h>
-// int main()
-// {
-// 	char s[] = "hello world";
-// 	char *dup = ft_strdup(s);
-// 	printf("%s\n", dup);
-// }

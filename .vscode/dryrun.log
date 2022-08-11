@@ -1,6 +1,7 @@
 make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/ohrete/Desktop/minishell'
 cc -Wall -Wextra -Werror    -c -o minishell.o minishell.c
+ 
 cc -Wall -Wextra -Werror    -c -o parse.o parse.c
 cc -Wall -Wextra -Werror    -c -o execute_minishell.o execute_minishell.c
 cd ./libft && make

@@ -35,7 +35,11 @@ SRC =	ft_isascii.c \
 		ft_strjoin.c \
 		ft_split.c \
 		ft_strmapi.c \
-		ft_striteri.c
+		ft_striteri.c \
+		ft_lstnew.c \
+		ft_lstadd_back.c \
+		ft_lstlast.c \
+		ft_lstadd_front.c
 	
 OBJS = $(SRC:.c=.o)
 

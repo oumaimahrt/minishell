@@ -1,39 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   my_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/08 16:29:04 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/11 01:23:21 by ohrete           ###   ########.fr       */
+/*   Created: 2022/08/08 11:38:36 by ohrete            #+#    #+#             */
+/*   Updated: 2022/08/08 11:38:46 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-char	*ft_strdup(char *s1)
-{
-	char	*dup;
-	int		i;
-
-	dup = malloc(sizeof(char) * (ft_strlen(s1) + 1));
-	if (!dup)
-		return (NULL);
-	i = 0;
-	while (s1[i])
-	{
-		dup[i] = s1[i];
-		i++;
-	}
-	dup[i] = '\0';
-	return (dup);
-}
-
-// #include<stdio.h>
-// int main()
-// {
-// 	char s[] = "hello world";
-// 	char *dup = ft_strdup(s);
-// 	printf("%s\n", dup);
-// }
+#include "minishell.h"
