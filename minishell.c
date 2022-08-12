@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:26:50 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/11 22:39:07 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/12 18:41:18 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	main(int ac, char **av, char **env)
 	// 	if (line[0] != '\0')
 	// 	{
 	// 		add_history(line);
-	// 		// tokenizer(env); //parsing
+	// 		// parser(fst_link, line); //parsing
 	// 	}
 	// 	// if (!line)
 	// 	// {

@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:11:06 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/11 23:49:20 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/12 22:58:31 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,14 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "./libft/libft.h"
+# define INPUT '>'
+# define OUTPUT '<'
+# define PIPE '|'
+# define EXPAND '$'
+# define SQ '\''
+# define DQ '\"'
+# define HERE_DOC 'H'
+
 
 //env
 typedef struct s_env
@@ -28,14 +36,6 @@ typedef struct s_env
     char *value;
     struct s_env *next;
 }   t_env;
-
-// //linked list
-// typedef struct s_node
-// {
-//     char    *data;
-//     struct s_node *next;
-// }   t_node;
-// //typedef struct s_head = NULL;
 
 //tokenizer
 typedef struct s_token
@@ -64,14 +64,11 @@ typedef struct  s_line
 {
     t_cmd           *cmd;
     t_redir         *redir;
-    struct s_node   *next;
+    struct s_line   *next;
 }   t_line;
 
 
 char	tokenizer(char **env);
-
-
-
 //char	**copy_env(char **env);
 void    expansion_env(t_env **fst_link, char **env);
 #endif

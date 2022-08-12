@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   expanding.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 18:06:24 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/11 23:21:51 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/13 00:14:30 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,34 +86,49 @@ void    add_first(t_env **fst_link, t_env *new)
     *fst_link = new;
 }
 
-t_env   *search_last(t_env *fst_link)
-{
-    t_env *tmp;
+// t_env   *search_last(t_env *fst_link)
+// {
+//     t_env *tmp;
     
-    if (!fst_link)
-        return (NULL);
-    tmp = fst_link;
-    while (tmp->next != NULL)
-        tmp = tmp->next;
-    return (tmp);
-}
+//     if (!fst_link)
+//         return (NULL);
+//     tmp = fst_link;
+//     while (tmp->next != NULL)
+//         tmp = tmp->next;
+//     return (tmp);
+// }
 
-void    add_last(t_env **fst_link, t_env *new)
+// void    add_last(t_env **fst_link, t_env *new)
+// {
+//     t_env *last;
+    
+//     if (!(*fst_link))
+//     {
+//         add_first(fst_link, new);
+//         return ;
+//     }
+//     last = search_last(*fst_link);
+//     if(new->next == NULL)
+//         last->next = new;
+//     while (new->next != NULL)
+//     {
+//         last->next = new;
+//         new = new->next;
+//     }
+// }
+
+void add_last(t_env **head, t_env *new)
 {
     t_env *last;
     
-    if (!(*fst_link))
+    last = (*head);
+    if (!(*head))
+        (*head) = new;
+    else
     {
-        add_first(fst_link, new);
-        return ;
-    }
-    last = search_last(*fst_link);
-    if(new->next == NULL)
+        while (last->next)
+            last = last->next;
         last->next = new;
-    while (new->next != NULL)
-    {
-        last->next = new;
-        new = new->next;
     }
 }
 
