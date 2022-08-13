@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:11:06 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/12 22:58:31 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/13 23:39:50 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@
 # define INPUT '>'
 # define OUTPUT '<'
 # define PIPE '|'
+# define APPEND 'A' // >>
 # define EXPAND '$'
 # define SQ '\''
 # define DQ '\"'
-# define HERE_DOC 'H'
+# define HERE_DOC 'H' // <<
 
 
 //env
@@ -64,11 +65,17 @@ typedef struct  s_line
 {
     t_cmd           *cmd;
     t_redir         *redir;
+    t_token         *head;
+    t_env           *fst_link;
     struct s_line   *next;
 }   t_line;
 
 
 char	tokenizer(char **env);
 //char	**copy_env(char **env);
+void add_last(t_env **head, t_env *new);
+t_env   *fill_struct(char *name, char *value);
 void    expansion_env(t_env **fst_link, char **env);
+void token(char *line, t_token **head);
+
 #endif

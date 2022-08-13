@@ -10,7 +10,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 make: *** No rule to make target `minishell.o', needed by `minishell'.  Stop.
 
 
-# Make data base, printed on Fri Aug 12 00:01:44 2022
+# Make data base, printed on Sat Aug 13 20:26:33 2022
 
 # Variables
 
@@ -41,15 +41,17 @@ OBJS = $(SRCS:%.c=%.o)
 # environment
 VSCODE_CWD = /
 # environment
-Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.V9hdOnXQwP/Render
+Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.Fv28cVR5XR/Render
 # environment
-PATH = /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
+PATH = /Users/ohrete/.brew/bin:/Users/ohrete/.brew/bin:/Users/ohrete/.brew/bin:/Users/ohrete/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki
+# environment
+LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.uVNORsT2TZ/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.1VojpY8NbO/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -67,7 +69,9 @@ VSCODE_CODE_CACHE_PATH = /Users/ohrete/Library/Application Support/Code/CachedDa
 # environment
 LOGNAME = ohrete
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+# environment
+ZSH = /Users/ohrete/.oh-my-zsh
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # automatic
@@ -92,6 +96,8 @@ USER = ohrete
 .DEFAULT_GOAL := all
 # makefile (from `Makefile', line 13)
 NAME = minishell
+# environment
+LESS = -R
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # makefile (from `Makefile', line 23)
@@ -115,19 +121,25 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = com.microsoft.VSCode.1668
+XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000002.Electron
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
 +F = $(notdir $+)
 # environment
 __CF_USER_TEXT_ENCODING = 0x101A:0:0
+# environment
+COMMAND_MODE = unix2003
 # default
 MAKEFILES := 
 # automatic
 <F = $(notdir $<)
 # environment
+PAGER = less
+# environment
 LC_ALL = C
+# environment
+SECURITYSESSIONID = 186a8
 # automatic
 ^F = $(notdir $^)
 # default
@@ -139,9 +151,9 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 28092
+VSCODE_PID = 4469
 # variable set hash-table stats:
-# Load=63/1024=6%, Rehash=0, Collisions=3/93=3%
+# Load=69/1024=7%, Rehash=0, Collisions=3/99=3%
 
 # Pattern-specific Variable Values
 
@@ -225,7 +237,6 @@ fclean: clean
 	cd ./libft && make fclean
 	
 
- 
 # Not a target:
 parser.o:
 #  Implicit rule search has not been done.
@@ -277,6 +288,6 @@ execute_minishell.o:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Fri Aug 12 00:01:44 2022
+# Finished Make data base on Sat Aug 13 20:26:33 2022
 
  

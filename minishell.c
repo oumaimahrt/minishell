@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:26:50 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/12 18:41:18 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/13 23:47:14 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 
 int	main(int ac, char **av, char **env)
 {
-	t_env *fst_link;
-	//char *line;
+	t_line data;
+	char *line;
 	// int		i;
 
 	// i = 0;
-	fst_link = NULL;
+	data.head = NULL;
+	data.fst_link = NULL;
     if (!ac || !av)
 		return (0);
 	// while (env[i])
@@ -27,26 +28,32 @@ int	main(int ac, char **av, char **env)
 	// 	printf("%s %d\n", env[i], i);
 	// 	i++;
 	// }
-	expansion_env(&fst_link, env);
-	while (fst_link)
+	expansion_env(&data.fst_link, env);
+	/*while (data.fst_link)
 	{
-		printf("name = %s\n value = %s\n", fst_link->name, fst_link->value);
-		fst_link = fst_link->next;
+		printf("name = %s\n value = %s\n", data.fst_link->name, data.fst_link->value);
+		data.fst_link = data.fst_link->next;
+	}*/
+	while (1)
+	{
+		line = readline("minishell~ ");
+		if (line[0] != '\0')
+		{
+			add_history(line);
+			token(line, &data.head);
+			while (data.head)
+			{
+				printf("word1 = %s, id = %d\n", data.head->str, data.head->id);
+				data.head = data.head->next;
+			}
+			// parser(fst_link, line); //parsing
+		}
+		// if (!line)
+		// {
+		// 	printf("exit");
+		// 	exit(0);
+		// }
+		free(line);
+		//execution;
 	}
-	// while (1)
-	// {
-	// 	line = readline("minishell~ ");
-	// 	if (line[0] != '\0')
-	// 	{
-	// 		add_history(line);
-	// 		// parser(fst_link, line); //parsing
-	// 	}
-	// 	// if (!line)
-	// 	// {
-	// 	// 	printf("exit");
-	// 	// 	exit(0);
-	// 	// }
-	// 	free(line);
-	// 	//execution;
-	// }
 }
