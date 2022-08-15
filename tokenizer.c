@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 23:00:09 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/15 01:57:59 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/15 23:44:16 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int whitespace(char c)
         return (1);
     return (0);
 }
+
 
 // int special_char(char c)
 // {
@@ -84,6 +85,16 @@ void add_token_last(t_token **head, t_token *new)
     }
 }
 
+void    space(t_token **head, char *str, int *i)
+{
+    int index;
+    
+    index = *i;
+    while (str[*i] == ' ' || str[*i] == '\t')
+        (*i)++;
+    add_token_last(head, new_node(" ", 0));
+}
+
 void single_quote(t_token **head, char *line, int *i)
 {
     int index;
@@ -92,12 +103,12 @@ void single_quote(t_token **head, char *line, int *i)
     (*i)++;
     while (line[*i] && line[*i] != '\'')
         (*i)++;
-    if (!line[*i] || (line[*i] && line[*i] != '\''))
+    if (!line[*i])
     {
         printf("ERROR: inclosed quotes\n");   //error in case of unclosed quotes
         return ;
     }
-    add_token_last(head, new_node(ft_substr(line, index + 1, *i - index - 1), SQ));
+    add_token_last(head, new_node(ft_substr(line, index + 1, *i - index - 1), 0));
     (*i)++;
 }
 
@@ -115,9 +126,8 @@ void single_quote(t_token **head, char *line, int *i)
 
 int skip_char(char c)
 {
-    if (c =='`' || c == '$' || c == '&' || c == '(' || c == ')' || c == ';'
-            || c == '!' || c == '\'' || c == '\"' || c == '<' || c == '>' 
-            || c == ' ' || c == '\t' || c == '|')
+    if (c == '$' || c == '&'|| c == '\'' || c == '\"' || c == '<' || c == '>' 
+            || c == ' '|| c == '|')
         return (0);
     return (1);
 }
@@ -127,6 +137,7 @@ void    setting_word(t_token **head, char *str, int *i)
     int index;
 
     index = *i;
+    (*i)++;
     while(str[*i] && skip_char(str[*i]))
         (*i)++;
     add_token_last(head, new_node(ft_substr(str, 0, *i - index + 1), 0));
@@ -143,11 +154,13 @@ void    redirection(t_token **head, char *str, int *i)
         add_token_last(head, new_node(">>", APPEND));
     else if (str[*i] == '<' && str[*i + 1] == '<')
         add_token_last(head, new_node("<<", HERE_DOC));
-} 
+}
+
 void pipe_sign(t_token **head, int *i)
 {
     add_token_last(head, new_node("|", PIPE));
     (*i)++;
+    
 }
 
 void token(char *line, t_token **head)
@@ -165,16 +178,16 @@ void token(char *line, t_token **head)
         //     return (double_quote());
         // else if (line[i] == '$')
         //     return (dollar()); it gonna be handled in func of double quote & also in setting_word function
-        else if (whitespace(line[i]))
+        else if(whitespace(line[i]))
             i++;
         if (line[i] == '<' || line[i] == '>')
             redirection(head, line, &i);
         else if (line[i] == '|')
-            return (pipe_sign(head, &i));
+            pipe_sign(head, &i);
         // else if (special_char(line[i]));
         //     return (NULL);
-        else
-            setting_word(head, line, &i);
+        // else
+        //     setting_word(head, line, &i);
         //printf("%d\n", i);
     }
 }
