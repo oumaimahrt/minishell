@@ -2,7 +2,6 @@ make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/ohrete/Desktop/minishell'
 cc -Wall -Wextra -Werror    -c -o minishell.o minishell.c
 cc -Wall -Wextra -Werror    -c -o expanding.o expanding.c
- 
 cc -Wall -Wextra -Werror    -c -o tokenizer.o tokenizer.c
 cc -Wall -Wextra -Werror    -c -o parser.o parser.c
 cc -Wall -Wextra -Werror    -c -o execute_minishell.o execute_minishell.c

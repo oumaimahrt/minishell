@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:11:06 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/13 23:39:50 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/14 23:44:10 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "./libft/libft.h"
-# define INPUT '>'
-# define OUTPUT '<'
+# define OUTPUT '>'
+# define INPUT '<'
 # define PIPE '|'
 # define APPEND 'A' // >>
 # define EXPAND '$'
@@ -45,7 +45,6 @@ typedef struct s_token
     int             id;
     struct s_token  *next;
 }   t_token;
-
 
 //parser
 typedef struct s_cmd
