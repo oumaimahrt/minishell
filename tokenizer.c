@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 23:00:09 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/16 18:13:52 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/17 00:43:29 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,10 @@ void    space(t_token **head, char *str, int *i)
     int index;
     
     index = *i;
-    while (str[*i] == ' ' || str[*i] == '\t')
+    while (str[*i] == ' ')
         (*i)++;
-    add_token_last(head, new_node(" ", 0));
+    add_token_last(head, new_node(" ", SPACE));
+    
 }
 
 void single_quote(t_token **head, char *line, int *i)
@@ -129,18 +130,6 @@ void double_quote(t_token **head, char *line, int *i)
     (*i)++;
 }
 
-// void    double_quote(t_token **head, char *str, int *i)
-// {
-//     int index;
-
-//     index = *i;
-//     (*i)++;
-//     while (str[*i] && str[i] != '\"')
-//     {
-//         if (str[*i])
-//     }
-// }
-
 int skip_char(char c)
 {
     if (c == '$' || c == '&'|| c == '\'' || c == '\"' || c == '<' || c == '>' 
@@ -164,9 +153,15 @@ void    setting_word(t_token **head, char *str, int *i)
 void    redirection(t_token **head, char *str, int *i)
 {
     if (str[*i] == '>' && str[*i + 1] == '>')
+    {
         add_token_last(head, new_node(">>", APPEND));
+        (*i)++;
+    }
     else if (str[*i] == '<' && str[*i + 1] == '<')
+    {
         add_token_last(head, new_node("<<", HERE_DOC));
+        (*i)++;
+    }
     else if (str[*i] == '>')
         add_token_last(head, new_node(">", OUTPUT));
     else if (str[*i] == '<')
@@ -193,9 +188,11 @@ void token(char *line, t_token **head)
         if (line[i] == '\'')
             single_quote(head, line, &i);
         else if (line[i] == '\"')
-            double_quote(head, line, &i);
+            double_quote(head, line, &i); //handle expansion inside it
         else if(whitespace(line[i]))
             i++;
+        // else if (line[i] == ' ')
+        //     space(head, line, &i);
         // else if (line[i] == '$')
         //     return (dollar()); it gonna be handled in func of double quote & also in setting_word function
         else if (line[i] == '<' || line[i] == '>')
