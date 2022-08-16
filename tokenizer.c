@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 23:00:09 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/15 23:44:16 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/16 18:13:52 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 int whitespace(char c)
 {
-    if ((c >= 9 && c >= 13) || c == 32)
+    if (c == 32)
         return (1);
     return (0);
 }
@@ -112,6 +112,23 @@ void single_quote(t_token **head, char *line, int *i)
     (*i)++;
 }
 
+void double_quote(t_token **head, char *line, int *i)
+{
+    int index;
+
+    index = *i;
+    (*i)++;
+    while (line[*i] && line[*i] != '\"')
+        (*i)++;
+    if (!line[*i])
+    {
+        printf("ERROR: inclosed quotes\n");   //error in case of unclosed quotes
+        return ;
+    }
+    add_token_last(head, new_node(ft_substr(line, index + 1, *i - index - 1), DQ));
+    (*i)++;
+}
+
 // void    double_quote(t_token **head, char *str, int *i)
 // {
 //     int index;
@@ -137,23 +154,24 @@ void    setting_word(t_token **head, char *str, int *i)
     int index;
 
     index = *i;
-    (*i)++;
     while(str[*i] && skip_char(str[*i]))
         (*i)++;
-    add_token_last(head, new_node(ft_substr(str, 0, *i - index + 1), 0));
+    add_token_last(head, new_node(ft_substr(str, index , *i - index), 0));
     //printf("word2: %s\n", str);
 }
 
+
 void    redirection(t_token **head, char *str, int *i)
 {
-    if (str[*i] == '>')
-        add_token_last(head, new_node(">", OUTPUT));
-    else if (str[*i] == '<')
-        add_token_last(head, new_node("<", INPUT));
-    else if (str[*i] == '>' && str[*i + 1] == '>')
+    if (str[*i] == '>' && str[*i + 1] == '>')
         add_token_last(head, new_node(">>", APPEND));
     else if (str[*i] == '<' && str[*i + 1] == '<')
         add_token_last(head, new_node("<<", HERE_DOC));
+    else if (str[*i] == '>')
+        add_token_last(head, new_node(">", OUTPUT));
+    else if (str[*i] == '<')
+        add_token_last(head, new_node("<", INPUT));
+    (*i)++;
 }
 
 void pipe_sign(t_token **head, int *i)
@@ -174,20 +192,19 @@ void token(char *line, t_token **head)
     {
         if (line[i] == '\'')
             single_quote(head, line, &i);
-        // else if (line[i] == '\"')
-        //     return (double_quote());
-        // else if (line[i] == '$')
-        //     return (dollar()); it gonna be handled in func of double quote & also in setting_word function
+        else if (line[i] == '\"')
+            double_quote(head, line, &i);
         else if(whitespace(line[i]))
             i++;
-        if (line[i] == '<' || line[i] == '>')
+        // else if (line[i] == '$')
+        //     return (dollar()); it gonna be handled in func of double quote & also in setting_word function
+        else if (line[i] == '<' || line[i] == '>')
             redirection(head, line, &i);
         else if (line[i] == '|')
             pipe_sign(head, &i);
         // else if (special_char(line[i]));
         //     return (NULL);
-        // else
-        //     setting_word(head, line, &i);
-        //printf("%d\n", i);
+        else
+            setting_word(head, line, &i);  
     }
 }
