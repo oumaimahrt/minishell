@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 18:06:24 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/13 00:14:30 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/17 20:35:58 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,12 +140,12 @@ void    expansion_env(t_env **fst_link, char **env)
     int     i;
     //char    **table;
     //char    **split;
-   // char *s;
+    // char *s;
 
     //line = NULL;
     //table = copy_env(env);
     i = 0;
-   // split = ft_split(env[i], '=');
+    // split = ft_split(env[i], '=');
     while(env[i])
     {
         name = search_name(env[i], '=');

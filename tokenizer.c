@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 23:00:09 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/17 00:43:29 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/17 18:27:37 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void single_quote(t_token **head, char *line, int *i)
         printf("ERROR: inclosed quotes\n");   //error in case of unclosed quotes
         return ;
     }
-    add_token_last(head, new_node(ft_substr(line, index + 1, *i - index - 1), 0));
+    add_token_last(head, new_node(ft_substr(line, index + 1, *i - index - 1), SQ));
     (*i)++;
 }
 
@@ -169,6 +169,31 @@ void    redirection(t_token **head, char *str, int *i)
     (*i)++;
 }
 
+int other_char(char c)
+{
+    if(!(c >= '0' && c <= '9') && !(c >= 'A' && c <= 'Z') 
+        && !(c >= 'a' && c <= 'z') && c != '_' && c != '?')
+        return (0);
+    return (1);
+}
+
+void    dollar(t_token **head, char *str, int *i)
+{
+    int index;
+
+    index = *i;
+    (*i)++;
+    while (str[*i] && other_char(str[*i]))
+    {
+        //printf("INSIDE\n");
+        (*i)++;
+    }
+    add_token_last(head, new_node(ft_substr(str, index , *i - index), EXPAND));
+    // (*i)++;
+    //printf("00 %c\n", str[*i]);
+    //printf("%s", (*head)->str);
+}
+
 void pipe_sign(t_token **head, int *i)
 {
     add_token_last(head, new_node("|", PIPE));
@@ -193,8 +218,8 @@ void token(char *line, t_token **head)
             i++;
         // else if (line[i] == ' ')
         //     space(head, line, &i);
-        // else if (line[i] == '$')
-        //     return (dollar()); it gonna be handled in func of double quote & also in setting_word function
+        else if (line[i] == '$')
+            dollar(head, line, &i); //it's gonna be handled in func of double quote & also in setting_word function
         else if (line[i] == '<' || line[i] == '>')
             redirection(head, line, &i);
         else if (line[i] == '|')
@@ -202,6 +227,8 @@ void token(char *line, t_token **head)
         // else if (special_char(line[i]));
         //     return (NULL);
         else
-            setting_word(head, line, &i);  
+            setting_word(head, line, &i);  //expanding the key
+        // else
+        //     i++;
     }
 }
