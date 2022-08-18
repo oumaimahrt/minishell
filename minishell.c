@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:26:50 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/14 17:05:44 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/18 20:53:06 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int ac, char **av, char **env)
 	// 	printf("%s %d\n", env[i], i);
 	// 	i++;
 	// }
-	expansion_env(&data.fst_link, env);
+	setting_env(&data.fst_link, env);
 	/*while (data.fst_link)
 	{
 		printf("name = %s\n value = %s\n", data.fst_link->name, data.fst_link->value);

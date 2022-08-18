@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 19:32:52 by ohrete            #+#    #+#             */
-/*   Updated: 2021/11/23 23:37:49 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/18 18:13:38 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,19 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	}
 	return (0);
 }
+
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	while(*s1 != '\0' || *s2 != '\0')
+	{
+		if (*s1 != *s2)
+			return (*(unsigned char *)s1 - *(unsigned char *)s2);
+			s1++;
+			s2++;
+	}
+	return (0);
+}
+
 // #include<stdio.h>
 // int main()
 // {

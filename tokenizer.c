@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 23:00:09 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/17 18:27:37 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/18 19:16:34 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,9 @@ void single_quote(t_token **head, char *line, int *i)
 void double_quote(t_token **head, char *line, int *i)
 {
     int index;
+    // t_env *env;
 
+    // env = NNULL;
     index = *i;
     (*i)++;
     while (line[*i] && line[*i] != '\"')
@@ -126,6 +128,10 @@ void double_quote(t_token **head, char *line, int *i)
         printf("ERROR: inclosed quotes\n");   //error in case of unclosed quotes
         return ;
     }
+    // if (line[*i] == '$')
+    // {
+    //     getting_env(env, line);
+    // }
     add_token_last(head, new_node(ft_substr(line, index + 1, *i - index - 1), DQ));
     (*i)++;
 }
@@ -141,14 +147,17 @@ int skip_char(char c)
 void    setting_word(t_token **head, char *str, int *i)
 {
     int index;
+    //t_env *env;
 
+    //env = NULL;
     index = *i;
+    // if (str[*i] == '$')
+    //     getting_env(env, str);
     while(str[*i] && skip_char(str[*i]))
         (*i)++;
     add_token_last(head, new_node(ft_substr(str, index , *i - index), 0));
     //printf("word2: %s\n", str);
 }
-
 
 void    redirection(t_token **head, char *str, int *i)
 {

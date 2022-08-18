@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:11:06 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/16 20:04:49 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/18 18:16:27 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ char	tokenizer(char **env);
 //char	**copy_env(char **env);
 void add_last(t_env **head, t_env *new);
 t_env   *fill_struct(char *name, char *value);
-void    expansion_env(t_env **fst_link, char **env);
+void    setting_env(t_env **fst_link, char **env);
+char *getting_env(t_env *env, char *name);
 void token(char *line, t_token **head);
 
 #endif

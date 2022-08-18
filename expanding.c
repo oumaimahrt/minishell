@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 18:06:24 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/17 20:35:58 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/18 18:23:47 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,15 @@ char    *search_name(char *name, int i)
     return (str);
 }
 
-char    *search_value(char *name, int i)
+char    *search_value(char *value, int i)
 {
     char    *str;
     int     len;
     char    *c;
 
-    c = ft_strchr(name, i);
+    c = ft_strchr(value, i);
     len = ft_strlen(c);
-    str = ft_substr(name, ft_strlen(name) - len + 1, len);
+    str = ft_substr(value, ft_strlen(value) - len + 1, len);
     return (str);
 }
 
@@ -132,24 +132,29 @@ void add_last(t_env **head, t_env *new)
     }
 }
 
-void    expansion_env(t_env **fst_link, char **env)
+char *getting_env(t_env *env, char *name)
+{
+    while(env)
+    {
+        if(!ft_strcmp(name, env->name))
+            return(env->value);
+        env = env->next;
+    }
+    return (NULL);
+}
+
+void    setting_env(t_env **fst_link, char **env)
 {
     //t_env **line;
     char *name;
     char *value;
     int     i;
-    //char    **table;
-    //char    **split;
-    // char *s;
 
-    //line = NULL;
-    //table = copy_env(env);
     i = 0;
-    // split = ft_split(env[i], '=');
     while(env[i])
     {
         name = search_name(env[i], '=');
-       // printf("name ==> [%s]\n",name);
+        // printf("name ==> [%s]\n",name);
         value = search_value(env[i], '=');
         //printf("value ==> [%s]\n",value);
         add_last(fst_link, fill_struct(name, value));
