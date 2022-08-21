@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 23:00:09 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/21 16:50:49 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/21 17:58:07 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ void	double_quote(t_token *head, t_token **temp, char *line, int *i)
 	char	*str;
 	char	*expand;
 	// t_env *env;
-
+	printf("FROM DQ %s\n", line);
 	// env = NULL;
 	index = *i;
 	(*i)++;
@@ -155,24 +155,32 @@ void	double_quote(t_token *head, t_token **temp, char *line, int *i)
 		return ;
 	}
 	// add_token_last(head, new_node(ft_substr(line, index + 1, *i - index - 1), DQ));
+	printf("before \n");
 	str = ft_substr(line, index + 1, *i - index - 1);
 	expand = ft_expand(str, head);
+	printf("after \n");
 	//printf("str === %s\n", str);
 	add_token_last(temp, new_node(expand, DQ));
+	printf("00000\n");
 	(*i)++;
 }
 
 
 
-void	setting_word(t_token **head, char *str, int *i)
+void	setting_word(t_token *head, t_token **temp, char *line, int *i)
 {
-	int	index;
+	int		index;
+	char	*str;
+	char	*expand;
 
 	index = *i;
-	while(str[*i] && skip_char(str[*i]))
+	while(line[*i] && skip_char(line[*i]))
 		(*i)++;
-	add_token_last(head, new_node(ft_substr(str, index , *i - index), 0));
-	
+	str = ft_substr(line, index , *i - index);
+	expand = ft_expand(str, head);
+	//printf("expand = %s\n", expand);
+	add_token_last(temp, new_node(expand, 0));
+	//(*i)++;
 }
 
 void	redirection(t_token **head, char *str, int *i)
@@ -194,21 +202,19 @@ void	redirection(t_token **head, char *str, int *i)
 	(*i)++;
 }
 
-void	dollar(t_token **head, char *str, int *i)
+void	dollar(t_token *head, t_token **temp, char *line, int *i)
 {
-	int	index;
+	int		index;
+	char	*str;
+	char	*expand;
 
 	index = *i;
 	(*i)++;
-	while (str[*i] && other_char(str[*i]))
-	{
-		//printf("INSIDE\n");
+	while (line[*i] && other_char(line[*i]))
 		(*i)++;
-	}
-	add_token_last(head, new_node(ft_substr(str, index , *i - index), EXPAND));
-	// (*i)++;
-	//printf("00 %c\n", str[*i]);
-	//printf("%s", (*head)->str);
+	str = ft_substr(line, index , *i - index);
+	expand = ft_expand(str, head);
+	add_token_last(temp, new_node(expand, EXPAND));
 }
 
 void	pipe_sign(t_token **head, int *i)
@@ -226,27 +232,36 @@ void	token(char *line, t_token **head)
 	i = 0;
 	while (line [i])
 	{
-		//printf("kakakakakak\n");
 		if (line[i] == '\'')
+		{
+			printf("SINGLE Q\n");
 			single_quote(temp, line, &i);
+		}
 		else if (line[i] == '\"')
-			double_quote(*head, temp, line, &i); //handle expansion inside it
-		//printf("22222kakakakakak\n");
+		{
+			printf("DOUBLE Q\n");
+			double_quote(*head, temp, line, &i);
+		}
 		else if(space(line[i]))
 			i++;
-		// else if (line[i] == ' ')
-		//     space(head, line, &i);
 		else if (line[i] == '$')
-			dollar(temp, line, &i); //it's gonna be handled in func of double quote & also in setting_word function
+		{
+			printf("DOLLAR\n");
+			dollar(*head, temp, line, &i);
+		}
 		else if (line[i] == '<' || line[i] == '>')
-			redirection(temp, line, &i); //to handle expand inside it, call func of double quote
+		{
+			printf("RED\n");
+			redirection(temp, line, &i);
+		}
 		else if (line[i] == '|')
 			pipe_sign(temp, &i);
-		// else if (special_char(line[i]));
-		//     return (NULL);
 		else
-			setting_word(temp, line, &i);  //expanding the key
-		// else
-		//     i++;
+		{
+			printf("WORD\n");
+			setting_word(*head, temp, line, &i);
+		}
+		//else
+		    //i++;
 	}
 }

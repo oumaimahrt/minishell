@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:26:50 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/21 16:05:36 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/21 17:58:42 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,14 @@ int	main(int ac, char **av, char **env)
 			// 	data = data->next;
 			// }
 			// parser(fst_link, line); //parsing
+			printf("koko \n");
+			//free(line);
 		}
 		// if (!line)
 		// {
 		// 	printf("exit");
 		// 	exit(0);
 		// }
-		free(line);
 		//execution;
 	}
 }

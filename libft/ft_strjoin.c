@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 19:33:51 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/21 15:42:07 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/21 18:09:02 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ char	*ft_strjoin(char*s1, char *s2)
 	while (s2[i])
 		dest[j++] = s2[i++];
 	dest[j] = '\0';
-	if (s1)
-		free(s1);
-	if (s2)
-		free(s2);
+	// if (s1)
+	// 	free(s1);
+	// if (s2)
+		// free(s2);
 	return (dest);
 }
 // #include<stdio.h>

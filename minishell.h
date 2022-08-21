@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:11:06 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/21 16:38:38 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/21 17:33:55 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,10 @@ void	single_quote(t_token **head, char *line, int *i);
 char	*ft_expand(char *str, t_token *head);
 void	double_quote(t_token *head, t_token **temp, char *line, int *i);
 int		skip_char(char c);
-void	setting_word(t_token **head, char *str, int *i);
+void	setting_word(t_token *head, t_token **temp, char *line, int *i);
 void	redirection(t_token **head, char *str, int *i);
 int		other_char(char c);
-void	dollar(t_token **head, char *str, int *i);
+void	dollar(t_token *head, t_token **temp, char *line, int *i);
 void	pipe_sign(t_token **head, int *i);
 void	token(char *line, t_token **head);
 
