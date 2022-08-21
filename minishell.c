@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:26:50 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/21 17:58:42 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/21 21:52:46 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	main(int ac, char **av, char **env)
 {
 	t_token *data;
 	char *line;
+	t_env			*fst_link;
 	// int		i;
 
 	// i = 0;
@@ -29,13 +30,13 @@ int	main(int ac, char **av, char **env)
 	// 	printf("%s %d\n", env[i], i);
 	// 	i++;
 	// }
-	data = (t_token *)malloc(sizeof(t_token));
-	data->av = av;
+	//data = (t_token *)malloc(sizeof(t_token));
+	//data->av = av;
 	//printf("********%s\n", data->av[0]);
-	data->fst_link= setting_env(env);
+	fst_link = setting_env(env);
 	// while (data->fst_link)
 	// {
-	// 	printf("name = %s\n value = %s\n", data->fst_link->name, data->fst_link->value);
+	// 	printf("%s==%s\n", data->fst_link->name, data->fst_link->value);
 	// 	data->fst_link = data->fst_link->next;
 	// }
 	while (1)
@@ -44,7 +45,7 @@ int	main(int ac, char **av, char **env)
 		if (line[0] != '\0')
 		{
 			add_history(line);
-			token(line, &data);
+			token(line, &data, av, fst_link);
 			//printf("my expand\n");
 			// while (data)
 			// {

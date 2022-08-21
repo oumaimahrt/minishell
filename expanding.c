@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 18:06:24 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/21 16:19:15 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/21 21:14:09 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ t_env   *fill_struct(char *name, char *value)
 {
     t_env *new;
     
-    new = malloc(sizeof(t_env));
+    new = (t_env *)malloc(sizeof(t_env));
     new->name = name;
     new->value = value;
     new->next = NULL;

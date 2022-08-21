@@ -6,13 +6,13 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 18:30:42 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/21 16:47:31 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/21 21:58:36 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_expand(char *str, t_token *head)
+char	*ft_expand(char *str,t_env *env, char **av)
 {
 	int		i;
 	int		start;
@@ -34,7 +34,7 @@ char	*ft_expand(char *str, t_token *head)
 			}
 			else if (str[i + 1] != '\0' && str[i + 1] == 48)
 			{
-				ptr = ft_strdup(head->av[0]);
+				ptr = ft_strdup(av[0]);
 				new = ft_strjoin(new, ptr);
 				i = i + 2;
 			}
@@ -44,7 +44,7 @@ char	*ft_expand(char *str, t_token *head)
 			while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
 				i++;
 			ptr = ft_substr(str, start, i - start);
-			ptr = getting_env(head->fst_link, ptr);
+			ptr = getting_env(env, ptr);
 			//printf("ptr = %s\n",ptr);
 			new = ft_strjoin(new, ptr);
 			//printf("if=======|%s|\n",new);
