@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 18:06:24 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/18 18:23:47 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/21 16:19:15 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char    *search_name(char *name, int i)
    // printf("c ==> [%s]\n",c);
     len = ft_strlen(c);
     str = ft_substr(name, 0, ft_strlen(name) - len);
-    
+    // printf("str*==%s\n",str);
     return (str);
 }
 
@@ -140,25 +140,27 @@ char *getting_env(t_env *env, char *name)
             return(env->value);
         env = env->next;
     }
-    return (NULL);
+    return (ft_strdup(""));
 }
 
-void    setting_env(t_env **fst_link, char **env)
+t_env    *setting_env(char **env)
 {
-    //t_env **line;
+    t_env *head;
     char *name;
     char *value;
     int     i;
 
+    head = NULL;
     i = 0;
     while(env[i])
     {
         name = search_name(env[i], '=');
-        // printf("name ==> [%s]\n",name);
+        //printf("name ==> [%s]\n",name);
         value = search_value(env[i], '=');
         //printf("value ==> [%s]\n",value);
-        add_last(fst_link, fill_struct(name, value));
+        add_last(&head, fill_struct(name, value));
         //printf("hahahahahhahahahahahah\n");
         i++;
     }
+    return(head);
 }

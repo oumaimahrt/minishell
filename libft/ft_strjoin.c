@@ -6,21 +6,19 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 19:33:51 by ohrete            #+#    #+#             */
-/*   Updated: 2021/11/23 04:50:09 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/21 15:42:07 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char*s1, char *s2)
 {
 	size_t	i;
 	size_t	j;
 	size_t	len;
 	char	*dest;
 
-	if (!s1 || !s2)
-		return (NULL);
 	i = 0;
 	j = 0;
 	len = ft_strlen((char *) s1) + ft_strlen(s2);
@@ -33,6 +31,10 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (s2[i])
 		dest[j++] = s2[i++];
 	dest[j] = '\0';
+	if (s1)
+		free(s1);
+	if (s2)
+		free(s2);
 	return (dest);
 }
 // #include<stdio.h>
