@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 23:00:09 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/21 21:57:30 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/22 22:15:40 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	single_quote(t_token **head, char *line, int *i)
 	(*i)++;
 }
 
-void	double_quote(t_env *env, t_token **temp, char *line, int *i, char **av)
+void	double_quote(t_save *save, t_token **temp, char *line, int *i)
 {
 	int		index;
 	char	*str;
@@ -72,7 +72,7 @@ void	double_quote(t_env *env, t_token **temp, char *line, int *i, char **av)
 	printf("before \n");
 	str = ft_substr(line, index + 1, *i - index - 1);
 	printf("ana hnaaaa\n");
-	expand = ft_expand(str, env, av);
+	expand = ft_expand(str, save->env, save->av);
 	printf("after \n");
 	//printf("str === %s\n", str);
 	add_token_last(temp, new_node(expand, DQ));
@@ -84,7 +84,7 @@ void	setting_word(t_token *head, t_token **temp, char *line, int *i)
 {
 	int		index;
 	char	*str;
-	char	*expand;
+	//char	*expand;
 
 	index = *i;
 	while(line[*i] && skip_char(line[*i]))
@@ -105,7 +105,7 @@ void	redirection(t_token **head, char *str, int *i)
 	}
 	else if (str[*i] == '<' && str[*i + 1] == '<')
 	{
-		add_token_last(head, new_node("<<", HERE_DOC));
+		add_token_last(head, new_node("<<", HERE_DOC)); // don't expand it fixed
 		(*i)++;
 	}
 	else if (str[*i] == '>')
@@ -115,7 +115,7 @@ void	redirection(t_token **head, char *str, int *i)
 	(*i)++;
 }
 
-void	dollar(t_token *head, t_token **temp, char *line, int *i)
+void	dollar(t_save *save, t_token **temp, char *line, int *i)
 {
 	int		index;
 	char	*str;
@@ -126,8 +126,21 @@ void	dollar(t_token *head, t_token **temp, char *line, int *i)
 	while (line[*i] && other_char(line[*i]))
 		(*i)++;
 	str = ft_substr(line, index , *i - index);
-	//expand = ft_expand(str, env, av);
-	add_token_last(temp, new_node(expand, EXPAND));
+	while(*temp != NULL)
+	{
+		if ((*temp)->next == NULL)
+			break;
+		*temp = (*temp)->next;
+	}
+	
+	if (strcmp((*temp)->str, "<<") != 0)
+	{
+		expand = ft_expand(str, save->env, save->av);
+		add_token_last(temp, new_node(expand, EXPAND));
+		
+	}
+	else
+		add_token_last(temp, new_node(str, EXPAND));
 }
 
 void	pipe_sign(t_token **head, int *i)
@@ -140,40 +153,44 @@ void	token(char *line, t_token **head, char **av, t_env *env)
 {
 	int		i;
 	t_token	**temp;
-    
+    t_save	*save;
+
+	save = (t_save *)malloc(sizeof(t_save));
+	save->av = av;
+	save->env = env;
 	temp = head;
 	i = 0;
 	while (line [i])
 	{
 		if (line[i] == '\'')
 		{
-			printf("SINGLE Q\n");
+			//printf("SINGLE Q\n");
 			single_quote(temp, line, &i);
 		}
 		else if (line[i] == '\"')
 		{
-			printf("DOUBLE Q\n");
-			double_quote(env, temp, line, &i, av);
+			//printf("DOUBLE Q\n");
+			double_quote(save, temp, line, &i);
 		}
-		// else if(space(line[i]))
-		// 	i++;
-		// else if (line[i] == '$')
-		// {
-		// 	printf("DOLLAR\n");
-		// 	dollar(*head, temp, line, &i);
-		// }
-		// else if (line[i] == '<' || line[i] == '>')
-		// {
-		// 	printf("RED\n");
-		// 	redirection(temp, line, &i);
-		// }
-		// else if (line[i] == '|')
-		// 	pipe_sign(temp, &i);
-		// else
-		// {
-		// 	printf("WORD\n");
-		// 	setting_word(*head, temp, line, &i);
-		// }
+		else if(space(line[i]))
+			i++;
+		else if (line[i] == '$')
+		{
+			//printf("DOLLAR\n");
+			dollar(save, temp, line, &i);
+		}
+		else if (line[i] == '<' || line[i] == '>')
+		{
+			//printf("RED\n");
+			redirection(temp, line, &i);
+		}
+		else if (line[i] == '|')
+			pipe_sign(temp, &i);
+		else
+		{
+			//printf("WORD\n");
+			setting_word(*head, temp, line, &i);
+		}
 		//else
 		    //i++;
 	}

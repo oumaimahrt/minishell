@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:11:06 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/21 21:55:40 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/22 22:22:11 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,12 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
+//save last value of envp and argv
+typedef struct s_save
+{
+	t_env *env;
+	char **av;
+}	t_save;
 //parser
 // typedef struct s_cmd
 // {
@@ -62,11 +68,11 @@ typedef struct s_token
 //     struct s_redir  *next;
 // }   t_redir;
 
-typedef struct s_line
-{
-	t_token			*head;
-	struct s_line	*next;
-}	t_line;
+// typedef struct s_line
+// {
+// 	t_token			*head;
+// 	struct s_line	*next;
+// }	t_line;
 
 char	*search_name(char *name, int i);
 char	*search_value(char *value, int i);
@@ -81,12 +87,12 @@ t_token	*new_node(char *str, int id);
 void	add_token_last(t_token **head, t_token *new);
 void	single_quote(t_token **head, char *line, int *i);
 char	*ft_expand(char *str, t_env *env, char **av);
-void double_quote(t_env *env, t_token **temp, char *line, int *i, char **av);
+void	double_quote(t_save *save, t_token **temp, char *line, int *i);
 int		skip_char(char c);
 void	setting_word(t_token *head, t_token **temp, char *line, int *i);
 void	redirection(t_token **head, char *str, int *i);
 int		other_char(char c);
-void	dollar(t_token *head, t_token **temp, char *line, int *i);
+void	dollar(t_save *save, t_token **temp, char *line, int *i);
 void	pipe_sign(t_token **head, int *i);
 void	token(char *line, t_token **head, char **av, t_env *env);
 
