@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:11:06 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/23 17:11:25 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/23 23:32:55 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,7 @@ int		other_char(char c);
 void	dollar(t_save *save, t_token **temp, char *line, int *i);
 void	pipe_sign(t_token **head, int *i);
 void	token(char *line, t_token **head, char **av, t_env *env);
+void	ft_signals(void);
+void	rl_replace_line (const char *text, int clear_undo);
 
 #endif

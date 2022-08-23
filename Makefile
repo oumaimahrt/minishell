@@ -6,7 +6,7 @@
 #    By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/22 09:56:57 by ohrete            #+#    #+#              #
-#    Updated: 2022/08/22 11:14:03 by ohrete           ###   ########.fr        #
+#    Updated: 2022/08/23 18:23:25 by ohrete           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = minishell
 
 SRCS = minishell.c \
 	expanding.c \
+	expanding_utils.c \
 	tokenizer.c \
 	token_utils.c \
 	token_utils2.c \

@@ -1,30 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   expanding_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/10 01:52:46 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/10 01:52:55 by ohrete           ###   ########.fr       */
+/*   Created: 2022/08/23 18:22:39 by ohrete            #+#    #+#             */
+/*   Updated: 2022/08/23 18:23:08 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "minishell.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	add_first(t_env **fst_link, t_env *new)
 {
-	t_list	*last;
-
-	if (!(*lst))
-	{
-		ft_lstadd_front(lst, new);
+	if (!new || !fst_link)
 		return ;
-	}
-	last = ft_lstlast(*lst);
-	while (new->next)
+	new->next = *fst_link;
+	*fst_link = new;
+}
+
+void	add_last(t_env **head, t_env *new)
+{
+	t_env	*last;
+
+	last = (*head);
+	if (!(*head))
+		(*head) = new;
+	else
 	{
+		while (last->next)
+			last = last->next;
 		last->next = new;
-		new = new->next;
 	}
 }

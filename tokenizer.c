@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 23:00:09 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/23 17:06:48 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/24 00:23:09 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,9 @@ void	dollar(t_save *save, t_token **temp, char *line, int *i)
 		expand = ft_expand(str, save->env, save->av);
 		add_token_last(temp, new_node(expand, EXPAND));
 	}
+	//jlsa ksdjjds $USER $PATH <<$USER$USER ===> still this case to check
 }
+
 
 void	pipe_sign(t_token **head, int *i)
 {
@@ -144,7 +146,7 @@ void	token(char *line, t_token **head, char **av, t_env *env)
 {
 	int		i;
 	t_token	**temp;
-    t_save	*save;
+	t_save	*save;
 
 	save = (t_save *)malloc(sizeof(t_save));
 	save->av = av;
