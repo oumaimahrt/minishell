@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:11:06 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/22 22:22:11 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/23 17:11:25 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define SQ '\''
 # define DQ '\"'
 # define HERE_DOC 'H' // <<
-# define SPACE 'S'
+# define WORD 'W'
 int g_status;
 //env
 typedef struct s_env
@@ -89,7 +89,7 @@ void	single_quote(t_token **head, char *line, int *i);
 char	*ft_expand(char *str, t_env *env, char **av);
 void	double_quote(t_save *save, t_token **temp, char *line, int *i);
 int		skip_char(char c);
-void	setting_word(t_token *head, t_token **temp, char *line, int *i);
+void	setting_word(t_save *save, t_token **temp, char *line, int *i);
 void	redirection(t_token **head, char *str, int *i);
 int		other_char(char c);
 void	dollar(t_save *save, t_token **temp, char *line, int *i);

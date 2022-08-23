@@ -7,8 +7,10 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 
 # This program built for i386-apple-darwin11.3.0
  
+make: *** No rule to make target `minishell.o', needed by `minishell'.  Stop.
 
-# Make data base, printed on Sun Aug 21 21:10:14 2022
+
+# Make data base, printed on Tue Aug 23 14:36:59 2022
 
 # Variables
 
@@ -39,18 +41,17 @@ OBJS = $(SRCS:%.c=%.o)
 # environment
 VSCODE_CWD = /
 # environment
-Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.klTLlDLqwT/Render
+Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.ko5Mup0SaL/Render
 # environment
 PATH = /Users/ohrete/.brew/bin:/Users/ohrete/.brew/bin:/Users/ohrete/.brew/bin:/Users/ohrete/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki
 # environment
- 
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.Ip4WtFhQME/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.nXqRylWfDS/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -120,7 +121,7 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000002.Electron
+XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000001.Electron
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
@@ -150,7 +151,7 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 3930
+VSCODE_PID = 1227
 # variable set hash-table stats:
 # Load=69/1024=7%, Rehash=0, Collisions=3/99=3%
 
@@ -160,9 +161,9 @@ VSCODE_PID = 3930
 
 # Directories
 
-# . (device 16777227, inode 2529358): 25 files, no impossibilities.
+# . (device 16777227, inode 2529358): 18 files, no impossibilities.
 
-# 25 files, no impossibilities in 1 directories.
+# 18 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -172,19 +173,15 @@ VSCODE_PID = 3930
 
 # Not a target:
 token_utils.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-08-21 21:09:20
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 all: minishell
 #  Command-line target.
 #  Implicit rule search has not been done.
-#  Last modified 1969-12-31 23:59:56
-#  File has been updated.
-#  Successfully updated.
+#  File does not exist.
+#  File has not been updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 #  commands to execute (from `Makefile', line 30):
@@ -192,12 +189,9 @@ all: minishell
 
 # Not a target:
 expanding.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-08-21 21:09:19
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 .SUFFIXES:
@@ -208,7 +202,7 @@ expanding.o:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-21 21:09:17
+#  Last modified 2022-08-22 11:14:03
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -216,9 +210,8 @@ Makefile:
 
 minishell: minishell.o expanding.o tokenizer.o token_utils.o token_utils2.o parser.o execute_minishell.o libft/libft.a
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-21 21:09:23
-#  File has been updated.
-#  Successfully updated.
+#  File does not exist.
+#  File has not been updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 #  commands to execute (from `Makefile', line 32):
@@ -228,17 +221,15 @@ minishell: minishell.o expanding.o tokenizer.o token_utils.o token_utils2.o pars
 # Not a target:
 minishell.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-21 21:09:19
-#  File has been updated.
-#  Successfully updated.
+#  File does not exist.
+#  File has not been updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 libft/libft.a:
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-21 21:09:23
-#  File has been updated.
-#  Successfully updated.
+#  Modification time never checked.
+#  File has not been updated.
 #  commands to execute (from `Makefile', line 35):
 	cd ./libft && make
 	
@@ -254,21 +245,15 @@ fclean: clean
 
 # Not a target:
 token_utils2.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-08-21 21:09:20
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 parser.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-08-21 21:09:20
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 .DEFAULT:
@@ -278,12 +263,9 @@ parser.o:
 
 # Not a target:
 tokenizer.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-08-21 21:09:20
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 re: fclean all
 #  Implicit rule search has not been done.
@@ -301,12 +283,9 @@ clean:
 
 # Not a target:
 execute_minishell.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-08-21 21:09:20
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # files hash-table stats:
 # Load=16/1024=2%, Rehash=0, Collisions=0/41=0%
@@ -321,6 +300,6 @@ execute_minishell.o:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Sun Aug 21 21:10:14 2022
+# Finished Make data base on Tue Aug 23 14:36:59 2022
 
  

@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 19:33:51 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/22 21:43:52 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/23 15:21:51 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,19 +74,15 @@ char    *ft_strjoin(char *s1, char *s2)
     total = 0;
     i = 0;
     j = 0;
-	printf("str join start \n");
     total = ft_strlen(s1) + ft_strlen(s2) + 1;
     p = malloc((total) * sizeof(char));
     if (p == NULL)
         return (NULL);
     p = ft_copy(s1, s2, p);
-    printf("str join bfore \n");
 	if (s1 != NULL)
         free(s1);
-		printf("str join between \n");
     if (s2 != NULL)
         free(s2);
-	printf("str join fin \n");
     return (p);
 }
 

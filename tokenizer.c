@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 23:00:09 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/22 22:15:40 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/23 17:06:48 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	single_quote(t_token **head, char *line, int *i)
 		(*i)++;
 	if (!line[*i])
 	{
-		printf("ERROR: inclosed quotes\n");   //error in case of unclosed quotes
+		printf("ERROR: inclosed quotes\n");
 		return ;
 	}
 	add_token_last(head, new_node(ft_substr(line, index + 1, *i - index - 1), SQ));
@@ -58,42 +58,33 @@ void	double_quote(t_save *save, t_token **temp, char *line, int *i)
 	char	*str;
 	char	*expand;
 
-	printf("FROM DQ %s\n", line);
 	index = *i;
 	(*i)++;
 	while (line[*i] && line[*i] != '\"')
 		(*i)++;
 	if (!line[*i])
 	{
-		printf("ERROR: inclosed quotes\n");   //error in case of unclosed quotes
+		printf("ERROR: inclosed quotes\n");
 		return ;
 	}
-	// add_token_last(head, new_node(ft_substr(line, index + 1, *i - index - 1), DQ));
-	printf("before \n");
 	str = ft_substr(line, index + 1, *i - index - 1);
-	printf("ana hnaaaa\n");
 	expand = ft_expand(str, save->env, save->av);
-	printf("after \n");
-	//printf("str === %s\n", str);
 	add_token_last(temp, new_node(expand, DQ));
-	printf("00000\n");
 	(*i)++;
 }
 
-void	setting_word(t_token *head, t_token **temp, char *line, int *i)
+void	setting_word(t_save *save, t_token **temp, char *line, int *i)
 {
 	int		index;
 	char	*str;
-	//char	*expand;
+	char	*expand;
 
 	index = *i;
 	while(line[*i] && skip_char(line[*i]))
 		(*i)++;
 	str = ft_substr(line, index , *i - index);
-	//expand = ft_expand(str, head);
-	//printf("expand = %s\n", expand);
-	add_token_last(temp, new_node(str, 0));
-	//(*i)++;
+	expand = ft_expand(str, save->env, save->av);
+	add_token_last(temp, new_node(expand, WORD));
 }
 
 void	redirection(t_token **head, char *str, int *i)
@@ -120,27 +111,27 @@ void	dollar(t_save *save, t_token **temp, char *line, int *i)
 	int		index;
 	char	*str;
 	char	*expand;
+	t_token	*copy;
 
+	copy = *temp;
 	index = *i;
 	(*i)++;
 	while (line[*i] && other_char(line[*i]))
 		(*i)++;
 	str = ft_substr(line, index , *i - index);
-	while(*temp != NULL)
+	while(copy != NULL)
 	{
-		if ((*temp)->next == NULL)
+		if (copy->next == NULL)
 			break;
-		*temp = (*temp)->next;
+		copy = copy->next;
 	}
-	
-	if (strcmp((*temp)->str, "<<") != 0)
+	if (copy && ft_strcmp(copy->str, "<<") == 0)
+		add_token_last(temp, new_node(str, EXPAND));
+	else
 	{
 		expand = ft_expand(str, save->env, save->av);
 		add_token_last(temp, new_node(expand, EXPAND));
-		
 	}
-	else
-		add_token_last(temp, new_node(str, EXPAND));
 }
 
 void	pipe_sign(t_token **head, int *i)
@@ -163,35 +154,18 @@ void	token(char *line, t_token **head, char **av, t_env *env)
 	while (line [i])
 	{
 		if (line[i] == '\'')
-		{
-			//printf("SINGLE Q\n");
 			single_quote(temp, line, &i);
-		}
 		else if (line[i] == '\"')
-		{
-			//printf("DOUBLE Q\n");
 			double_quote(save, temp, line, &i);
-		}
 		else if(space(line[i]))
 			i++;
 		else if (line[i] == '$')
-		{
-			//printf("DOLLAR\n");
 			dollar(save, temp, line, &i);
-		}
 		else if (line[i] == '<' || line[i] == '>')
-		{
-			//printf("RED\n");
 			redirection(temp, line, &i);
-		}
 		else if (line[i] == '|')
 			pipe_sign(temp, &i);
 		else
-		{
-			//printf("WORD\n");
-			setting_word(*head, temp, line, &i);
-		}
-		//else
-		    //i++;
+			setting_word(save, temp, line, &i);
 	}
 }
