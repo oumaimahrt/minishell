@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 23:00:09 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/24 00:23:09 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/24 23:09:31 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,22 +119,20 @@ void	dollar(t_save *save, t_token **temp, char *line, int *i)
 	while (line[*i] && other_char(line[*i]))
 		(*i)++;
 	str = ft_substr(line, index , *i - index);
-	while(copy != NULL)
+	while (copy != NULL)
 	{
-		if (copy->next == NULL)
-			break;
+		if (copy && ft_strcmp(copy->str, "<<") == 0)
+		{
+			add_token_last(temp, new_node(str, EXPAND));
+			return ;
+		}
+		else if (copy->next == NULL)
+			break ;
 		copy = copy->next;
 	}
-	if (copy && ft_strcmp(copy->str, "<<") == 0)
-		add_token_last(temp, new_node(str, EXPAND));
-	else
-	{
-		expand = ft_expand(str, save->env, save->av);
-		add_token_last(temp, new_node(expand, EXPAND));
-	}
-	//jlsa ksdjjds $USER $PATH <<$USER$USER ===> still this case to check
+	expand = ft_expand(str, save->env, save->av);
+	add_token_last(temp, new_node(expand, EXPAND));
 }
-
 
 void	pipe_sign(t_token **head, int *i)
 {

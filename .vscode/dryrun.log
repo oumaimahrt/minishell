@@ -2,15 +2,14 @@ make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/ohrete/Desktop/minishell'
 cc -fsanitize=address -g    -c -o minishell.o minishell.c
  
-cc -fsanitize=address -g    -c -o expanding.o expanding.c
-cc -fsanitize=address -g    -c -o expanding_utils.o expanding_utils.c
+cc -fsanitize=address -g    -c -o ft_environment.o ft_environment.c
+cc -fsanitize=address -g    -c -o environment_utils.o environment_utils.c
 cc -fsanitize=address -g    -c -o tokenizer.o tokenizer.c
 cc -fsanitize=address -g    -c -o token_utils.o token_utils.c
 cc -fsanitize=address -g    -c -o token_utils2.o token_utils2.c
 cc -fsanitize=address -g    -c -o parser.o parser.c
- 
-cc -fsanitize=address -g    -c -o execute_minishell.o execute_minishell.c
 cd ./libft && make
-cc -fsanitize=address -g  minishell.o expanding.o expanding_utils.o tokenizer.o token_utils.o token_utils2.o parser.o execute_minishell.o -lreadline -L/Users/ohrete/.brew/opt/readline/lib -I/Users/ohrete/.brew/opt/readline/include ./libft/libft.a -o minishell 
+stty -echoctl
+cc -fsanitize=address -g  minishell.o ft_environment.o environment_utils.o tokenizer.o token_utils.o token_utils2.o parser.o -lreadline -L/Users/ohrete/.brew/opt/readline/lib -I/Users/ohrete/.brew/opt/readline/include ./libft/libft.a -o minishell 
 make: Leaving directory `/Users/ohrete/Desktop/minishell'
  

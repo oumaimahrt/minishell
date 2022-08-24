@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:26:50 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/23 23:34:56 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/24 20:29:10 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,25 +60,22 @@ int	main(int ac, char **av, char **env)
 		ft_signals();
 		line = readline("minishell~ ");
 		if (!line) 
-			exit(0); //control_D
-		// if (line[0] != '\0') asking for this problem
-		// {
-		// 	token(line, &data, av, fst_link);
-		// 	while (data)
-		// 	{
-		// 		printf("word1 = %s, id = %d\n", data->str, data->id);
-		// 		data = data->next;
-		// 	}
-		// }
-		add_history(line);
-		token(line, &data, av, fst_link);
-		while (data)
 		{
-			printf("word1 = %s, id = %d\n", data->str, data->id);
-			data = data->next;
+			printf("minishell~ exit");
+			exit(0); //control_D
 		}
-		//execution;
-		free(line);
-		//system("leaks minishell");
+		if (line[0] != '\0') //for skipping \n
+		{
+			add_history(line);
+			token(line, &data, av, fst_link);
+			while (data)
+			{
+				printf("word1 = %s, id = %d\n", data->str, data->id);
+				data = data->next;
+			}
+			//execution;
+			free(line);
+			//system("leaks minishell");
+		}
 	}
 }
