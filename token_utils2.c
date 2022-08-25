@@ -6,56 +6,59 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 18:30:42 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/23 16:30:05 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/25 19:54:39 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_expand(char *str, t_env *env, char **av)
+int	space(char c)
 {
-	int		i;
-	int		start;
-	char	*ptr;
-	char	*new;
+	if (c == 32)
+		return (1);
+	return (0);
+}
 
-	i = 0;
-	start = 0;
-	new = ft_strdup("");
-	while (str[i])
-	{
-		if (str[i] == '$')
-		{
-			if (str[i + 1] != '\0' && str[i + 1] == '?')
-			{
-				ptr = ft_itoa(g_status);
-				new = ft_strjoin(new, ptr);
-				i = i + 2;
-			}
-			else if (str[i + 1] != '\0' && str[i + 1] == 48)
-			{
-				ptr = ft_strdup(av[0]);
-				new = ft_strjoin(new, ptr);
-				i = i + 2;
-			}
-			else
-			{
-				start = ++i;
-				while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
-					i++;
-				ptr = ft_substr(str, start, i - start);
-				ptr = getting_env(env, ptr);
-				new = ft_strjoin(new, ptr);
-			}
-		}
-		else
-		{
-			start = i;
-			while (str[i] != '\0' && str[i] != '$')
-				i++;
-			ptr = ft_substr(str, start, i - start);
-			new = ft_strjoin(new, ptr);
-		}
-	}
+int	skip_char(char c)
+{
+	if (c == '$' || c == '&' || c == '\'' || c == '\"' || c == '<' || c == '>'
+		|| c == ' ' || c == '|')
+		return (0);
+	return (1);
+}
+
+int	other_char(char c)
+{
+	if (!(c >= '0' && c <= '9') && !(c >= 'A' && c <= 'Z')
+		&& !(c >= 'a' && c <= 'z') && c != '_' && c != '?')
+		return (0);
+	return (1);
+}
+
+t_token	*new_node(char *str, int id)
+{
+	t_token	*new;
+
+	new = (t_token *)malloc(sizeof(t_token));
+	if (new == NULL)
+		return NULL;
+	new->str = str;
+	new->id = id;
+	new->next = NULL;
 	return (new);
+}
+
+void	add_token_last(t_token **head, t_token *new)
+{
+	t_token	*last;
+
+	last = (*head);
+	if (!(*head))
+		(*head) = new;
+	else
+	{
+		while (last->next != NULL)
+			last = last->next;
+		last->next = new;
+	}
 }

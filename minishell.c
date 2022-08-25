@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:26:50 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/24 20:29:10 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/25 17:54:50 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int	main(int ac, char **av, char **env)
 	// i = 0;
 	// data->head = NULL;
 	// data->fst_link = NULL;
-	//(void)ac;
 	if (ac > 1)
 		return (0);
 	// while (env[i])
@@ -67,7 +66,7 @@ int	main(int ac, char **av, char **env)
 		if (line[0] != '\0') //for skipping \n
 		{
 			add_history(line);
-			token(line, &data, av, fst_link);
+			tokenizer(line, &data, av, fst_link);
 			while (data)
 			{
 				printf("word1 = %s, id = %d\n", data->str, data->id);

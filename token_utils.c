@@ -6,59 +6,108 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 18:25:58 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/21 21:42:13 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/25 19:56:26 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	space(char c)
+void	single_quote(t_token **head, char *line, int *i)
 {
-	if (c == 32)
-		return (1);
-	return (0);
-}
+	int	index;
 
-int	skip_char(char c)
-{
-	if (c == '$' || c == '&' || c == '\'' || c == '\"' || c == '<' || c == '>'
-		|| c == ' ' || c == '|')
-		return (0);
-	return (1);
-}
-
-int	other_char(char c)
-{
-	if (!(c >= '0' && c <= '9') && !(c >= 'A' && c <= 'Z')
-		&& !(c >= 'a' && c <= 'z') && c != '_' && c != '?')
-		return (0);
-	return (1);
-}
-
-t_token	*new_node(char *str, int id)
-{
-	t_token	*new;
-
-	new = (t_token *)malloc(sizeof(t_token));
-	if (new == NULL)
-		return NULL;
-	new->str = str;
-	new->id = id;
-	new->next = NULL;
-	return (new);
-}
-
-void	add_token_last(t_token **head, t_token *new)
-{
-	t_token	*last;
-
-	last = (*head);
-	if (!(*head))
-		(*head) = new;
-	else
+	index = *i;
+	(*i)++;
+	while (line[*i] && line[*i] != '\'')
+		(*i)++;
+	if (!line[*i])
 	{
-		while (last->next != NULL)
-			last = last->next;
-		last->next = new;
+		printf("ERROR: inclosed quotes\n");
+		return ;
 	}
+	add_token_last(head, new_node
+		(ft_substr(line, index + 1, *i - index - 1), SQ));
+	(*i)++;
+}
+
+void	double_quote(t_save *save, t_token **temp, char *line, int *i)
+{
+	int		index;
+	char	*str;
+	char	*expand;
+
+	index = *i;
+	(*i)++;
+	while (line[*i] && line[*i] != '\"')
+		(*i)++;
+	if (!line[*i])
+	{
+		printf("ERROR: inclosed quotes\n");
+		return ;
+	}
+	str = ft_substr(line, index + 1, *i - index - 1);
+	expand = ft_expand(str, save->env, save->av);
+	add_token_last(temp, new_node(expand, DQ));
+	(*i)++;
+}
+
+void	dollar(t_save *save, t_token **temp, char *line, int *i)
+{
+	int		index;
+	char	*str;
+	char	*expand;
+	t_token	*copy;
+
+	copy = *temp;
+	index = *i;
+	(*i)++;
+	while (line[*i] && other_char(line[*i]))
+		(*i)++;
+	str = ft_substr(line, index, *i - index);
+	while (copy != NULL)
+	{
+		if (copy && ft_strcmp(copy->str, "<<") == 0)
+		{
+			add_token_last(temp, new_node(str, EXPAND));
+			return ;
+		}
+		else if (copy->next == NULL)
+			break ;
+		copy = copy->next;
+	}
+	expand = ft_expand(str, save->env, save->av);
+	add_token_last(temp, new_node(expand, EXPAND));
+}
+
+void	redirection(t_token **head, char *str, int *i)
+{
+	if (str[*i] == '>' && str[*i + 1] == '>')
+	{
+		add_token_last(head, new_node(">>", APPEND));
+		(*i)++;
+	}
+	else if (str[*i] == '<' && str[*i + 1] == '<')
+	{
+		add_token_last(head, new_node("<<", HERE_DOC));
+		(*i)++;
+	}
+	else if (str[*i] == '>')
+		add_token_last(head, new_node(">", OUTPUT));
+	else if (str[*i] == '<')
+		add_token_last(head, new_node("<", INPUT));
+	(*i)++;
+}
+
+void	setting_word(t_save *save, t_token **temp, char *line, int *i)
+{
+	int		index;
+	char	*str;
+	char	*expand;
+
+	index = *i;
+	while (line[*i] && skip_char(line[*i]))
+		(*i)++;
+	str = ft_substr(line, index, *i - index);
+	expand = ft_expand(str, save->env, save->av);
+	add_token_last(temp, new_node(expand, WORD));
 }

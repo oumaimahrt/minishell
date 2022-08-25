@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:11:06 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/23 23:32:55 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/08/25 20:34:48 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_save
 	t_env *env;
 	char **av;
 }	t_save;
+
 //parser
 // typedef struct s_cmd
 // {
@@ -76,7 +77,6 @@ typedef struct s_save
 
 char	*search_name(char *name, int i);
 char	*search_value(char *value, int i);
-char	tokenizer(char **env);
 t_env	*fill_struct(char *name, char *value);
 void	add_first(t_env **fst_link, t_env *new);
 void	add_last(t_env **head, t_env *new);
@@ -94,7 +94,8 @@ void	redirection(t_token **head, char *str, int *i);
 int		other_char(char c);
 void	dollar(t_save *save, t_token **temp, char *line, int *i);
 void	pipe_sign(t_token **head, int *i);
-void	token(char *line, t_token **head, char **av, t_env *env);
+void	tokens(char *line, t_token **temp, t_save *save, int *i);
+void	tokenizer(char *line, t_token **head, char **av, t_env *env);
 void	ft_signals(void);
 void	rl_replace_line (const char *text, int clear_undo);
 
