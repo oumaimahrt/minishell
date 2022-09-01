@@ -1,16 +1,5 @@
-make --dry-run --always-make --keep-going --print-directory
+make --dry-run --keep-going --print-directory
 make: Entering directory `/Users/ohrete/Desktop/minishell'
-cc -Wall -Wextra -Werror    -c -o minishell.o minishell.c
- 
-cc -Wall -Wextra -Werror    -c -o ft_environment.o ft_environment.c
-cc -Wall -Wextra -Werror    -c -o environment_utils.o environment_utils.c
-cc -Wall -Wextra -Werror    -c -o tokenizer.o tokenizer.c
-cc -Wall -Wextra -Werror    -c -o token_utils.o token_utils.c
-cc -Wall -Wextra -Werror    -c -o token_utils2.o token_utils2.c
-cc -Wall -Wextra -Werror    -c -o expanding.o expanding.c
-cc -Wall -Wextra -Werror    -c -o parser.o parser.c
-cd ./libft && make
-stty -echoctl
-cc -Wall -Wextra -Werror  minishell.o ft_environment.o environment_utils.o tokenizer.o token_utils.o token_utils2.o expanding.o parser.o -lreadline -L/Users/ohrete/.brew/opt/readline/lib -I/Users/ohrete/.brew/opt/readline/include ./libft/libft.a -o minishell 
+make: `all' is up to date.
 make: Leaving directory `/Users/ohrete/Desktop/minishell'
  

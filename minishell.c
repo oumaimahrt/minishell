@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:26:50 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/25 17:54:50 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/01 23:47:30 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,10 @@ void	ft_signals(void)
 
 int	main(int ac, char **av, char **env)
 {
-	t_token	*data;
 	char	*line;
+	t_token	*data;
 	t_env	*fst_link;
+	//t_save	save;
 	// int		i;
 
 	// i = 0;
@@ -66,12 +67,15 @@ int	main(int ac, char **av, char **env)
 		if (line[0] != '\0') //for skipping \n
 		{
 			add_history(line);
+			//printf("======>Hiiii ana hna\n");
 			tokenizer(line, &data, av, fst_link);
-			while (data)
-			{
-				printf("word1 = %s, id = %d\n", data->str, data->id);
-				data = data->next;
-			}
+			//while (data)
+			// {
+			// 	printf("word1 = %s, id = %d\n", data->str, data->id);
+			// 	data = data->next;
+			// }
+			//printf("======>222222222\n");
+			parser (&data);
 			//execution;
 			free(line);
 			//system("leaks minishell");

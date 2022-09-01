@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 23:00:09 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/25 20:36:05 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/01 20:24:23 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	pipe_sign(t_token **head, int *i)
 // 	}
 // }
 
+//FOR THE NORM, STILL NEED SOME UPDATES TO HANDLE SPACES 
 void	tokens(char *line, t_token **temp, t_save *save, int *i)
 {
 	if (line[*i] == '\'')
@@ -87,8 +88,6 @@ void	tokens(char *line, t_token **temp, t_save *save, int *i)
 		pipe_sign(temp, i);
 	else
 		setting_word(save, temp, line, i);
-	if (line[*i] == '\0')
-		return;
 }
 
 void	tokenizer(char *line, t_token **head, char **av, t_env *env)
@@ -105,6 +104,5 @@ void	tokenizer(char *line, t_token **head, char **av, t_env *env)
 	while (line[i])
 	{
 		tokens(line, temp, save, &i);
-		i++;
 	}
 }

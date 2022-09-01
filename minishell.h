@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:11:06 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/25 20:34:48 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/01 23:34:39 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,16 @@ typedef struct s_token
 {
 	char			*str;
 	int				id;
+	char			*content;
+	char			**cmd;
+	char			*infile;
+	char			*outfile;
+	char			*append;
+	char			*here_d;
+	int				before_pipe;
+	int				after_pipe;
+	//t_file			*myfile;
+	struct s_token	*my_node;
 	char			**av;
 	t_env			*fst_link;
 	struct s_token	*next;
@@ -53,8 +63,35 @@ typedef struct s_save
 {
 	t_env *env;
 	char **av;
+	//t_token	*list;
+	//t_node	*list;
+	//t_token	*final_list;
 }	t_save;
 
+//precising my files
+typedef struct s_file
+{
+	char	*filename;
+	int		id;
+	struct s_file *next;
+}	t_file;
+
+// node of commands
+// typedef struct s_node
+// {
+// 	int				type;
+// 	char			**cmd;
+// 	char			*content;
+// 	char			*infile;
+// 	char			*outfile;
+// 	char			*append;
+// 	char			*here_d;
+// 	int				before_pipe;
+// 	int				after_pipe;
+// 	//t_file			*myfile;
+// 	struct s_node	*my_node;
+// 	struct s_node	*next;
+// }	t_node;
 //parser
 // typedef struct s_cmd
 // {
@@ -96,6 +133,7 @@ void	dollar(t_save *save, t_token **temp, char *line, int *i);
 void	pipe_sign(t_token **head, int *i);
 void	tokens(char *line, t_token **temp, t_save *save, int *i);
 void	tokenizer(char *line, t_token **head, char **av, t_env *env);
+t_token	*parser(t_token **line);
 void	ft_signals(void);
 void	rl_replace_line (const char *text, int clear_undo);
 
