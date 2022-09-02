@@ -6,18 +6,28 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 16:29:04 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/11 01:23:21 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/02 01:26:02 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+int	len_of_str(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	return (i);
+}
 
 char	*ft_strdup(char *s1)
 {
 	char	*dup;
 	int		i;
 
-	dup = malloc(sizeof(char) * (ft_strlen(s1) + 1));
+	dup = malloc(sizeof(char) * (len_of_str(s1) + 1));
 	if (!dup)
 		return (NULL);
 	i = 0;

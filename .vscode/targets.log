@@ -8,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This program built for i386-apple-darwin11.3.0
  
 
-# Make data base, printed on Fri Sep  2 00:24:27 2022
+# Make data base, printed on Fri Sep  2 01:31:22 2022
 
 # Variables
 
@@ -34,13 +34,13 @@ _ = /usr/bin/make
 CFLAGS = -Wall -Wextra -Werror 
 # makefile (from `Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
- 
 # makefile (from `Makefile', line 27)
+ 
 OBJS = $(SRCS:%.c=%.o)
 # environment
 VSCODE_CWD = /
 # environment
-Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.oF4qwd4SkQ/Render
+Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.hh9Jgfc6z5/Render
 # environment
 PATH = /Users/ohrete/.brew/bin:/Users/ohrete/.brew/bin:/Users/ohrete/.brew/bin:/Users/ohrete/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki
 # environment
@@ -50,7 +50,7 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.HZTmmZBPtY/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.e2U8pHKCsK/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -122,7 +122,7 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000002.Electron
+XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000007.Electron
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
@@ -140,7 +140,7 @@ PAGER = less
 # environment
 LC_ALL = C
 # environment
-SECURITYSESSIONID = 186a7
+SECURITYSESSIONID = 18721
 # automatic
 ^F = $(notdir $^)
 # default
@@ -152,7 +152,7 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 3822
+VSCODE_PID = 48838
 # variable set hash-table stats:
 # Load=70/1024=7%, Rehash=0, Collisions=3/100=3%
 
@@ -175,7 +175,7 @@ VSCODE_PID = 3822
 # Not a target:
 ft_environment.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-02 00:20:38
+#  Last modified 2022-09-02 01:30:58
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -184,8 +184,7 @@ ft_environment.o:
 # Not a target:
 token_utils.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-02 00:20:38
- 
+#  Last modified 2022-09-02 01:30:59
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -205,7 +204,7 @@ all: minishell
 # Not a target:
 environment_utils.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-02 00:20:38
+#  Last modified 2022-09-02 01:30:59
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -214,7 +213,7 @@ environment_utils.o:
 # Not a target:
 expanding.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-02 00:20:38
+#  Last modified 2022-09-02 01:30:59
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -229,7 +228,7 @@ expanding.o:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-02 00:20:35
+#  Last modified 2022-09-02 01:30:54
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -237,7 +236,7 @@ Makefile:
 
 minishell: minishell.o ft_environment.o environment_utils.o tokenizer.o token_utils.o token_utils2.o expanding.o parser.o libft/libft.a
 #  Implicit rule search has not been done.
-#  Last modified 2022-09-02 00:20:41
+#  Last modified 2022-09-02 01:31:02
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -250,7 +249,7 @@ minishell: minishell.o ft_environment.o environment_utils.o tokenizer.o token_ut
 # Not a target:
 minishell.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-02 00:20:37
+#  Last modified 2022-09-02 01:30:58
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -258,7 +257,7 @@ minishell.o:
 
 libft/libft.a:
 #  Implicit rule search has not been done.
-#  Last modified 2022-09-02 00:20:41
+#  Last modified 2022-09-02 01:31:02
 #  File has been updated.
 #  Successfully updated.
 #  commands to execute (from `Makefile', line 40):
@@ -277,7 +276,7 @@ fclean: clean
 # Not a target:
 token_utils2.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-02 00:20:38
+#  Last modified 2022-09-02 01:30:59
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -286,7 +285,7 @@ token_utils2.o:
 # Not a target:
 parser.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-02 00:20:38
+#  Last modified 2022-09-02 01:30:59
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -301,7 +300,7 @@ parser.o:
 # Not a target:
 tokenizer.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-02 00:20:38
+#  Last modified 2022-09-02 01:30:59
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -334,6 +333,6 @@ clean:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Fri Sep  2 00:24:27 2022
+# Finished Make data base on Fri Sep  2 01:31:22 2022
 
  

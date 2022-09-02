@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:26:50 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/01 23:47:30 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/02 01:27:58 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,14 @@ int	main(int ac, char **av, char **env)
 		if (line[0] != '\0') //for skipping \n
 		{
 			add_history(line);
-			//printf("======>Hiiii ana hna\n");
+			printf("======>Hiiii ana hna\n");
 			tokenizer(line, &data, av, fst_link);
 			//while (data)
 			// {
 			// 	printf("word1 = %s, id = %d\n", data->str, data->id);
 			// 	data = data->next;
 			// }
-			//printf("======>222222222\n");
+			printf("======>222222222\n");
 			parser (&data);
 			//execution;
 			free(line);

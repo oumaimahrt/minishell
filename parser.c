@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 23:50:30 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/02 00:16:10 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/02 01:31:35 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,7 @@ void	 my_cmds(t_token **head)
 	printf("after while \n");
 }
 
-void	redirects(t_token	**line, t_token **head)
+void	redirects(t_token **line, t_token **head)
 {
 	if ((*line)->id == INPUT)
 	{
@@ -185,7 +185,7 @@ void	redirects(t_token	**line, t_token **head)
 			my_errors(1);
 		printf("input\n");
 		(*head)->infile = ft_strdup((*line)->next->content);
-		printf("inputfile\n");
+		printf("infile\n");
 	}
 	else if ((*line)->id == OUTPUT)
 	{
@@ -247,6 +247,7 @@ t_token *parser(t_token **line)
 		{
 			printf("======>redirects\n");
 			redirects(&str, &head);
+			printf("out of redirects\n");
 		}
 		printf("OUT \n");
 	}

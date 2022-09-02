@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:11:06 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/01 23:34:39 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/02 00:52:39 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_env
 	struct s_env	*next;
 }	t_env;
 
-//tokenizer
+//tokenizer & parser
 typedef struct s_token
 {
 	char			*str;
@@ -69,12 +69,12 @@ typedef struct s_save
 }	t_save;
 
 //precising my files
-typedef struct s_file
-{
-	char	*filename;
-	int		id;
-	struct s_file *next;
-}	t_file;
+// typedef struct s_file
+// {
+// 	char	*filename;
+// 	int		id;
+// 	struct s_file *next;
+// }	t_file;
 
 // node of commands
 // typedef struct s_node
