@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:11:06 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/02 00:52:39 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/02 18:04:23 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_token
 {
 	char			*str;
 	int				id;
+	struct s_token	*my_node;
 	char			*content;
 	char			**cmd;
 	char			*infile;
@@ -52,7 +53,6 @@ typedef struct s_token
 	int				before_pipe;
 	int				after_pipe;
 	//t_file			*myfile;
-	struct s_token	*my_node;
 	char			**av;
 	t_env			*fst_link;
 	struct s_token	*next;

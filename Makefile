@@ -6,7 +6,7 @@
 #    By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/22 09:56:57 by ohrete            #+#    #+#              #
-#    Updated: 2022/09/02 01:30:54 by ohrete           ###   ########.fr        #
+#    Updated: 2022/09/02 21:09:12 by ohrete           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRCS = minishell.c \
 OBJS = $(SRCS:%.c=%.o)
 CONTROL = @stty -echoctl
 LFLAGS = -lreadline -L/Users/ohrete/.brew/opt/readline/lib -I/Users/ohrete/.brew/opt/readline/include
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 LIBFT = ./libft/libft.a
 
 all: $(NAME)

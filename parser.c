@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 23:50:30 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/02 01:31:35 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/02 23:52:50 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ t_token	*new_content(void *content)
 {
 	t_token	*new_node;
 	
-	new_node =  (t_token *)malloc(sizeof (t_token));
+	new_node =  (t_token *)malloc(sizeof(t_token));
+	if (!new_node)
+		return (NULL);
+	new_node->content = content;
 	new_node->my_node = NULL;
 	new_node->after_pipe = 0;
 	new_node->before_pipe = 0;
@@ -46,7 +49,6 @@ t_token	*new_content(void *content)
 	new_node->infile = NULL;
 	new_node->outfile = NULL;
 	new_node->cmd = NULL;
-	new_node->content = content;
 	new_node->id = 0;
 	new_node->next = NULL;
 	return (new_node);
@@ -134,7 +136,7 @@ void	clear_list(t_token **list)
 	while (*list)
 	{
 		tmp = (*list)->next;
-		free((*list)->content);
+		//free((*list)->content);
 		free(*list);
 		*list = tmp;
 	}
@@ -145,7 +147,7 @@ int	my_errors(int e)
 {
 	if (e == 1)
 		printf("Oops Error! Syntax error!\n");
-	return (0);
+	return (0) ;
 }
 
 void	 my_cmds(t_token **head)
@@ -184,28 +186,28 @@ void	redirects(t_token **line, t_token **head)
 		if (!(*line)->next)
 			my_errors(1);
 		printf("input\n");
-		(*head)->infile = ft_strdup((*line)->next->content);
+		(*head)->infile = ft_strdup((*line)->content);
 		printf("infile\n");
 	}
 	else if ((*line)->id == OUTPUT)
 	{
 		if (!(*line)->next)
 			my_errors(1);
-		(*head)->outfile = ft_strdup((*line)->next->content);
+		(*head)->outfile = ft_strdup((*line)->content);
 	}
 	else if ((*line)->id == HERE_DOC)
 	{
 		if (!(*line)->next)
 			my_errors(1);
-		(*head)->here_d= ft_strdup((*line)->next->content);
+		(*head)->here_d= ft_strdup((*line)->content);
 	}
 	else if ((*line)->id == APPEND)
 	{
 		if (!(*line)->next)
 			my_errors(1);
-		(*head)->append = ft_strdup((*line)->next->content);
+		(*head)->append = ft_strdup((*line)->content);
 	}
-	(*line) = (*line)->next->next;
+	(*line) = (*line)->next;
 }
 
 void	my_pipe(t_token **line, t_token **head)
@@ -236,20 +238,20 @@ t_token *parser(t_token **line)
 			printf("======>PIPE\n");
 			my_pipe(&str, &head);
 		}
-		else if (str->id == WORD)
+		else if (str->id == INPUT || str->id == OUTPUT || str->id == HERE_DOC || str->id == APPEND)
+		{
+			printf("======>redirects\n");
+			redirects(&str, &head);
+			printf("out of redirects\n");
+		}
+		else
 		{
 			printf("======>WORD\n");
 			add_last_list(&(head->next), new_content((str->content)));
 			printf("hallo \n");
 			str = str->next;
 		}
-		else
-		{
-			printf("======>redirects\n");
-			redirects(&str, &head);
-			printf("out of redirects\n");
-		}
-		printf("OUT \n");
+		printf("OUT WHILE\n");
 	}
 	printf("======>making array\n");
 	my_cmds(&tmp);
