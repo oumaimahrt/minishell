@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 23:50:30 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/02 23:52:50 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/04 20:49:02 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,31 +181,40 @@ void	 my_cmds(t_token **head)
 
 void	redirects(t_token **line, t_token **head)
 {
+// 	t_token *data;
+	
+// 	data = *line;
+// 	while (data)
+// 	{
+// 		printf("word1 = %s, id = %d\n", data->str, data->id);
+// 		data = data->next;
+// 	}
 	if ((*line)->id == INPUT)
 	{
 		if (!(*line)->next)
 			my_errors(1);
-		printf("input\n");
-		(*head)->infile = ft_strdup((*line)->content);
+		// printf("input\n");
+		printf ("content : %s\n", (*line)->str);
+		(*head)->infile = ft_strdup((*line)->str);
 		printf("infile\n");
 	}
 	else if ((*line)->id == OUTPUT)
 	{
 		if (!(*line)->next)
 			my_errors(1);
-		(*head)->outfile = ft_strdup((*line)->content);
+		(*head)->outfile = ft_strdup((*line)->str);
 	}
 	else if ((*line)->id == HERE_DOC)
 	{
 		if (!(*line)->next)
 			my_errors(1);
-		(*head)->here_d= ft_strdup((*line)->content);
+		(*head)->here_d= ft_strdup((*line)->str);
 	}
 	else if ((*line)->id == APPEND)
 	{
 		if (!(*line)->next)
 			my_errors(1);
-		(*head)->append = ft_strdup((*line)->content);
+		(*head)->append = ft_strdup((*line)->str);
 	}
 	(*line) = (*line)->next;
 }
@@ -230,34 +239,24 @@ t_token *parser(t_token **line)
 	str = *line;
 	head = create_node();
 	tmp = head;
-	printf("======>before str\n");
 	while (str)
 	{
 		if (str->id == PIPE)
 		{
-			printf("======>PIPE\n");
 			my_pipe(&str, &head);
 		}
 		else if (str->id == INPUT || str->id == OUTPUT || str->id == HERE_DOC || str->id == APPEND)
 		{
-			printf("======>redirects\n");
 			redirects(&str, &head);
-			printf("out of redirects\n");
 		}
 		else
 		{
-			printf("======>WORD\n");
 			add_last_list(&(head->next), new_content((str->content)));
-			printf("hallo \n");
 			str = str->next;
 		}
-		printf("OUT WHILE\n");
 	}
-	printf("======>making array\n");
 	my_cmds(&tmp);
-	printf("clearing my list\n");
 	clear_list(line);
-	printf("final\n");
 	line = 0;
 	return (tmp);
 }
