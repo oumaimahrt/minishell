@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:11:06 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/02 18:04:23 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/04 22:08:12 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_token
 	char			*str;
 	int				id;
 	struct s_token	*my_node;
-	char			*content;
+	//char			*content;
 	char			**cmd;
 	char			*infile;
 	char			*outfile;

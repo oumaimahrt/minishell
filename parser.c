@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 23:50:30 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/04 20:49:02 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/04 22:21:42 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,18 @@ t_token	*create_node(void)
 	new_node->infile = NULL;
 	new_node->outfile = NULL;
 	new_node->cmd = NULL;
-	new_node->content = NULL;
+	new_node->str = NULL;
 	return (new_node);
 }
 
-t_token	*new_content(void *content)
+t_token	*new_content(void *str)
 {
 	t_token	*new_node;
 	
 	new_node =  (t_token *)malloc(sizeof(t_token));
 	if (!new_node)
 		return (NULL);
-	new_node->content = content;
+	new_node->str = str;
 	new_node->my_node = NULL;
 	new_node->after_pipe = 0;
 	new_node->before_pipe = 0;
@@ -54,61 +54,61 @@ t_token	*new_content(void *content)
 	return (new_node);
 }
 
-// void	add_last_list(t_token **head, t_token *new)
-// {
-// 	t_token	*last;
-
-// 	last = (*head);
-// 	if (!(*head))
-// 		(*head) = new;
-// 	else
-// 	{
-// 		while (last->next != NULL)
-// 			last = last->next;
-// 		last->next = new;
-// 	}
-// }
-
-void	add_first_list(t_token **list, t_token *new)
-{
-	if (!new || !list)
-		return ;
-	new->next = *list;
-	*list = new;
-}
-
-t_token	*last_elem(t_token *list)
-{
-	t_token	*tmp;
-
-	if (!list)
-		return (NULL);
-	tmp = list;
-	while (tmp->next != NULL)
-	{
-		tmp = tmp->next;
-	}
-	return (tmp);
-}
-
-void	add_last_list(t_token **list, t_token *new)
+void	add_last_list(t_token **head, t_token *new)
 {
 	t_token	*last;
 
-	if (!(*list))
+	last = (*head);
+	if (!(*head))
+		(*head) = new;
+	else
 	{
-		add_first_list(list, new);
-		return ;
-	}
-	last = last_elem(*list);
-	if (new->next == NULL)
+		while (last->next != NULL)
+			last = last->next;
 		last->next = new;
-	while (new->next != NULL)
-	{
-		last->next = new;
-		new = new->next;
 	}
 }
+
+// void	add_first_list(t_token **list, t_token *new)
+// {
+// 	if (!new || !list)
+// 		return ;
+// 	new->next = *list;
+// 	*list = new;
+// }
+
+// t_token	*last_elem(t_token *list)
+// {
+// 	t_token	*tmp;
+
+// 	if (!list)
+// 		return (NULL);
+// 	tmp = list;
+// 	while (tmp->next != NULL)
+// 	{
+// 		tmp = tmp->next;
+// 	}
+// 	return (tmp);
+// }
+
+// void	add_last_list(t_token **list, t_token *new)
+// {
+// 	t_token	*last;
+
+// 	if (!(*list))
+// 	{
+// 		add_first_list(list, new);
+// 		return ;
+// 	}
+// 	last = last_elem(*list);
+// 	if (new->next == NULL)
+// 		last->next = new;
+// 	while (new->next != NULL)
+// 	{
+// 		last->next = new;
+// 		new = new->next;
+// 	}
+// }
 
 int	list_size(t_token *list)
 {
@@ -136,7 +136,7 @@ void	clear_list(t_token **list)
 	while (*list)
 	{
 		tmp = (*list)->next;
-		//free((*list)->content);
+		//free((*list)->str);
 		free(*list);
 		*list = tmp;
 	}
@@ -158,45 +158,34 @@ void	 my_cmds(t_token **head)
 	t_token	*tab;
 
 	tmp_head = *head;
-	printf("before while \n");
+	//printf("before while \n");
 	while (tmp_head)
 	{
 		tab = tmp_head->my_node;
 		i = 0;
 		len = list_size(tab);
 		tmp_head->cmd = malloc((len + 1) * sizeof (char *));
-		printf("my table\n");
+		//printf("my table\n");
 		while(tab)
 		{
-			tmp_head->cmd[i] = ft_strdup(tab->content);
+			tmp_head->cmd[i] = ft_strdup(tab->str);
 			i++;
 			tab = tab->next;
 		}
-		printf("after strdup\n");
+		//printf("after strdup\n");
 		tmp_head->cmd[i] = NULL;
 		tmp_head = tmp_head->next;
 	}
-	printf("after while \n");
+	//printf("after while \n");
 }
 
 void	redirects(t_token **line, t_token **head)
 {
-// 	t_token *data;
-	
-// 	data = *line;
-// 	while (data)
-// 	{
-// 		printf("word1 = %s, id = %d\n", data->str, data->id);
-// 		data = data->next;
-// 	}
 	if ((*line)->id == INPUT)
 	{
 		if (!(*line)->next)
 			my_errors(1);
-		// printf("input\n");
-		printf ("content : %s\n", (*line)->str);
 		(*head)->infile = ft_strdup((*line)->str);
-		printf("infile\n");
 	}
 	else if ((*line)->id == OUTPUT)
 	{
@@ -232,28 +221,26 @@ void	my_pipe(t_token **line, t_token **head)
 
 t_token *parser(t_token **line)
 {
-	t_token	*str;
+	t_token	*new;
 	t_token	*head;
 	t_token	*tmp;
 
-	str = *line;
+	new = *line;
 	head = create_node();
 	tmp = head;
-	while (str)
+	while (new)
 	{
-		if (str->id == PIPE)
+		if (new->id == PIPE)
 		{
-			my_pipe(&str, &head);
+			my_pipe(&new, &head);
 		}
-		else if (str->id == INPUT || str->id == OUTPUT || str->id == HERE_DOC || str->id == APPEND)
+		else if (new->id == WORD)
 		{
-			redirects(&str, &head);
+			add_last_list(&(head->next), new_content((new->str)));
+			new = new->next;
 		}
 		else
-		{
-			add_last_list(&(head->next), new_content((str->content)));
-			str = str->next;
-		}
+			redirects(&new, &head);
 	}
 	my_cmds(&tmp);
 	clear_list(line);
