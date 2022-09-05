@@ -6,7 +6,7 @@
 #    By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/22 09:56:57 by ohrete            #+#    #+#              #
-#    Updated: 2022/09/04 22:18:30 by ohrete           ###   ########.fr        #
+#    Updated: 2022/09/05 22:37:43 by ohrete           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,8 @@ SRCS = minishell.c \
 	token_utils2.c \
 	expanding.c \
 	parser.c \
-	#pars_utils.c \
-	pars_utils2.c \
+	pars_utils.c \
+	#pars_utils2.c \
 	#./parsing/parse.c 
 
 OBJS = $(SRCS:%.c=%.o)

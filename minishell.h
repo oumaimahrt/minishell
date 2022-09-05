@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:11:06 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/04 22:08:12 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/06 00:00:52 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,8 @@ typedef struct s_env
 typedef struct s_token
 {
 	char			*str;
-	int				id;
+	int				id; //type
 	struct s_token	*my_node;
-	//char			*content;
 	char			**cmd;
 	char			*infile;
 	char			*outfile;
@@ -63,9 +62,6 @@ typedef struct s_save
 {
 	t_env *env;
 	char **av;
-	//t_token	*list;
-	//t_node	*list;
-	//t_token	*final_list;
 }	t_save;
 
 //precising my files
@@ -134,6 +130,11 @@ void	pipe_sign(t_token **head, int *i);
 void	tokens(char *line, t_token **temp, t_save *save, int *i);
 void	tokenizer(char *line, t_token **head, char **av, t_env *env);
 t_token	*parser(t_token **line);
+t_token	*create_node(void);
+void	add_last_list(t_token **head, t_token *new);
+int		 list_size(t_token *list);
+void	clear_list(t_token **list);
+int		my_errors(int e);
 void	ft_signals(void);
 void	rl_replace_line (const char *text, int clear_undo);
 
