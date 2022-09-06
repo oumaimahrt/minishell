@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:26:50 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/05 23:38:51 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/06 20:35:04 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,11 @@ int	main(int ac, char **av, char **env)
 {
 	char	*line;
 	t_token	*data;
+	t_final *final_data;
 	t_env	*fst_link;
+
+	int id ;
+	id = 1;
 	//t_save	save;
 	// int		i;
 
@@ -70,20 +74,23 @@ int	main(int ac, char **av, char **env)
 			//printf("======>Hiiii ana hna\n");
 			//printf("======>ana f tokeniszer\n");
 			tokenizer(line, &data, av, fst_link);
-			// while (data)
+			// while (data != NULL)
 			// {
 			// 	printf("word1 = %s, id = %d\n", data->str, data->id);
 			// 	data = data->next;
 			// }
+			// printf("before parser %s\n", data->str);
+			final_data = ft_parser(data);
 			//printf("======>222222222\n");
-			parser (&data);
-			// while (data)
-			// {
-			// 	printf("word2 = %s, id = %d\n", data->str, data->id);
-			// 	data = data->next;
-			// }
+			// parser (&data);
+			// // // printf("output %s\n", data->str);
+			// printf("after parser \n");
+			ft_output(final_data);
+			ft_freetokens(data);
+			data = NULL;
+			// ft_free(final_data);
+			// printf("****\n");
 			//printf("salitttt\n");
-			//data = parser (&data);
 			//execution;
 			free(line);
 			//system("leaks minishell");

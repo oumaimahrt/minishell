@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:11:06 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/06 00:00:52 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/06 18:14:58 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 # define DQ '\"'
 # define HERE_DOC 'H' // <<
 # define WORD 'W'
+# define FIL 1
+# define NAM 2
 int g_status;
 //env
 typedef struct s_env
@@ -38,24 +40,33 @@ typedef struct s_env
 	struct s_env	*next;
 }	t_env;
 
-//tokenizer & parser
+//tokenizer
 typedef struct s_token
 {
 	char			*str;
-	int				id; //type
-	struct s_token	*my_node;
-	char			**cmd;
-	char			*infile;
-	char			*outfile;
-	char			*append;
-	char			*here_d;
-	int				before_pipe;
-	int				after_pipe;
-	//t_file			*myfile;
+	int				id;
 	char			**av;
 	t_env			*fst_link;
 	struct s_token	*next;
 }	t_token;
+
+// typedef struct s_token
+// {
+// 	char			*str;
+// 	int				id; //type
+// 	struct s_token	*my_node;
+// 	char			**cmd;
+// 	char			*infile;
+// 	char			*outfile;
+// 	char			*append;
+// 	char			*here_d;
+// 	int				before_pipe;
+// 	int				after_pipe;
+// 	//t_file			*myfile;
+// 	char			**av;
+// 	t_env			*fst_link;
+// 	struct s_token	*next;
+// }	t_token;
 
 //save last value of envp and argv
 typedef struct s_save
@@ -63,6 +74,28 @@ typedef struct s_save
 	t_env *env;
 	char **av;
 }	t_save;
+
+/*** strcut for parser ***/
+typedef struct s_cmd
+{
+	char *str;
+	struct s_cmd *next;
+}	t_cmd;
+
+typedef struct s_file
+{
+	char *str;
+	int id;
+	struct s_file *next;
+}	t_file;
+typedef struct s_final
+{
+	int		type;
+	t_file	*file;
+	t_cmd	*name;
+	struct s_final *next;
+}	t_final;
+/*** end struct of parser ***/
 
 //precising my files
 // typedef struct s_file
@@ -129,12 +162,16 @@ void	dollar(t_save *save, t_token **temp, char *line, int *i);
 void	pipe_sign(t_token **head, int *i);
 void	tokens(char *line, t_token **temp, t_save *save, int *i);
 void	tokenizer(char *line, t_token **head, char **av, t_env *env);
-t_token	*parser(t_token **line);
-t_token	*create_node(void);
-void	add_last_list(t_token **head, t_token *new);
-int		 list_size(t_token *list);
-void	clear_list(t_token **list);
-int		my_errors(int e);
+t_final	*ft_parser(t_token *data);
+void ft_output(t_final *cmd);
+void	ft_free(t_final *cmd);
+
+void ft_freetokens(t_token *data);
+// t_token	*create_node(void);
+//void	add_last_list(t_token **head, t_token *new);
+//int		 list_size(t_token *list);
+//void	clear_list(t_token **list);
+//int		my_errors(int e);
 void	ft_signals(void);
 void	rl_replace_line (const char *text, int clear_undo);
 
