@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:11:06 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/07 19:49:13 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/08 22:40:19 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ typedef struct s_token
 	t_env			*fst_link;
 	struct s_token	*next;
 }	t_token;
-
 
 //save last value of envp and argv
 typedef struct s_save
@@ -103,10 +102,11 @@ int		other_char(char c);
 void	dollar(t_save *save, t_token **temp, char *line, int *i);
 void	pipe_sign(t_token **head, int *i);
 void	tokens(char *line, t_token **temp, t_save *save, int *i);
-void	tokenizer(char *line, t_token **head, char **av, t_env *env);
+t_token *	tokenizer(char *line, char **av, t_env *env);
 t_final	*ft_parser(t_token *data);
 void ft_output(t_final *cmd);
 void	ft_free(t_final *cmd);
+int check_dollar(char *str);
 
 void ft_freetokens(t_token *data);
 // t_token	*create_node(void);

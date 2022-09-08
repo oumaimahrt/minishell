@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 23:50:30 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/07 21:38:01 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/08 16:34:30 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,127 +33,41 @@ t_final	*create_node(void)
 	if (!new_node)
 		return (NULL);
 	// new_node = NULL;
-	new_node->next = NULL;
+	new_node->next = NULL; //*****
 	// new_node->file = NULL;
 	// new_node->name = NULL;
 	//printf("creat big node \n");
 	return (new_node);
 }
 
-
 t_file	*file_node(char *str, int type)
 {
 	t_file	*new_node;
-	// t_file	*link_file;
 
-	// link_file = NULL;
-	
 	new_node =  (t_file *)malloc(sizeof (t_file));
 	if (!new_node)
 		return (NULL);
 	// new_node = NULL;
-	new_node->next = NULL;
-	// if (file == NULL)
-	// {
-	// 	printf("head of file \n");
-	// 	file = new_node;
-	// 	link_file = new_node;
-	// }
-	// else
-	// {
-	// 	printf("NOT head of file \n");
-	// 	link_file->next = new_node;
-	// 	link_file = new_node;
-	// }
+	new_node->next = NULL;  //*****
 	new_node->str = ft_strdup(str);
 	new_node->id = type;
 	//printf("creat file node \n");
 	return (new_node);
 }
 
-// t_file	*file_node(char *str, int type)
-// {
-// 	t_file	*new_node;
-// 	t_file	*head;
-// 	t_file	*last_node;
-	
-// 	new_node =  (t_file *)malloc(sizeof (t_file));
-// 	if (!new_node)
-// 		return (NULL);
-// 	new_node->str = ft_strdup(str);
-// 	new_node->id = type;
-// 	new_node->next = NULL;
-// 	if (head == NULL)
-// 		head = new_node;
-// 	else
-// 	{
-// 		last_node = head;
-// 		while (last_node->next != NULL)
-// 		{
-// 			last_node = last_node->next;
-// 		}
-// 		last_node->next = new_node;
-// 	}
-// 	return (new_node);
-// }
-
 t_cmd	*cmd_node(char *str)
 {
 	t_cmd	*new_node;
-	// t_cmd *link_cmd;
-	
-	//link_cmd = NULL;
+
 	new_node =  (t_cmd *)malloc(sizeof (t_cmd));
 	if (!new_node)
 		return (NULL);
-	//new_node = NULL;
-	// if (*name == NULL)
-	// {
-	// 	printf("head of cmd\n");
-	// 	*name = new_node;
-	// 	link_cmd = new_node;
-	// }
-	// else
-	// {
-	// 	printf("NOT head of cmd \n");
-	// 	link_cmd->next = new_node;
-	// 	link_cmd = new_node;
-	// }
 	new_node->str = ft_strdup(str);
-	new_node->next = NULL;
+	new_node->next = NULL;  //*****   
 	//printf("|%s| \n", (*name)->str);
 	//printf("creat cmd node \n");
 	return (new_node);
 }
-
-// t_cmd	*cmd_node(char *str)
-// {
-// 	t_cmd	*new_node;
-// 	t_cmd	*last_node;
-// 	t_cmd	*head;
-
-// 	new_node =  (t_cmd *)malloc(sizeof (t_cmd));
-// 	if (!new_node)
-// 		return (NULL);
-// 	new_node->str = ft_strdup(str);
-// 	new_node->next = NULL;
-// 	if (head == NULL)
-// 		head = new_node;
-// 	else
-// 	{
-// 		last_node = head;
-// 		while (last_node->next != NULL)
-// 		{
-// 			last_node = last_node->next;
-// 		}
-// 		last_node->next = new_node;
-// 	}
-// 	return (new_node);
-// }
-
-
-
-
 
 t_final	*ft_parser(t_token *data)
 {

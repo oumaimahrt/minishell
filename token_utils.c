@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 18:25:58 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/07 23:44:14 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/08 22:36:38 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,27 @@ void	single_quote(t_token **head, char *line, int *i)
 	(*i)++;
 }
 
+// void	double_quote(t_save *save, t_token **temp, char *line, int *i)
+// {
+// 	int		index;
+// 	char	*str;
+// 	char	*expand;
+
+// 	index = *i;
+// 	(*i)++;
+// 	while (line[*i] && line[*i] != '\"')
+// 		(*i)++;
+// 	if (!line[*i])
+// 	{
+// 		printf("ERROR: inclosed quotes\n");
+// 		return ;
+// 	}
+// 	str = ft_substr(line, index + 1, *i - index - 1);
+// 	expand = ft_expand(str, save->env, save->av);
+// 	add_token_last(temp, new_node(expand, DQ));
+// 	(*i)++;
+// }
+
 void	double_quote(t_save *save, t_token **temp, char *line, int *i)
 {
 	int		index;
@@ -46,10 +67,16 @@ void	double_quote(t_save *save, t_token **temp, char *line, int *i)
 		return ;
 	}
 	str = ft_substr(line, index + 1, *i - index - 1);
-	expand = ft_expand(str, save->env, save->av);
-	add_token_last(temp, new_node(expand, DQ));
+	if (check_dollar(str) != 0)
+	{
+		expand = ft_expand(str, save->env, save->av);
+		add_token_last(temp, new_node(expand, DQ));
+	}
+	else
+		add_token_last(temp, new_node(str, DQ));	
 	(*i)++;
 }
+
 
 void	dollar(t_save *save, t_token **temp, char *line, int *i)
 {
@@ -103,11 +130,21 @@ void	setting_word(t_save *save, t_token **temp, char *line, int *i)
 	int		index;
 	char	*str;
 	char	*expand;
-
+	
 	index = *i;
 	while (line[*i] && skip_char(line[*i]))
 		(*i)++;
 	str = ft_substr(line, index, *i - index);
-	expand = ft_expand(str, save->env, save->av);
-	add_token_last(temp, new_node(expand, WORD));
+	if (check_dollar(str) != 0)
+	{
+		printf("inside if \n");
+		expand = ft_expand(str, save->env, save->av);
+		add_token_last(temp, new_node(expand, WORD));
+	}
+	else
+	{
+		printf("inside else \n");
+		add_token_last(temp, new_node(str, WORD));
+		//while (1);
+	}
 }

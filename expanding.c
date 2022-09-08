@@ -6,12 +6,28 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 19:51:30 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/07 23:45:43 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/08 22:04:54 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+
+int	check_dollar(char *str)
+{
+	int	i;
+	int	c;
+
+	i = 0;
+	c = 0;
+	while (str[i])
+	{
+		if (str[i] == '$')
+			c++;
+		i++;
+	}
+	return (c);
+}
 char	*ft_expand(char *str, t_env *env, char **av)
 {
 	int		i;
@@ -21,7 +37,9 @@ char	*ft_expand(char *str, t_env *env, char **av)
 
 	i = 0;
 	start = 0;
+
 	new = ft_strdup("");
+	//printf("expanding \n");
 	while (str[i])
 	{
 		if (str[i] == '$')

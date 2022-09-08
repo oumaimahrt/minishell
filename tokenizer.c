@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 23:00:09 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/07 23:43:15 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/08 22:38:13 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,34 +75,55 @@ void	pipe_sign(t_token **head, int *i)
 void	tokens(char *line, t_token **temp, t_save *save, int *i)
 {
 	if (line[*i] == '\'')
+	{
+		//printf("single \n");
 		single_quote(temp, line, i);
+	}
 	else if (line[*i] == '\"')
+	{
+		// printf("double \n");
 		double_quote(save, temp, line, i);
+	}
 	else if (space(line[*i]))
 		(*i)++;
 	else if (line[*i] == '$')
+	{
+		// printf("dollar \n");
 		dollar(save, temp, line, i);
+	}
 	else if (line[*i] == '<' || line[*i] == '>')
+	{
+		// printf("redr \n");
 		redirection(temp, line, i);
+	}
 	else if (line[*i] == '|')
+	{
+		// printf("pipe \n");
 		pipe_sign(temp, i);
+	}
 	else
+	{
+		// printf("word \n");
 		setting_word(save, temp, line, i);
+	}
+	//printf("hhh\n");
 }
 
-void	tokenizer(char *line, t_token **head, char **av, t_env *env)
+t_token *tokenizer(char *line, char **av, t_env *env)
 {
 	int		i;
-	t_token	**temp;
+	t_token	*temp;
 	t_save	*save;
 
 	save = (t_save *)malloc(sizeof(t_save));
-	save->av = av;
+	save->av =av;
 	save->env = env;
-	temp = head;
 	i = 0;
+	temp = NULL;
 	while (line[i])
 	{
-		tokens(line, temp, save, &i);
+		tokens(line, &temp, save, &i);
 	}
+	free(save);
+	return (temp);
 }

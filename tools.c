@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 16:52:39 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/07 19:43:06 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/08 17:12:58 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,9 @@ void	ft_free(t_final *cmd)
 
 // 	while (data->next != NULL)
 // 	{
-// 		//printf("|%s|\n", data->str);
+// 		printf("|%s|\n", data->str);
 // 		tmp = data->next;
-// 		//printf("%s\n", tmp->str);
+// 		printf("%s\n", tmp->str); // **** sefault hna
 // 		free(data->str);
 // 		free(data);
 // 		data = tmp;
@@ -125,18 +125,17 @@ void ft_freetokens(t_token *data)
 
 	new = data;
 
-	while (new->next != NULL)
+	while (new != NULL)
 	{
 		//printf("|%s|\n", data->str);
 		tmp = new->next;
 		printf("%s\n", new->str);
 		printf("%p\n", new->str);
-		printf("%s\n",new->next->str);
-		printf("%p\n",new->next->str);
+		//printf("%s\n",new->next->str);
+		//printf("%p\n",new->next->str);
 		free(new->str);
 		free(new);
 		new = tmp;
-		new = new->next;
 	}
 	printf("end free \n");
 }
