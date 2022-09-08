@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 23:50:30 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/06 20:59:19 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/07 21:38:01 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_final	*create_node(void)
 	return (new_node);
 }
 
+
 t_file	*file_node(char *str, int type)
 {
 	t_file	*new_node;
@@ -70,28 +71,30 @@ t_file	*file_node(char *str, int type)
 	return (new_node);
 }
 
-
-// void    creat_node(t_node *head, char *data)
+// t_file	*file_node(char *str, int type)
 // {
-//     t_node    *new;
-//     t_node    last_node;
-
-//     new = (t_node)malloc(sizeof(t_node));
-//     if (!new)
-//         return ;
-//     new->data = ft_strdup(data);
-//     new->next = NULL;
-//     if (*head == NULL)
-//         head = new;
-//     else
-//     {
-//         last_node =head;
-//         while (last_node->next != NULL)
-//         {
-//             last_node = last_node->next;
-//         }
-//                 last_node->next = new;
-//     }
+// 	t_file	*new_node;
+// 	t_file	*head;
+// 	t_file	*last_node;
+	
+// 	new_node =  (t_file *)malloc(sizeof (t_file));
+// 	if (!new_node)
+// 		return (NULL);
+// 	new_node->str = ft_strdup(str);
+// 	new_node->id = type;
+// 	new_node->next = NULL;
+// 	if (head == NULL)
+// 		head = new_node;
+// 	else
+// 	{
+// 		last_node = head;
+// 		while (last_node->next != NULL)
+// 		{
+// 			last_node = last_node->next;
+// 		}
+// 		last_node->next = new_node;
+// 	}
+// 	return (new_node);
 // }
 
 t_cmd	*cmd_node(char *str)
@@ -122,6 +125,35 @@ t_cmd	*cmd_node(char *str)
 	//printf("creat cmd node \n");
 	return (new_node);
 }
+
+// t_cmd	*cmd_node(char *str)
+// {
+// 	t_cmd	*new_node;
+// 	t_cmd	*last_node;
+// 	t_cmd	*head;
+
+// 	new_node =  (t_cmd *)malloc(sizeof (t_cmd));
+// 	if (!new_node)
+// 		return (NULL);
+// 	new_node->str = ft_strdup(str);
+// 	new_node->next = NULL;
+// 	if (head == NULL)
+// 		head = new_node;
+// 	else
+// 	{
+// 		last_node = head;
+// 		while (last_node->next != NULL)
+// 		{
+// 			last_node = last_node->next;
+// 		}
+// 		last_node->next = new_node;
+// 	}
+// 	return (new_node);
+// }
+
+
+
+
 
 t_final	*ft_parser(t_token *data)
 {

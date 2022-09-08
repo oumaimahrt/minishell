@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 16:52:39 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/06 21:00:29 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/07 19:43:06 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,41 +100,67 @@ void	ft_free(t_final *cmd)
 }
 
 
-void ft_freetokens(t_token *data)
-{
-	t_token *tmp;
-	t_token *node;
-
-	while (data->next != NULL)
-	{
-		//printf("|%s|\n", data->str);
-		tmp = data->next;
-		//printf("%s\n", tmp->str);
-		free(data->str);
-		free(data);
-		data = tmp;
-	}
-	printf("end free \n");
-}
-
 // void ft_freetokens(t_token *data)
 // {
 // 	t_token *tmp;
 // 	t_token *node;
-// 	t_token *new;
 
-// 	new = data;
-
-// 	while (new->next != NULL)
+// 	while (data->next != NULL)
 // 	{
 // 		//printf("|%s|\n", data->str);
-// 		tmp = new->next;
-// 		printf("%s\n", new->str);
-// 		printf("%p\n", new->str);
-// 		free(new->str);
-// 		free(new);
-// 		new = tmp;
-// 		new = new->next;
+// 		tmp = data->next;
+// 		//printf("%s\n", tmp->str);
+// 		free(data->str);
+// 		free(data);
+// 		data = tmp;
 // 	}
 // 	printf("end free \n");
+// }
+
+void ft_freetokens(t_token *data)
+{
+	t_token *tmp;
+	t_token *node;
+	t_token *new;
+
+	new = data;
+
+	while (new->next != NULL)
+	{
+		//printf("|%s|\n", data->str);
+		tmp = new->next;
+		printf("%s\n", new->str);
+		printf("%p\n", new->str);
+		printf("%s\n",new->next->str);
+		printf("%p\n",new->next->str);
+		free(new->str);
+		free(new);
+		new = tmp;
+		new = new->next;
+	}
+	printf("end free \n");
+}
+
+
+// void    creat_node(t_node *head, char *data)
+// {
+//     t_node    *new;
+//     t_node    last_node;
+
+//     new = (t_node)malloc(sizeof(t_node));
+//     if (!new)
+//         return ;
+//     new->data = ft_strdup(data);
+//     new->next = NULL;
+//     if (*head == NULL)
+//         head = new;
+//     else
+//     {
+//         last_node =head;
+//         while (last_node->next != NULL)
+//         {
+//             last_node = last_node->next;
+//         }
+//                 last_node->next = new;
+//     }
 // }

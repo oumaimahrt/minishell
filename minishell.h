@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:11:06 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/06 18:14:58 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/07 19:49:13 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 # define WORD 'W'
 # define FIL 1
 # define NAM 2
+
+
 int g_status;
 //env
 typedef struct s_env
@@ -50,23 +52,6 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
-// typedef struct s_token
-// {
-// 	char			*str;
-// 	int				id; //type
-// 	struct s_token	*my_node;
-// 	char			**cmd;
-// 	char			*infile;
-// 	char			*outfile;
-// 	char			*append;
-// 	char			*here_d;
-// 	int				before_pipe;
-// 	int				after_pipe;
-// 	//t_file			*myfile;
-// 	char			**av;
-// 	t_env			*fst_link;
-// 	struct s_token	*next;
-// }	t_token;
 
 //save last value of envp and argv
 typedef struct s_save
@@ -97,49 +82,6 @@ typedef struct s_final
 }	t_final;
 /*** end struct of parser ***/
 
-//precising my files
-// typedef struct s_file
-// {
-// 	char	*filename;
-// 	int		id;
-// 	struct s_file *next;
-// }	t_file;
-
-// node of commands
-// typedef struct s_node
-// {
-// 	int				type;
-// 	char			**cmd;
-// 	char			*content;
-// 	char			*infile;
-// 	char			*outfile;
-// 	char			*append;
-// 	char			*here_d;
-// 	int				before_pipe;
-// 	int				after_pipe;
-// 	//t_file			*myfile;
-// 	struct s_node	*my_node;
-// 	struct s_node	*next;
-// }	t_node;
-//parser
-// typedef struct s_cmd
-// {
-//     char            *name;
-//     struct s_cmd    *next;
-// }   t_cmd;
-
-// typedef struct s_redir
-// {
-//     char            *str;
-//     int             id;
-//     struct s_redir  *next;
-// }   t_redir;
-
-// typedef struct s_line
-// {
-// 	t_token			*head;
-// 	struct s_line	*next;
-// }	t_line;
 
 char	*search_name(char *name, int i);
 char	*search_value(char *value, int i);

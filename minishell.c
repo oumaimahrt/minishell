@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:26:50 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/06 20:35:04 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/08 02:56:11 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ int	main(int ac, char **av, char **env)
 {
 	char	*line;
 	t_token	*data;
-	t_final *final_data;
 	t_env	*fst_link;
+	t_final *final_data;
 
-	int id ;
-	id = 1;
+	//int id ;
+	//id = 1;
 	//t_save	save;
 	// int		i;
 
@@ -86,8 +86,8 @@ int	main(int ac, char **av, char **env)
 			// // // printf("output %s\n", data->str);
 			// printf("after parser \n");
 			ft_output(final_data);
-			ft_freetokens(data);
-			data = NULL;
+			/*ft_freetokens(data);*/
+			//**data = NULL;
 			// ft_free(final_data);
 			// printf("****\n");
 			//printf("salitttt\n");

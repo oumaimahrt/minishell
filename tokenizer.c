@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 23:00:09 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/06 20:00:57 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/07 23:43:15 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,40 +71,23 @@ void	pipe_sign(t_token **head, int *i)
 // 	}
 // }
 
+//FOR THE NORM, STILL NEED SOME UPDATES TO HANDLE SPACES 
 void	tokens(char *line, t_token **temp, t_save *save, int *i)
 {
 	if (line[*i] == '\'')
-	{
 		single_quote(temp, line, i);
-		// (*temp)->next = NULL;
-	}
 	else if (line[*i] == '\"')
-	{
 		double_quote(save, temp, line, i);
-		// (*temp)->next = NULL;
-	}
 	else if (space(line[*i]))
 		(*i)++;
 	else if (line[*i] == '$')
-	{
 		dollar(save, temp, line, i);
-		// (*temp)->next = NULL;
-	}
 	else if (line[*i] == '<' || line[*i] == '>')
-	{
 		redirection(temp, line, i);
-		// (*temp)->next = NULL;
-	}
 	else if (line[*i] == '|')
-	{
 		pipe_sign(temp, i);
-		// (*temp)->next = NULL;
-	}
 	else
-	{
 		setting_word(save, temp, line, i);
-		// (*temp)->next = NULL;
-	}
 }
 
 void	tokenizer(char *line, t_token **head, char **av, t_env *env)
@@ -122,13 +105,4 @@ void	tokenizer(char *line, t_token **head, char **av, t_env *env)
 	{
 		tokens(line, temp, save, &i);
 	}
-	
-	// while (*temp)
-	// {
-	// //printf("** %s\n", (*temp)->str);
-	// *temp = (*temp)->next;
-	// }
-	// printf("** %s\n", (*temp)->str);
-	// printf("** %s\n", (*temp)->next->next->str);
-	//  (*temp)->next = NULL;
 }
