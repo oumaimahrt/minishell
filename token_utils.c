@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 18:25:58 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/08 22:36:38 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/09 17:11:26 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,34 @@ void	double_quote(t_save *save, t_token **temp, char *line, int *i)
 }
 
 
+// void	dollar(t_save *save, t_token **temp, char *line, int *i)
+// {
+// 	int		index;
+// 	char	*str;
+// 	char	*expand;
+// 	t_token	*copy;
+
+// 	copy = *temp;
+// 	index = *i;
+// 	(*i)++;
+// 	while (line[*i] && other_char(line[*i]))
+// 		(*i)++;
+// 	str = ft_substr(line, index, *i - index);
+// 	while (copy != NULL)
+// 	{
+// 		if (copy && ft_strcmp(copy->str, "<<") == 0)
+// 		{
+// 			add_token_last(temp, new_node(str, EXPAND));
+// 			return ;
+// 		}
+// 		else if (copy->next == NULL)
+// 			break ;
+// 		copy = copy->next;
+// 	}
+// 	expand = ft_expand(str, save->env, save->av);
+// 	add_token_last(temp, new_node(expand, EXPAND));
+// }
+
 void	dollar(t_save *save, t_token **temp, char *line, int *i)
 {
 	int		index;
@@ -91,6 +119,11 @@ void	dollar(t_save *save, t_token **temp, char *line, int *i)
 	while (line[*i] && other_char(line[*i]))
 		(*i)++;
 	str = ft_substr(line, index, *i - index);
+	if (check_dollar(str) != 0)
+	{
+		expand = ft_expand(str, save->env, save->av);
+		add_token_last(temp, new_node(expand, EXPAND));	
+	}
 	while (copy != NULL)
 	{
 		if (copy && ft_strcmp(copy->str, "<<") == 0)
@@ -102,8 +135,6 @@ void	dollar(t_save *save, t_token **temp, char *line, int *i)
 			break ;
 		copy = copy->next;
 	}
-	expand = ft_expand(str, save->env, save->av);
-	add_token_last(temp, new_node(expand, EXPAND));
 }
 
 void	redirection(t_token **head, char *str, int *i)
@@ -137,13 +168,13 @@ void	setting_word(t_save *save, t_token **temp, char *line, int *i)
 	str = ft_substr(line, index, *i - index);
 	if (check_dollar(str) != 0)
 	{
-		printf("inside if \n");
+		//printf("inside if \n");
 		expand = ft_expand(str, save->env, save->av);
 		add_token_last(temp, new_node(expand, WORD));
 	}
 	else
 	{
-		printf("inside else \n");
+		//printf("inside else \n");
 		add_token_last(temp, new_node(str, WORD));
 		//while (1);
 	}

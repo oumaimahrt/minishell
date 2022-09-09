@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 23:00:09 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/08 22:38:13 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/09 16:58:33 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,12 @@ void	tokens(char *line, t_token **temp, t_save *save, int *i)
 	if (line[*i] == '\'')
 	{
 		//printf("single \n");
-		single_quote(temp, line, i);
+		single_quote(temp, line, i); //done with leaks
 	}
 	else if (line[*i] == '\"')
 	{
 		// printf("double \n");
-		double_quote(save, temp, line, i);
+		double_quote(save, temp, line, i); //done with leaks
 	}
 	else if (space(line[*i]))
 		(*i)++;
@@ -103,8 +103,8 @@ void	tokens(char *line, t_token **temp, t_save *save, int *i)
 	}
 	else
 	{
-		// printf("word \n");
-		setting_word(save, temp, line, i);
+		//printf("word \n");
+		setting_word(save, temp, line, i); //done with leaks
 	}
 	//printf("hhh\n");
 }
@@ -122,6 +122,7 @@ t_token *tokenizer(char *line, char **av, t_env *env)
 	temp = NULL;
 	while (line[i])
 	{
+		//printf("ana hna\n");
 		tokens(line, &temp, save, &i);
 	}
 	free(save);

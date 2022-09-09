@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:26:50 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/08 22:39:06 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/09 17:06:31 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void	control_c(int sig)
 {
 	(void)sig;
 
-	// rl_replace_line("", 0);
-	// ft_putchar_fd('\n', 1);
-	// rl_on_new_line();
-	// rl_redisplay();
+	rl_replace_line("", 0);
+	ft_putchar_fd('\n', 1);
+	rl_on_new_line();
+	rl_redisplay();
 	return ;
 }
 void	ft_signals(void)
@@ -35,9 +35,9 @@ int	main(int ac, char **av, char **env)
 	t_env	*fst_link;
 	t_final *final_data;
 	
-	// fst_link = NULL;
-	// int id ;
-	// id = 1;
+	//fst_link = NULL;
+	int id ;
+	id = 1;
 	//t_save	save;
 	// int		i;
 
@@ -74,25 +74,25 @@ int	main(int ac, char **av, char **env)
 			add_history(line);
 			//printf("======>Hiiii ana hna\n");
 			//printf("======>ana f tokeniszer\n");
-			// while (1);
+			//while (1);
 			data = tokenizer(line,av, fst_link);
-			//printf("out put data \n");
-			while (data != NULL)
-			{
-				printf("word1 = %s, id = %d\n", data->str, data->id);
-				data = data->next;
-			}
+			//printf("output data \n");
+			// while (data != NULL)
+			// {
+			// 	printf("word1 = %s, id = %d\n", data->str, data->id);
+			// 	data = data->next;
+			// }
 			//printf("end output \n");
 			// printf("before parser %s\n", data->str);
-			//final_data = ft_parser(data);
+			//***final_data = ft_parser(data);
 			//printf("======>222222222\n");
 			// parser (&data);
 			// // // printf("output %s\n", data->str);
 			// printf("after parser \n");
-			//ft_output(final_data);
-			//**printf("data ===== %s\n", data->str);
+			//***ft_output(final_data);
+			//*printf("data ===== %s\n", data->str);
 			ft_freetokens(data);
-			// data = NULL;
+			//data = NULL;
 			// ft_free(final_data);
 			// printf("****\n");
 			//printf("salitttt\n");

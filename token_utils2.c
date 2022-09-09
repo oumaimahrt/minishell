@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 18:30:42 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/08 22:03:40 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/09 16:41:29 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,14 @@ t_token	*new_node(char *str, int id)
 void	add_token_last(t_token **head, t_token *new)
 {
 	t_token	*last;
-	//t_token	*test;
 	//printf("start add \n");
 
 	last = (*head);
-	//test = *head;
 	if (!(*head))
 	{
-		// printf("if add last \n");
+		//printf("if add last \n");
 		(*head) = new;
-	//printf("=== > %s\n", (*head)->str);
+		//printf("=== > %s\n", (*head)->str);
 	}
 	else
 	{
@@ -71,7 +69,7 @@ void	add_token_last(t_token **head, t_token *new)
 			last = last->next;
 		}
 		//printf("66666 \n");
-		 last->next= new;
+		last->next= new;
 
 		//printf("else 88\n");
 	}
