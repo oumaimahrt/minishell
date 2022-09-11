@@ -6,13 +6,14 @@
 #    By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/22 09:56:57 by ohrete            #+#    #+#              #
-#    Updated: 2022/09/06 20:29:07 by ohrete           ###   ########.fr        #
+#    Updated: 2022/09/10 21:13:30 by ohrete           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 SRCS = minishell.c \
+	syntax_error.c \
 	ft_environment.c \
 	environment_utils.c \
 	tokenizer.c \

@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 18:06:24 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/08 16:57:45 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/11 02:22:13 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,13 @@ char	*getting_env(t_env *env, char *name)
 	while (env)
 	{
 		if (!ft_strcmp(name, env->name))
+		{
+			free(name);
 			return (ft_strdup(env->value));
+		}
 		env = env->next;
 	}
+	free(name);
 	return (ft_strdup(""));
 }
 

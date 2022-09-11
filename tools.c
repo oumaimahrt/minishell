@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 16:52:39 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/08 17:12:58 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/10 22:18:51 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,19 @@ void ft_output(t_final *s)
 {
 	t_final *final;
 	t_file *file;
-	t_cmd *cmd;
+	char **cmd;
 	int id = 1;
+	int		i;
 	final = s;
     while (final)
 	{
+		i = 0;
 		printf("output cmd number %d\n",id);
-		cmd = final->name;
-		while (cmd != NULL)
+		cmd = final->cmd;
+		while (cmd[i])
 		{
-			printf("name cmd is = %s and id is %d\n", cmd->str, id);
-			cmd = cmd->next;
+			printf("name cmd is = %s and id is %d\n", cmd[i], id);
+			i++;
 		}
 		file = final->file;
 		while (file != NULL)

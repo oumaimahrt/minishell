@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:11:06 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/08 22:40:19 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/11 03:07:35 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ typedef struct s_env
 //tokenizer
 typedef struct s_token
 {
+	int				start;
+	char			*ptr;
+	char			*new;
 	char			*str;
 	int				id;
 	char			**av;
@@ -75,13 +78,16 @@ typedef struct s_file
 typedef struct s_final
 {
 	int		type;
+	int		infile;
+	int		outfile;
 	t_file	*file;
 	t_cmd	*name;
+	char	**cmd;
 	struct s_final *next;
 }	t_final;
 /*** end struct of parser ***/
 
-
+int syntax_error(char *str);
 char	*search_name(char *name, int i);
 char	*search_value(char *value, int i);
 t_env	*fill_struct(char *name, char *value);
@@ -116,5 +122,6 @@ void ft_freetokens(t_token *data);
 //int		my_errors(int e);
 void	ft_signals(void);
 void	rl_replace_line (const char *text, int clear_undo);
+void	to_array(t_final *node);
 
 #endif

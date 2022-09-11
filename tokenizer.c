@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 23:00:09 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/09 16:58:33 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/11 03:04:11 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 
 void	pipe_sign(t_token **head, int *i)
 {
-	add_token_last(head, new_node("|", PIPE));
+	add_token_last(head, new_node(ft_strdup("|"), PIPE));
 	(*i)++;
 }
 
@@ -75,38 +75,19 @@ void	pipe_sign(t_token **head, int *i)
 void	tokens(char *line, t_token **temp, t_save *save, int *i)
 {
 	if (line[*i] == '\'')
-	{
-		//printf("single \n");
 		single_quote(temp, line, i); //done with leaks
-	}
 	else if (line[*i] == '\"')
-	{
-		// printf("double \n");
 		double_quote(save, temp, line, i); //done with leaks
-	}
 	else if (space(line[*i]))
 		(*i)++;
 	else if (line[*i] == '$')
-	{
-		// printf("dollar \n");
-		dollar(save, temp, line, i);
-	}
+		dollar(save, temp, line, i); //DONE
 	else if (line[*i] == '<' || line[*i] == '>')
-	{
-		// printf("redr \n");
-		redirection(temp, line, i);
-	}
+		redirection(temp, line, i); // done
 	else if (line[*i] == '|')
-	{
-		// printf("pipe \n");
-		pipe_sign(temp, i);
-	}
+		pipe_sign(temp, i); //done 
 	else
-	{
-		//printf("word \n");
 		setting_word(save, temp, line, i); //done with leaks
-	}
-	//printf("hhh\n");
 }
 
 t_token *tokenizer(char *line, char **av, t_env *env)
@@ -122,7 +103,6 @@ t_token *tokenizer(char *line, char **av, t_env *env)
 	temp = NULL;
 	while (line[i])
 	{
-		//printf("ana hna\n");
 		tokens(line, &temp, save, &i);
 	}
 	free(save);
