@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 19:51:30 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/11 03:10:17 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/12 04:31:42 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,7 @@ int	check_dollar(char *str)
 
 // 	i = 0;
 // 	start = 0;
-
 // 	new = ft_strdup("");
-// 	//printf("expanding \n");
 // 	while (str[i])
 // 	{
 // 		if (str[i] == '$')
@@ -85,7 +83,6 @@ char *inside_dollar(char *str, t_env *env, char **av, int *i)
 	t_token	var;
 
 	var.start = 0;
-	var.new = ft_strdup("");
 	if (str[(*i) + 1] != '\0' && str[(*i) + 1] == '?')
 	{
 		var.ptr = ft_itoa(g_status);
@@ -104,8 +101,7 @@ char *inside_dollar(char *str, t_env *env, char **av, int *i)
 		var.ptr = ft_substr(str, var.start, (*i) - var.start);
 		var.ptr = getting_env(env, var.ptr);
 	}
-	var.new = ft_strjoin(var.new, var.ptr);
-	return (var.new);
+	return (var.ptr);
 }
 
 char	*ft_expand(char *str, t_env *env, char **av)
@@ -117,20 +113,17 @@ char	*ft_expand(char *str, t_env *env, char **av)
 
 	i = 0;
 	start = 0;
-	new = ft_strdup("");
 	while (str[i])
 	{
 		if (str[i] == '$')
-			new = inside_dollar(str, env, av, &i);
+			ptr = inside_dollar(str, env, av, &i);
 		else
 		{
 			start = i;
 			while (str[i] != '\0' && str[i] != '$')
 				i++;
 			ptr = ft_substr(str, start, i - start);
-			new = ft_strjoin(new, ptr);
 		}
-		i++;
 	}
-	return (new);
+	return (ptr);
 }

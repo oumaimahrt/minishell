@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:11:06 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/11 03:07:35 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/12 03:16:27 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,6 @@
 # define DQ '\"'
 # define HERE_DOC 'H' // <<
 # define WORD 'W'
-# define FIL 1
-# define NAM 2
-
 
 int g_status;
 //env
@@ -111,10 +108,10 @@ void	tokens(char *line, t_token **temp, t_save *save, int *i);
 t_token *	tokenizer(char *line, char **av, t_env *env);
 t_final	*ft_parser(t_token *data);
 void ft_output(t_final *cmd);
-void	ft_free(t_final *cmd);
+void	free_parser(t_final *cmd);
 int check_dollar(char *str);
 
-void ft_freetokens(t_token *data);
+void free_tokens(t_token *data);
 // t_token	*create_node(void);
 //void	add_last_list(t_token **head, t_token *new);
 //int		 list_size(t_token *list);

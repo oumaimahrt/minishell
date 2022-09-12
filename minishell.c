@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:26:50 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/11 03:12:49 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/12 04:30:23 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,33 +72,31 @@ int	main(int ac, char **av, char **env)
 		if (line[0] != '\0') //for skipping \n
 		{
 			add_history(line);
-			//printf("======>Hiiii ana hna\n");
-			//printf("======>ana f tokeniszer\n");
 			//while (1);
 			if (syntax_error(line) != 0)
 			{
 				data = tokenizer(line,av, fst_link);
 				//printf("output data \n");
-				// while (data != NULL)
-				// {
-				// 	printf("word1 = %s, id = %d\n", data->str, data->id);
-				// 	data = data->next;
-				// }
+				while (data != NULL)
+				{
+					printf("word1 = %s, id = %d\n", data->str, data->id);
+					data = data->next;
+				}
 			}
 			else
 				printf("minishell: syntax error\n");
 			//printf("end output \n");
 			// printf("before parser %s\n", data->str);
-			final_data = ft_parser(data);
+			//@final_data = ft_parser(data);
 			//printf("======>222222222\n");
 			// parser (&data);
 			// // // printf("output %s\n", data->str);
 			// printf("after parser \n");
-			ft_output(final_data);
+			//@ft_output(final_data);
 			//*printf("data ===== %s\n", data->str);
-			//**ft_freetokens(data); //holaaa
+			//**free_tokens(data); //holaaa
 			//data = NULL;
-			// ft_free(final_data);
+			// ft_freeparser(final_data);
 			// printf("****\n");
 			//printf("salitttt\n");
 			//execution;

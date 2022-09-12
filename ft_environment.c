@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 18:06:24 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/11 02:22:13 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/11 17:50:57 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ char	*search_value(char *value, int i)
 t_env	*fill_struct(char *name, char *value)
 {
 	t_env	*new;
-	// char *tmp_name;
-	// char *value_temp;
 	
 	new = (t_env *)malloc(sizeof(t_env));
 	new->name = ft_strdup(name);

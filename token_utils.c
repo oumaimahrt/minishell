@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 18:25:58 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/11 03:05:13 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/11 19:13:37 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	double_quote(t_save *save, t_token **temp, char *line, int *i)
 	if (check_dollar(str) != 0)
 	{
 		expand = ft_expand(str, save->env, save->av);
+		free (str);
 		add_token_last(temp, new_node(expand, DQ));
 	}
 	else

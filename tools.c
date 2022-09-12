@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 16:52:39 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/10 22:18:51 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/12 03:15:57 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void ft_output(t_final *s)
 // }
 
 
-void	ft_free(t_final *cmd)
+void	free_parser(t_final *cmd)
 {
 	t_file	*tmp;
 	t_final	*pointer;
@@ -102,7 +102,7 @@ void	ft_free(t_final *cmd)
 }
 
 
-// void ft_freetokens(t_token *data)
+// void free_tokens(t_token *data)
 // {
 // 	t_token *tmp;
 // 	t_token *node;
@@ -119,7 +119,7 @@ void	ft_free(t_final *cmd)
 // 	printf("end free \n");
 // }
 
-void ft_freetokens(t_token *data)
+void free_tokens(t_token *data)
 {
 	t_token *tmp;
 	t_token *node;
