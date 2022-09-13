@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:26:50 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/13 02:59:35 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/13 23:14:03 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void	control_c(int sig)
 {
 	(void)sig;
 
-	rl_replace_line("", 0);
-	ft_putchar_fd('\n', 1);
-	rl_on_new_line();
-	rl_redisplay();
+	// rl_replace_line("", 0);
+	// ft_putchar_fd('\n', 1);
+	// rl_on_new_line();
+	// rl_redisplay();
 	return ;
 }
 void	ft_signals(void)

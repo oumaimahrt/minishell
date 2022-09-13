@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: anajmi <anajmi@student.1337.ma>            +#+  +:+       +#+         #
+#    By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/25 14:07:31 by anajmi            #+#    #+#              #
-#    Updated: 2022/09/11 16:50:06 by anajmi           ###   ########.fr        #
+#    Updated: 2022/09/13 23:16:13 by ohrete           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ EXEC =	\
 SRCS = $(PARSE) $(EXEC)
 #/Users/anajmi/goinfre/brew/opt/readline
 # LFLAGS = -lreadline -L./Users/anajmi/goinfre/brew/opt/readline/8.1.2/lib -I./Users/anajmi/goinfre/brew/opt/readline/8.1.2/include
-LFLAGS = -lreadline -L/Users/anajmi/.brew/opt/readline/lib -I/Users/anajmi/.brew/opt/readline/include
+LFLAGS = -lreadline -L/Users/orete/.brew/opt/readline/lib -I/Users/ohrete/.brew/opt/readline/include
 
 OBJ = $(SRCS:.c=.o)
 
