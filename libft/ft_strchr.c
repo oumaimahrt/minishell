@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anajmi <anajmi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/05 10:36:26 by ohrete            #+#    #+#             */
-/*   Updated: 2021/11/23 04:49:08 by ohrete           ###   ########.fr       */
+/*   Created: 2021/11/05 12:06:28 by anajmi            #+#    #+#             */
+/*   Updated: 2021/11/21 13:28:21 by anajmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,38 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	int	i;
+	char	check;
+	char	*out;
+	size_t	len;
 
-	i = 0;
-	if ((unsigned char)c == 0)
-		return ((char *)s + ft_strlen(s));
-	while (s[i] != '\0')
+	check = (char) c;
+	out = (char *) s;
+	len = ft_strlen(s);
+	while (len > 0)
 	{
-		if (s[i] == (unsigned char)c)
-		{
-			return ((char *)&s[i]);
-		}
-		i++;
+		if (*out == check)
+			return (out);
+		out++;
+		len--;
 	}
+	if (len == 0 && *out == check)
+		return (out);
+	return (NULL);
+}
+
+/*
+int	main(void)
+{
+	const char	str[] = "http://www.tutorialspoint.com";
+	const char	ch = '/';
+	char		*ret;
+
+	ret = ft_strchr(str, ch);
+	printf("\nString after |%c| is - |%s|\n", ch, ret);
+	printf("String before |%s|\n\n", str);
+	ret = strchr(str, ch);
+	printf("String after |%c| is - |%s|\n", ch, ret);
+	printf("String before |%s|\n\n", str);
 	return (0);
 }
-// #include<stdio.h>
-// int main()
-// {
-// 	char a[] = "oumaima";
-// 	printf("%s\n",ft_strchr("oumaima",'i'));
-// }
+*/

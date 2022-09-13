@@ -3,45 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anajmi <anajmi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/03 20:40:29 by ohrete            #+#    #+#             */
-/*   Updated: 2021/11/24 00:46:03 by ohrete           ###   ########.fr       */
+/*   Created: 2021/11/02 17:49:31 by anajmi            #+#    #+#             */
+/*   Updated: 2021/11/18 17:37:09 by anajmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcat(char *dest, const char *src, size_t size)
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	size_t	i;
-	size_t	j;
-	size_t	len_d;
-	size_t	len_s;
+	size_t	srclen;
+	size_t	dstlen;
 
-	i = 0;
-	j = 0;
-	len_d = ft_strlen(dest);
-	len_s = ft_strlen(src);
-	if (size == 0 || size <= len_d)
-		return (size + len_s);
-	while (dest[i])
-		i++;
-	while (src[j] != '\0' && j < size - len_d -1)
+	srclen = ft_strlen(src);
+	if (dstsize == 0)
+		return (srclen);
+	dstlen = ft_strlen(dst);
+	if (dstsize < dstlen + 1)
+		return (dstsize + srclen);
+	if (dstsize > dstlen + 1)
 	{
-		dest[i] = src [j];
-		i++;
-		j++;
+		while (*dst && dstsize > 0)
+		{
+			dst++;
+			dstsize--;
+		}
+		while (*src && dstsize-- > 1)
+			*dst++ = *src++;
+		*dst++ = '\0';
 	}
-	dest[i] = '\0';
-	return (len_d + len_s);
+	return (dstlen + srclen);
 }
 
-// #include <stdio.h>
-// int main()
-// {
-// 	char x[] = "hello";
-// 	char y[] = "universe";
-// 	printf("%zu",ft_strlcat(x,y, 15));
-// 	return(0);
-// }
+/*
+int	main(void)
+{
+	printf("\n=> %zu\n", ft_strlcat("123456789", "jnjn5", 8));
+	printf("\n=> %zu\n", strlcat("123456789", "jnjn5", 8));
+	return (0);
+}
+*/

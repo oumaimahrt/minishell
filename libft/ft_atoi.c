@@ -3,53 +3,63 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anajmi <anajmi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/03 09:01:29 by ohrete            #+#    #+#             */
-/*   Updated: 2021/11/23 23:39:00 by ohrete           ###   ########.fr       */
+/*   Created: 2021/11/02 10:52:01 by anajmi            #+#    #+#             */
+/*   Updated: 2022/03/14 15:04:23 by anajmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	wspace(int c)
+int	check_nbr(long nbr, int sign)
 {
-	if (c == ' ' || c == '\f' || c == '\n' || c == '\r'
-		|| c == '\t' || c == '\v')
-		return (1);
-	return (0);
+	if (sign * nbr > INT32_MAX)
+		return (-1);
+	else if (sign * nbr < INT32_MIN)
+		return (0);
+	return (1);
 }
 
 int	ft_atoi(const char *str)
 {
-	int				i;
-	int				sign;
-	unsigned long	result;
+	long	nbr;
+	int		sign;
+	int		a;
 
-	i = 0;
+	a = 0;
+	nbr = 0;
 	sign = 1;
-	result = 0;
-	while (wspace(str[i]))
-		i++;
-	if (str[i] == '-' || str[i] == '+')
+	while (str[a] == ' ' || (9 <= str[a] && str[a] <= 13))
+		a++;
+	if (str[a] == '-' || str[a] == '+')
 	{
-		if (str[i] == '-')
-			sign = -1;
-		i++;
+		if (str[a] == '-')
+			sign *= (-1);
+		a++;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
+	while ('0' <= str[a] && str[a] <= '9')
 	{
-		if (result > 9223372036854775807 && sign == -1)
-			return (0);
-		if (result >= 9223372036854775807 && sign == 1)
-			return (-1);
-		result = (result * 10) + (str[i] - '0');
-		i++;
+		nbr *= 10;
+		nbr += str[a] - '0';
+		if (check_nbr(nbr, sign) <= 0)
+			return (check_nbr(nbr, sign));
+		a++;
 	}
-	return (sign * result);
+	return (nbr * sign);
 }
-// #include<stdio.h>
-// int main()
-// {
-// 	printf("%d\n",ft_atoi("-9999"));
-// }
+/*
+int	main(void)
+{
+	int		val;
+	char 	str[] = "9223372036854775807";
+	// char 	str[] = "9223372036854775807";
+	// char 	str[] = "4294967299";
+
+	val = ft_atoi(str);
+	printf("String value = %s, Int value = %d\n", str, val);
+	val = atoi(str);
+	printf("String value = %s, Int value = %d\n", str, val);
+	return (0);
+}
+*/

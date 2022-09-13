@@ -3,39 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anajmi <anajmi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/14 23:28:20 by ohrete            #+#    #+#             */
-/*   Updated: 2021/11/20 13:07:13 by ohrete           ###   ########.fr       */
+/*   Created: 2021/11/12 23:00:34 by anajmi            #+#    #+#             */
+/*   Updated: 2021/11/18 13:37:54 by anajmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr_fd(int nb, int fd)
+void	ft_putnbr_fd(int n, int fd)
 {
-	while (nb == -2147483648)
+	long	nbr;
+
+	nbr = n;
+	if (n < 0)
 	{
-		write(fd, "-2147483648", 11);
-		return ;
+		ft_putchar_fd('-', fd);
+		nbr *= -1;
 	}
-	if (nb < 0 && nb != -2147483648)
+	if (nbr > 9)
 	{
-		ft_putchar_fd(('-'), fd);
-		nb = -1 * nb;
+		ft_putnbr_fd(nbr / 10, fd);
+		ft_putnbr_fd(nbr % 10, fd);
 	}
-	if (nb >= 10)
-	{
-		ft_putnbr_fd((nb / 10), fd);
-		ft_putchar_fd((nb % 10 + '0'), fd);
-	}
-	else
-		ft_putchar_fd((nb + '0'), fd);
+	if (0 <= nbr && nbr < 10)
+		ft_putchar_fd(nbr + '0', fd);
 }
-// #include <stdio.h>
-// int main()
-// {
-// 	int a = 4525545;
-// 	int fd = creat("test.txt", 0644);
-// 	printf("%d\n", ft_putnbr_fd(a,fd));
-// }
+
+/*
+#include <fcntl.h>
+int	main(void)
+{
+	int	fd;
+
+	fd = open("file", O_CREAT | O_RDWR);
+	ft_putnbr_fd(1234567890, fd);
+	return (0);
+}
+*/

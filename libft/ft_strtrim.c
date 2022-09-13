@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anajmi <anajmi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/10 13:46:39 by ohrete            #+#    #+#             */
-/*   Updated: 2021/11/24 00:48:39 by ohrete           ###   ########.fr       */
+/*   Created: 2021/11/08 18:46:10 by anajmi            #+#    #+#             */
+/*   Updated: 2021/11/18 13:48:50 by anajmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,33 @@
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	unsigned int	beg;
-	unsigned int	end;
-	char			*reslt;
+	size_t	len;
+	char	*result;
 
-	beg = 0;
-	end = 0;
-	if (!s1)
-		return (NULL);
-	while (s1[end])
-		end++;
-	while (s1[beg] && ft_strchr(set, s1[beg]))
-		beg++;
-	while (end > beg && ft_strchr(set, s1[end]))
-		end--;
-	reslt = ft_substr(s1, beg, end - beg + 1);
-	return (reslt);
+	result = NULL;
+	if (s1 && set)
+	{
+		while (*s1 && ft_strchr(set, *s1) != NULL)
+			s1++;
+		len = ft_strlen(s1);
+		while (len && s1[len - 1] && ft_strchr(set, s1[len - 1]) != NULL)
+			len--;
+		result = (char *)malloc(sizeof(char) * (len + 1));
+		if (!result)
+			return (0);
+		ft_strlcpy(result, s1, len + 1);
+		result[len] = '\0';
+	}
+	return (result);
 }
 
-// #include <stdio.h>
-// int main()
-// {
-// 	char *s1 = "do baby shark do";
-// 	char *a = ft_strtrim(s1, "do");
-// 	printf("%s", a);
-// }
+/*
+int	main(void)
+{
+	char const 	s1[50] = "3213|21hello32|1321";
+	char const 	set[6] = "123";
+
+	printf("\n trim = %s", ft_strtrim(s1, set));
+	return (0);
+}
+*/

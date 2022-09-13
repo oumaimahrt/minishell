@@ -3,70 +3,146 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anajmi <anajmi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/19 02:22:15 by ohrete            #+#    #+#             */
-/*   Updated: 2021/11/24 00:44:07 by ohrete           ###   ########.fr       */
+/*   Created: 2021/11/09 18:36:14 by anajmi            #+#    #+#             */
+/*   Updated: 2021/11/18 13:40:04 by anajmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_word(char const *str, char c)
+static char	*ft_strndup(const char *s1, size_t n)
+{
+	char	*out;
+	int		i;
+
+	out = malloc((n + 1) * sizeof(char));
+	if (!out)
+		return (NULL);
+	i = 0;
+	while (s1[i] && i < (int)n)
+	{
+		out[i] = s1[i];
+		i++;
+	}
+	out[i] = '\0';
+	return (out);
+}
+
+static int	between(char const *s1, char c, int count)
 {
 	int	i;
-	int	counter;
 
 	i = 0;
-	counter = 0;
-	while (str[i] != '\0')
+	if (count == 0)
 	{
-		if ((str[i] != c))
+		while (*s1 && *s1 != c)
 		{
-			counter++;
-			while (str[i] && str[i] != c)
-				i++;
-			while (str[i] && str[i] == c)
-				i++;
-		}
-		else
+			s1++;
 			i++;
+		}
 	}
-	return (counter);
+	else
+	{
+		while (*s1 && *s1 == c)
+		{
+			s1++;
+			i++;
+		}
+	}
+	return (i);
+}
+
+static char	**second_process(char **out, char const *s, char c, int i)
+{
+	char	*tmp;
+	int		j;
+	int		k;
+
+	k = 0;
+	tmp = (char *)s;
+	if (*tmp == c)
+		tmp += between(tmp, c, 1);
+	while (k < i)
+	{
+		j = between(tmp, c, 0);
+		out[k] = ft_strndup(tmp, j);
+		if (!out[k])
+			return (out);
+		if ((k + 1) == i)
+			break ;
+		tmp = tmp + j;
+		j = between(tmp, c, 1);
+		tmp = tmp + j;
+		k++;
+	}
+	out[k + 1] = NULL;
+	return (out);
+}
+
+static int	first_process(char *tmp, char c)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (1)
+	{
+		j = between(tmp, c, 0);
+		if (j == 0)
+			break ;
+		tmp = tmp + j;
+		j = between(tmp, c, 1);
+		tmp = tmp + j;
+		i += 1;
+	}
+	return (i);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**split;
-	int		size;
+	char	**out;
+	char	*tmp;
 	int		i;
-	int		j;
-	int		index;
 
-	i = 0;
-	j = 0;
-	if (!s)
+	if ((s == 0 && c == '\0') || s == 0)
+		return (0);
+	out = malloc(sizeof(char *) * (1));
+	if (!out)
 		return (NULL);
-	size = ft_word(s, c);
-	split = malloc(sizeof(char *) * (size + 1));
-	if (!split)
+	out[0] = NULL;
+	if (s == 0 || *s == '\0')
+		return (out);
+	tmp = (char *)s;
+	if (*tmp == c)
+		tmp += between(tmp, c, 1);
+	if (*tmp == '\0')
+		return (out);
+	i = first_process(tmp, c);
+	if (i == 0)
+		return (out);
+	free(out);
+	out = (char **)malloc(sizeof(char *) * (i + 1));
+	if (!out)
 		return (NULL);
-	while (s[i] && j < size)
-	{
-		while (s[i] && s[i] == c)
-			i++;
-		index = i;
-		while (s[i] != c && s[i])
-		i++;
-		split[j++] = ft_substr(s, index, i - index);
-	}
-	split[j] = NULL;
-	return (split);
+	return (second_process(out, s, c, i));
 }
-// #include<stdio.h>
-// int main()
-// {
-// 	char  **split;
-// 	split = ft_split(0,'\t');
-// 	printf("%s\n", split[0]);
-// }
+
+/*
+int	main(void)
+{
+	const char	*str = "      split     this for   me  !    ";
+	char		ch = ' ';
+	char		**ret;
+
+	ret = ft_split(str, ch);
+	printf("\nspliter |%c|\nslipted =>", ch);
+	for (size_t i = 0; ret[i]; i++)
+	{
+		printf(" {%s}", ret[i]);
+	}
+	printf("\n\n");
+	return (0);
+}
+*/

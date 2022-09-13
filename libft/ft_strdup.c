@@ -3,87 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anajmi <anajmi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/08 16:29:04 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/06 10:22:22 by ohrete           ###   ########.fr       */
+/*   Created: 2021/11/06 12:26:47 by anajmi            #+#    #+#             */
+/*   Updated: 2021/11/18 13:40:50 by anajmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	len_of_str(char *s)
+static char	*ft_strcpy(char *dst, const char *src)
 {
 	int	i;
 
 	i = 0;
-	if (!s)
-		return (0);
-	while (s[i] != '\0')
-		i++;
-	return (i);
-}
-
-// int	my_strlcpy(char *dst, char *src, int dstsize)
-// {
-	
-// 	int	len;
-// 	int	i;
-
-// 	len = len_of_str(src);
-// 	i = 0;
-// 	if (!dst || !src)
-// 		return (0);
-// 	if (dstsize == 0)
-// 		return (len);
-// 	while (src[i] && i < (dstsize - 1))
-// 	{
-// 		dst[i] = src[i];
-// 		i++;
-// 	}
-// 	dst[i] = '\0';
-// 	return (len);
-// }
-
-// char	*ft_strdup(char	*s1)
-// {
-// 	char	*ptr;
-// 	int		len;
-
-// 	if (!s1)
-// 		return (NULL);
-// 	len = len_of_str(s1);
-// 	ptr = (char *) malloc ((len + 1) * sizeof(char));
-// 	if (!ptr)
-// 		return (0);
-// 	my_strlcpy(ptr, s1, len + 1);
-// 	return (ptr);
-// }
-
-char	*ft_strdup(char *s1)
-{
-	char	*dup;
-	int		i;
-
-	if (!s1)
-		return (0);
-	dup = malloc(sizeof(char) * (len_of_str(s1) + 1));
-	if (!dup)
-		return (0);
-	i = 0;
-	while (s1[i])
+	while (src[i] != '\0')
 	{
-		dup[i] = s1[i];
+		dst[i] = src[i];
 		i++;
 	}
-	dup[i] = '\0';
-	return (dup);
+	dst[i] = '\0';
+	return (dst);
 }
 
-// #include<stdio.h>
-// int main()
-// {
-// 	char s[] = "hello world";
-// 	char *dup = ft_strdup(s);
-// 	printf("%s\n", dup);
-// }
+char	*ft_strdup(const char *s1)
+{
+	char	*dest;
+	int		src_len;
+
+	src_len = ft_strlen(s1);
+	dest = malloc((src_len + 1) * sizeof(char));
+	if (!dest)
+		return (NULL);
+	dest = ft_strcpy(dest, s1);
+	return (dest);
+}
+
+/*
+int	main(int argc, char **argv)
+{
+	(void) argc;
+	printf("ft_strdup(%s) => %s\n", argv[1], ft_strdup(argv[1]));
+	printf("strdup(%s) => %s\n", argv[1], strdup(argv[1]));
+	return (0);
+}
+*/

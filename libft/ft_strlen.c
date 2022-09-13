@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anajmi <anajmi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/02 14:09:41 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/02 21:23:50 by ohrete           ###   ########.fr       */
+/*   Created: 2021/11/02 10:30:25 by anajmi            #+#    #+#             */
+/*   Updated: 2021/11/21 15:09:19 by anajmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,17 @@ size_t	ft_strlen(const char *s)
 
 	i = 0;
 	while (s[i] != '\0')
+	{
 		i++;
+	}
 	return (i);
 }
 
-// #include<stdio.h>
-// int main()
-// {
-// 	char str[] = "hellooowwww";
-// 	printf("%lu",ft_strlen(str));
-// }
+/*
+#include <stdio.h>
+int	main(void)
+{
+	printf("%zu\n", strlen("hello world"));
+	
+}
+*/

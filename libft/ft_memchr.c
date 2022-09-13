@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anajmi <anajmi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/06 14:37:47 by ohrete            #+#    #+#             */
-/*   Updated: 2021/11/23 23:59:32 by ohrete           ###   ########.fr       */
+/*   Created: 2021/11/05 15:59:06 by anajmi            #+#    #+#             */
+/*   Updated: 2021/11/18 13:30:44 by anajmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,36 @@
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
+	unsigned char	check;
+	unsigned char	*out;
 	size_t			i;
-	unsigned char	*str;
 
-	str = (unsigned char *)s;
+	check = (unsigned char) c;
+	out = (unsigned char *) s;
 	i = 0;
 	while (i < n)
 	{
-		if (str[i] == (unsigned char)c)
-			return (&str[i]);
+		if (out[i] == check)
+			return (out + i);
 		i++;
 	}
+	return (NULL);
+}
+
+/*
+int	main(void)
+{
+	char str[] = {0, 1, 2 ,3 ,4 ,5};
+	//const char	ch = '2';
+	char		*ret;
+
+	ret = ft_memchr(str, 0, 1);
+	printf("|%s|\n", ret);
+	//printf("String before |%s|\n\n", str);
+
+	ret = memchr(str, 0, 1);
+	printf("|%s|\n", ret);
+	//printf("String before |%s|\n\n", str);
 	return (0);
 }
-// #include<stdio.h>
-// int main()
-// {
-// 	printf("%s\n",ft_memchr("hello it's me", 'l', 6));
-// 	printf("%s",memchr("hello it's me", 'l', 6));
-// }
+*/

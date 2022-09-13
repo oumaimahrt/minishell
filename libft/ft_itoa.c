@@ -3,67 +3,74 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anajmi <anajmi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/13 16:31:19 by ohrete            #+#    #+#             */
-/*   Updated: 2021/11/23 23:51:11 by ohrete           ###   ########.fr       */
+/*   Created: 2021/11/12 13:43:12 by anajmi            #+#    #+#             */
+/*   Updated: 2021/11/19 14:33:37 by anajmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_count(int n)
+static int	get_int_len(long value, int i)
 {
-	int	i;
+	long	l;
 
-	i = 0;
-	if (n < 0)
+	l = 1;
+	while (value > 9)
 	{
-		i++;
-		n = -n;
+		l++;
+		value /= 10;
 	}
-	if (n == 0)
-		i++;
-	while (n != 0)
+	return (l + i);
+}
+
+static char	*process(char *out, long nbr, int i)
+{
+	while (i >= 0)
 	{
-		n = n / 10;
-		i++;
+		if (0 <= (nbr % 10) && (nbr % 10) < 10)
+			out[i] = nbr % 10 + '0';
+		i--;
+		if (i == -1 || out[i] == '-')
+			break ;
+		nbr /= 10;
 	}
-	return (i);
+	return (out);
 }
 
 char	*ft_itoa(int n)
 {
-	char	*tab;
+	char	*out;
+	long	nbr;
 	int		i;
 
-	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
-	tab = malloc(ft_count(n) + 1);
-	if (!tab)
+	nbr = n;
+	i = 0;
+	if (nbr < 0)
+	{
+		nbr = nbr * (-1);
+		i = 1;
+	}
+	i = get_int_len(nbr, i);
+	out = ft_calloc(i + 1, sizeof(char));
+	if (!out)
 		return (NULL);
-	i = ft_count(n);
-	tab [i] = '\0';
-		i--;
-	if (n == 0)
-		tab[i] = '0';
 	if (n < 0)
-	{
-		tab[0] = '-';
-		n = -n;
-	}
-	while (n != 0)
-	{
-		tab[i] = n % 10 + 48;
-		n = n / 10;
-		i--;
-	}
-	return (tab);
+		out[0] = '-';
+	i -= 1;
+	return (process(out, nbr, i));
 }
-// #include<stdio.h>
-//  int main()
-//  {
-// 	printf("%s\n",ft_itoa(-2147483648));
-// 	//printf("%s\n",ft_itoa(0));
-// 	//printf("%s\n",ft_itoa(10));
-//  }
+
+/*
+int	main(void)
+{
+	char	*str;
+	int		val;
+
+	val = 1234567890;
+	str = ft_itoa(val);
+	printf("Int value = %d, String value = %s\n", val, str);
+	return (0);
+}
+*/

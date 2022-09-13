@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anajmi <anajmi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/15 21:08:12 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/02 21:20:46 by ohrete           ###   ########.fr       */
+/*   Created: 2021/11/12 16:11:17 by anajmi            #+#    #+#             */
+/*   Updated: 2021/11/18 13:47:25 by anajmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,40 @@
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	char			*mapi;
-	unsigned int	i;
+	char	*out;
+	size_t	len;
+	size_t	i;
 
+	if (s == 0)
+		return (NULL);
+	len = ft_strlen(s);
+	out = malloc(sizeof(char) * (len + 1));
+	if (!out)
+		return (NULL);
 	i = 0;
-	if (!s)
-		return (NULL);
-	mapi = (char *)malloc(sizeof(char ) * ft_strlen(s) + 1);
-	if (!mapi)
-		return (NULL);
-	while (i < ft_strlen(s))
+	while (i < len)
 	{
-		mapi[i] = f(i, s[i]);
+		out[i] = f(i, s[i]);
 		i++;
 	}
-	mapi[i] = '\0';
-	return (mapi);
+	out[i] = '\0';
+	return (out);
 }
 
-// char	ft_test(unsigned int i, char s)
-// {
-// 	return (s + i);
-// }
+/*
+char	f(unsigned int i, char c)
+{
+	(void)c;
+	(void)i;
+	return ('j');
+}
 
-// #include<stdio.h>
-// int main()
-// {
-//     char	s[] = "hello";
-// 	   char	*b;
-// 	   b = ft_strmapi(s, &ft_test);
-//     printf("%s\n", b);
-// }
+int	main(void)
+{
+	char	str1[] = "abcdef";
+	char*	str2;
+
+	str2 = ft_strmapi(str1, *f);
+	printf("%s\n", str2);
+}
+*/

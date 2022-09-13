@@ -6,20 +6,33 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:11:06 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/12 03:16:27 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/06 18:14:58 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <signal.h>
 # include <fcntl.h>
+# include <sys/wait.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "./libft/libft.h"
+
+# include "Libft/libft.h"
+# include "LibftPlus/libftplus.h"
+#define HERE fprintf(stderr, "HERE   %s  in  %d\n", __FILE__, __LINE__);
+
+typedef struct s_final t_final;
+typedef struct s_vars t_vars;
+// # include "Parsing/parsing.h"
+# include "Execution/execution.h"
+
+
+
 # define OUTPUT '>'
 # define INPUT '<'
 # define PIPE '|'
@@ -29,6 +42,9 @@
 # define DQ '\"'
 # define HERE_DOC 'H' // <<
 # define WORD 'W'
+# define FIL 1
+# define NAM 2
+
 
 int g_status;
 //env
@@ -36,6 +52,7 @@ typedef struct s_env
 {
 	char			*name;
 	char			*value;
+	t_vars			*env_var;
 	struct s_env	*next;
 }	t_env;
 
@@ -108,10 +125,10 @@ void	tokens(char *line, t_token **temp, t_save *save, int *i);
 t_token *	tokenizer(char *line, char **av, t_env *env);
 t_final	*ft_parser(t_token *data);
 void ft_output(t_final *cmd);
-void	free_parser(t_final *cmd);
+void	ft_free(t_final *cmd);
 int check_dollar(char *str);
 
-void free_tokens(t_token *data);
+void ft_freetokens(t_token *data);
 // t_token	*create_node(void);
 //void	add_last_list(t_token **head, t_token *new);
 //int		 list_size(t_token *list);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anajmi <anajmi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/04 21:15:38 by ohrete            #+#    #+#             */
-/*   Updated: 2021/11/23 01:28:50 by ohrete           ###   ########.fr       */
+/*   Created: 2021/11/05 14:57:13 by anajmi            #+#    #+#             */
+/*   Updated: 2021/11/18 13:48:26 by anajmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,45 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	int	i;
+	unsigned char	*out;
+	size_t			i;
+	int				j;
 
-	i = ft_strlen(s) - 1;
-	if ((char)c == 0)
-		return ((char *)s + ft_strlen(s));
-	while (i >= 0)
+	out = (unsigned char *) s;
+	i = 0;
+	j = -1;
+	while (i < ft_strlen(s))
 	{
-		if (s[i] == (char)c)
-			return ((char *)&s[i]);
-		i--;
+		if (*out == (unsigned char) c)
+			j = (int) i;
+		out++;
+		i++;
 	}
-	return (0);
+	if (j != -1)
+	{
+		out = (unsigned char *) s;
+		while (j-- > 0)
+			out++;
+		return ((char *) out);
+	}
+	if (i == ft_strlen(s) && *out == (unsigned char) c)
+		return ((char *) out);
+	return (NULL);
 }
 
-// #include <stdio.h>
-// int main()
-// {
-// 	char a[] = "oumaimato";
-// 	printf("%s\n",ft_strrchr("oumaimato",'m'));
-// 	printf("%s",strrchr("oumaimato",'m'));
-// }
+/*
+int	main(void)
+{
+	const char	str[] = "http://www.tutorialspoint.com";
+	const char	ch = 't';
+	char		*ret;
+
+	ret = ft_strrchr(str, ch);
+	printf("\nString after |%c| is - |%s|\n", ch, ret);
+	printf("String before |%s|\n\n", str);
+	ret = strrchr(str, ch);
+	printf("String after |%c| is - |%s|\n", ch, ret);
+	printf("String before |%s|\n\n", str);
+	return (0);
+}
+*/

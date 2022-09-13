@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anajmi <anajmi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/05 20:11:54 by ohrete            #+#    #+#             */
-/*   Updated: 2021/11/24 00:32:02 by ohrete           ###   ########.fr       */
+/*   Created: 2021/11/03 10:41:55 by anajmi            #+#    #+#             */
+/*   Updated: 2021/11/19 19:59:45 by anajmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,42 @@
 
 void	*ft_memset(void *b, int c, size_t len)
 {
+	unsigned char	*s;
 	size_t			i;
-	unsigned char	*tb;
 
+	s = (unsigned char *) b;
 	i = 0;
-	tb = (unsigned char *)b;
 	while (i < len)
 	{
-		tb[i] = c;
+		s[i] = (unsigned char)c;
 		i++;
 	}
 	return (b);
 }
 
-// #include<stdio.h>
-// int main()
-// {
-// 	char x[]="oumaima";
-// 	char y = 'g';
-// 	ft_memset(x, y,2);
-// 	printf("%s\n", x);
-// }
+/*
+int	main(void)
+{
+	char	str[50];
+	int		a;
+
+	strcpy(str, "This is string.h");
+	puts(str);
+	a = 0;
+	while (a <= 20)
+	{
+		strcpy(str, "This is string.h");
+		ft_memset(str, '$', a);
+		printf("(%d)	ft_memset => %s	", a, str);
+		strcpy(str, "This is string.h");
+		memset(str, '$', a);
+		printf("memset => %s\n", str);
+		a++;
+	}
+	int	d;
+
+	ft_memset(&d, 127, sizeof(int));
+	printf("%d\n", d);
+	return (0);
+}
+*/

@@ -3,33 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anajmi <anajmi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/08 11:37:51 by ohrete            #+#    #+#             */
-/*   Updated: 2021/11/24 00:03:02 by ohrete           ###   ########.fr       */
+/*   Created: 2021/11/03 15:52:14 by anajmi            #+#    #+#             */
+/*   Updated: 2021/11/18 22:09:13 by anajmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
+	char	*s;
+	char	*d;
 	size_t	i;
 
-	i = 0;
-	if (!dest && !src)
+	if (!dst && !src)
 		return (NULL);
+	if (dst == src)
+		return (dst);
+	s = (char *) src;
+	d = (char *) dst;
+	i = 0;
 	while (i < n)
 	{
-		((unsigned char *)dest)[i] = ((unsigned char *)src)[i];
+		d[i] = s[i];
 		i++;
 	}
-	return (dest);
+	return (dst);
 }
-// #include<stdio.h>
-// int main()
-// {
-// 	char s1[] = "HELLOOOOOO";
-// 	char s2[20];
-// 	printf("%s\n", ft_memcpy(s2, s1, 4));
-// }
+
+/*
+int	main(void)
+{
+	const char	src[50] = "http://www.tutorialspoint.com";
+	char		dest[50];
+
+	strcpy(dest, "Heloooo!!!");
+	printf("Before memcpy dest = %s\n", dest);
+	memcpy(dest, src, strlen(src)+1);
+	printf("After memcpy dest = %s\n", dest);
+	strcpy(dest, "Heloooo!!!");
+	printf("Before ft_memcpy dest = %s\n", dest);
+	ft_memcpy(dest, src, strlen(src)+1);
+	printf("After ft_memcpy dest = %s\n", dest);
+	return (0);
+}
+*/

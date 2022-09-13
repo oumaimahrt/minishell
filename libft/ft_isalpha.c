@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anajmi <anajmi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/01 16:27:34 by ohrete            #+#    #+#             */
-/*   Updated: 2021/11/23 23:44:53 by ohrete           ###   ########.fr       */
+/*   Created: 2021/11/02 10:00:22 by anajmi            #+#    #+#             */
+/*   Updated: 2021/11/18 13:26:19 by anajmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,25 @@
 
 int	ft_isalpha(int c)
 {
-	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
-		return (1);
+	if (!('a' <= c && c <= 'z') && !('A' <= c && c <= 'Z'))
+	{
+		return (0);
+	}
+	return (1);
+}
+
+/*
+int	main(void)
+{
+	int	a;
+
+	a = 0;
+	while (a <= 127)
+	{
+		printf("(%d) (%c)	ft_isalpha => %d	", a, a, ft_isalpha(a));
+		printf("isalpha => %d\n", isalpha(a));
+		a++;
+	}
 	return (0);
 }
-// #include<stdio.h>
-// int main()
-// {
-// 	int a = 67;
-// 	printf("%d",ft_isalpha(a));
-// }
+*/

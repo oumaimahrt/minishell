@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anajmi <anajmi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/02 19:30:45 by ohrete            #+#    #+#             */
-/*   Updated: 2021/11/24 00:48:48 by ohrete           ###   ########.fr       */
+/*   Created: 2021/11/02 14:33:40 by anajmi            #+#    #+#             */
+/*   Updated: 2021/11/18 13:49:49 by anajmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,23 @@
 
 int	ft_tolower(int c)
 {
-	if (c >= 'A' && c <= 'Z')
-		return (c + 32);
-	else
-		return (c);
+	if ('A' <= c && c <= 'Z')
+		c = c + 32;
+	return (c);
 }
-// #include<stdio.h>
-// int main()
-// {
-// 	char s[]= "M BEAUTIFUL IN MY OWN WAY THIS IS WHAT MAKS ME SPECIAL";
-// 	printf("%s",ft_tolower(s));
-// }
+
+/*
+int	main(void)
+{
+	int	a;
+
+	a = 65;
+	while (a <= 90)
+	{
+		printf("(%d) (%c)	ft_tolower => %c	", a, a, ft_tolower(a));
+		printf("tolower => %c\n", tolower(a));
+		a++;
+	}
+	return (0);
+}
+*/

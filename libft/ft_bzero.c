@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anajmi <anajmi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/06 11:33:03 by ohrete            #+#    #+#             */
-/*   Updated: 2021/11/23 01:13:01 by ohrete           ###   ########.fr       */
+/*   Created: 2021/11/03 11:42:59 by anajmi            #+#    #+#             */
+/*   Updated: 2021/11/18 13:22:27 by anajmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,28 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	ft_memset (s, 0, n);
+	ft_memset(s, '\0', n);
 }
-// #include<stdio.h>
-// int main()
-// {
-// 	char x[]="oumaima";
-// 	ft_bzero(x,2);
-// 	printf("%d",x[0]);
-// }
+
+/*
+int	main(void)
+{
+	char	str[50];
+	int		a;
+
+	strcpy(str, "This is string.h");
+	puts(str);
+	a = 0;
+	while (a <= 20)
+	{
+		strcpy(str, "This is string.h");
+		ft_bzero(str, a);
+		printf("(%d)	ft_bzero => %s	", a, str);
+		strcpy(str, "This is string.h");
+		bzero(str, a);
+		printf("bzero => %s\n", str);
+		a++;
+	}
+	return (0);
+}
+*/

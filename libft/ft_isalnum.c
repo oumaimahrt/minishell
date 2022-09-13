@@ -3,25 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anajmi <anajmi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/02 13:22:18 by ohrete            #+#    #+#             */
-/*   Updated: 2021/11/23 23:44:42 by ohrete           ###   ########.fr       */
+/*   Created: 2021/11/02 10:11:05 by anajmi            #+#    #+#             */
+/*   Updated: 2021/11/18 13:25:50 by anajmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isalnum(int a)
+int	ft_isalnum(int c)
 {
-	if (((a >= 'a' && a <= 'z') || (a >= 'A' && a <= 'Z')
-			|| (a >= '0' && a <= '9')))
-		return (1);
+	if (!('0' <= c && c <= '9')
+		&& !('A' <= c && c <= 'Z')
+		&& !('a' <= c && c <= 'z'))
+	{
+		return (0);
+	}
+	return (1);
+}
+/*
+int	main(void)
+{
+	int	a;
+
+	a = 0;
+	while (a <= 127)
+	{
+		printf("(%d) (%c)	ft_isalnum => %d	", a, a, ft_isalnum(a));
+		printf("isalnum => %d\n", isalnum(a));
+		a++;
+	}
 	return (0);
 }
-// #include<stdio.h>
-// int main()
-// {
-// 	int c = 5;
-// 	printf("%d\n",ft_isalnum(c));
-// }
+*/

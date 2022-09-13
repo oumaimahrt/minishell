@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anajmi <anajmi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/08 16:22:35 by ohrete            #+#    #+#             */
-/*   Updated: 2021/11/24 01:09:12 by ohrete           ###   ########.fr       */
+/*   Created: 2021/11/06 12:00:32 by anajmi            #+#    #+#             */
+/*   Updated: 2021/11/21 14:08:22 by anajmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,19 @@
 
 void	*ft_calloc(size_t count, size_t size)
 {
-	size_t	n;
-	int		*ptr;
+	void	*str;
 
-	n = count * size;
-	ptr = malloc(sizeof(char) * n);
-	if (ptr == NULL)
+	str = malloc(count * size);
+	if (!str)
 		return (NULL);
-	ft_bzero (ptr, n);
-	return (ptr);
+	ft_bzero(str, count * size);
+	return (str);
 }
-// #include<stdio.h>
-// int main()
-// {
-// 	char *a = "sunshine";
-// 	a = ft_strdup(a);
-// 	printf("%s\n",a);
-// 	a = ft_calloc(8,1);
-// }
+
+/*
+int	main(void)
+{
+	ft_calloc(0, 0);
+	return (0);
+}
+*/

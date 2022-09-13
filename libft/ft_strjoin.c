@@ -3,43 +3,68 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anajmi <anajmi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/08 19:33:51 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/23 18:28:44 by ohrete           ###   ########.fr       */
+/*   Created: 2021/11/08 12:07:43 by anajmi            #+#    #+#             */
+/*   Updated: 2021/11/18 13:46:22 by anajmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char*s1, char *s2)
+static char	*ft_strcat(char *dest, const char *src)
 {
-	size_t	i;
-	size_t	j;
-	size_t	len;
-	char	*dest;
+	unsigned int	i;
+	unsigned int	a;
 
-	i = 0;
-	j = 0;
-	len = ft_strlen((char *) s1) + ft_strlen(s2);
-	dest = (char *)malloc(sizeof(char) * (len + 1));
-	if (!dest)
-		return (NULL);
-	while (s1[i])
-		dest[j++] = s1[i++];
-	i = 0;
-	while (s2[i])
-		dest[j++] = s2[i++];
-	dest[j] = '\0';
-	if (s1)
-		free(s1);
-	if (s2)
-		free(s2);
+	i = ft_strlen(dest);
+	a = 0;
+	while (src[a] != '\0')
+	{
+		dest[i + a] = src[a];
+		a++;
+	}
+	dest[i + a] = '\0';
 	return (dest);
 }
 
-// #include<stdio.h>
-// int main()
-// {
-// 	printf("%s\n", ft_strjoin("hello","world"));
-// }
+static char	*ft_strcpy(char *dst, const char *src)
+{
+	int	i;
+
+	i = 0;
+	while (src[i] != '\0')
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*cat;
+
+	if (!s1 || !s2)
+		return (NULL);
+	cat = malloc((ft_strlen(s1) + ft_strlen(s2)) * sizeof(char) + 1);
+	if (!cat)
+		return (NULL);
+	ft_strcpy(cat, s1);
+	ft_strcat(cat, s2);
+	return (cat);
+}
+
+/*
+int	main(void)
+{
+	char	dst[30];
+	char	src[30];
+
+	strcpy(dst, "abcdef");
+	strcpy(src, "123456");
+	printf("\nft_strjoin => %s		\n\n", ft_strjoin(dst, src));
+	return (0);
+}
+*/

@@ -3,24 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anajmi <anajmi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/14 22:44:17 by ohrete            #+#    #+#             */
-/*   Updated: 2021/11/23 04:48:16 by ohrete           ###   ########.fr       */
+/*   Created: 2021/11/12 21:38:40 by anajmi            #+#    #+#             */
+/*   Updated: 2021/11/20 21:10:10 by anajmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putchar_fd(char s, int fd)
+void	ft_putchar_fd(char c, int fd)
 {
-	write(fd, &s, 1);
+	if (fd < 0)
+		return ;
+	write(fd, &c, 1);
 }
 
-// #include <fcntl.h>
-// int main()
-// {
-// 	int fd;
-// 	fd = open("file.txt", O_CREAT | O_RDWR);
-// 	ft_putchar_fd('h',fd);
-// }
+/*
+#include <fcntl.h>
+int	main(void)
+{
+	int	fd;
+
+	fd = open("file", O_CREAT | O_RDWR);
+	ft_putchar_fd('l', fd);
+	return (0);
+}
+*/

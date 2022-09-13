@@ -6,9 +6,8 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
- 
 
-# Make data base, printed on Mon Sep  5 22:37:55 2022
+# Make data base, printed on Tue Sep 13 22:39:02 2022
 
 # Variables
 
@@ -16,31 +15,38 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
 ?F = $(notdir $?)
+# makefile (from `Makefile', line 62)
+ARPLS = $(LIBPL)/libftplus.a
+# makefile (from `Makefile', line 44)
+OBJ = $(SRCS:.c=.o)
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
 # automatic
- 
 @F = $(notdir $@)
 # makefile
-CURDIR := /Users/ohrete/Desktop/minishell
+CURDIR := /Users/ohrete/Desktop/update
 # makefile
 SHELL = /bin/sh
+# makefile (from `Makefile', line 72)
+C_RED = \033[1;31m
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
 _ = /usr/bin/make
-# makefile (from `Makefile', line 30)
-CFLAGS = -Wall -Wextra -Werror 
+# makefile (from `Makefile', line 53)
+CLEANLIBFT = make clean -C $(LIBFT)
+# makefile (from `Makefile', line 15)
+CFLAGS = -fsanitize=address -g 
 # makefile (from `Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
-# makefile (from `Makefile', line 27)
-OBJS = $(SRCS:%.c=%.o)
+# makefile (from `Makefile', line 55)
+RELIBFT = make re -C $(LIBFT)
 # environment
 VSCODE_CWD = /
 # environment
-Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.wQ1istbKkP/Render
+Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.JyckSqLbIK/Render
 # environment
 PATH = /Users/ohrete/.brew/bin:/Users/ohrete/.brew/bin:/Users/ohrete/.brew/bin:/Users/ohrete/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki
 # environment
@@ -50,58 +56,76 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.yApbG64y6V/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.54vyKnFChe/Listeners
 # automatic
 %F = $(notdir $%)
+# makefile (from `Makefile', line 61)
+LIBPL = ./LibftPlus
 # environment
-PWD = /Users/ohrete/Desktop/minishell
+PWD = /Users/ohrete/Desktop/update
+# makefile (from `Makefile', line 63)
+ALLIBPL = make -C $(LIBPL)
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+# makefile (from `Makefile', line 74)
+C_L_BLUE = \033[1;34m
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
 HOME = /Users/ohrete
+# makefile (from `Makefile', line 65)
+FCLEANLIBPL = rm -f $(ARPLS)
 # default
 MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
 # environment
-VSCODE_CODE_CACHE_PATH = /Users/ohrete/Library/Application Support/Code/CachedData/e4503b30fc78200f846c62cf8091b76ff5547662
+VSCODE_CODE_CACHE_PATH = /Users/ohrete/Library/Application Support/Code/CachedData/784b0177c56c607789f9638da7b6bf3230d47a8c
 # environment
 LOGNAME = ohrete
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # environment
 ZSH = /Users/ohrete/.oh-my-zsh
+# makefile (from `Makefile', line 52)
+ALLIBFT = make -C $(LIBFT)
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
+# makefile (from `Makefile', line 75)
+C_RES = \033[0m
 # environment
 XPC_FLAGS = 0x0
 # default
 MAKE = $(MAKE_COMMAND)
 # default
 MAKECMDGOALS := all
-# makefile (from `Makefile', line 15)
-SRCS = minishell.c ft_environment.c environment_utils.c tokenizer.c token_utils.c token_utils2.c expanding.c parser.c pars_utils.c 
+# makefile (from `Makefile', line 38)
+SRCS = $(PARSE) $(EXEC)
 # environment
 SHLVL = 1
-# makefile (from `Makefile', line 31)
-LIBFT = ./libft/libft.a
+# makefile (from `Makefile', line 50)
+LIBFT = ./Libft
+# makefile (from `Makefile', line 51)
+ARLIB = $(LIBFT)/libft.a
+# makefile (from `Makefile', line 32)
+EXEC = ./minishell.c ./Execution/execution.c ./Execution/environment.c ./Execution/pipes_redirections.c 
 # default
 MAKE_VERSION := 3.81
 # environment
 USER = ohrete
 # makefile
 .DEFAULT_GOAL := all
-# makefile (from `Makefile', line 28)
+# makefile (from `Makefile', line 41)
 CONTROL = @stty -echoctl
 # makefile (from `Makefile', line 13)
 NAME = minishell
+# makefile (from `Makefile', line 54)
+FCLEANLIBFT = rm -f $(ARLIB)
 # environment
 LESS = -R
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
-# makefile (from `Makefile', line 29)
+# makefile (from `Makefile', line 42)
 LFLAGS = -lreadline -L/Users/ohrete/.brew/opt/readline/lib -I/Users/ohrete/.brew/opt/readline/include
 # default
 MAKE_COMMAND := /Applications/Xcode.app/Contents/Developer/usr/bin/make
@@ -112,9 +136,11 @@ TMPDIR = /var/folders/zz/zyxvpxvq6csfxvn_n0000h3800040t/T/
 # automatic
 *F = $(notdir $*)
 # environment
-VSCODE_IPC_HOOK = /Users/ohrete/Library/Application Support/Code/1.70.2-main.sock
+VSCODE_IPC_HOOK = /Users/ohrete/Library/Application Support/Code/1.71.0-main.sock
 # environment
 MallocNanoZone = 0
+# makefile (from `Makefile', line 17)
+PARSE = ./Parsing/syntax_error.c ./Parsing/ft_environment.c ./Parsing/environment_utils.c ./Parsing/tokenizer.c ./Parsing/token_utils.c ./Parsing/token_utils2.c ./Parsing/expanding.c ./Parsing/parser.c ./Parsing/parsing.c ./Parsing/tools.c 
 # makefile
 MAKEFLAGS = Rrqp
 # environment
@@ -122,7 +148,7 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000002.Electron
+XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000003.Electron
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
@@ -147,14 +173,20 @@ SECURITYSESSIONID = 186a8
 SUFFIXES := 
 # default
 .INCLUDE_DIRS = /usr/local/include
+# makefile (from `Makefile', line 64)
+CLEANLIBPL = make clean -C $(LIBPL)
 # environment
 MAKELEVEL := 0
+# makefile (from `Makefile', line 73)
+C_GREEN = \033[1;32m
 # environment
 LANG = C
 # environment
-VSCODE_PID = 11312
+VSCODE_PID = 4063
+# makefile (from `Makefile', line 66)
+RELIBPL = make re -C $(LIBPL)
 # variable set hash-table stats:
-# Load=70/1024=7%, Rehash=0, Collisions=3/100=3%
+# Load=87/1024=8%, Rehash=0, Collisions=8/137=6%
 
 # Pattern-specific Variable Values
 
@@ -162,71 +194,83 @@ VSCODE_PID = 11312
 
 # Directories
 
-# . (device 16777227, inode 3049711): 31 files, no impossibilities.
+# Parsing (device 16777227, inode 3214722): 28 files, no impossibilities so far.
+# . (device 16777227, inode 3210526): 15 files, no impossibilities.
+# Execution (device 16777227, inode 3214714): 9 files, no impossibilities so far.
 
-# 31 files, no impossibilities in 1 directories.
+# 52 files, no impossibilities in 3 directories.
 
 # Implicit Rules
 
-# No implicit rules.
+%.o: %.c
+#  commands to execute (from `Makefile', line 84):
+	gcc $(CFLAGS) -c $^ -o $@
+	
+
+# 1 implicit rules, 0 (0.0%) terminal.
 
 # Files
 
 # Not a target:
-ft_environment.o:
+Parsing/ft_environment.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-05 22:37:46
+#  Last modified 2022-09-13 22:34:18
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
-token_utils.o:
+Execution/environment.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-05 22:37:46
+#  Last modified 2022-09-13 22:34:18
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-all: minishell
-#  Command-line target.
-#  Implicit rule search has not been done.
-#  Last modified 1969-12-31 23:59:56
+Parsing/tokenizer.o: Parsing/tokenizer.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `Parsing/tokenizer'
+#  Last modified 2022-09-13 22:38:40
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 34):
+#  commands to execute (from `Makefile', line 84):
+	gcc $(CFLAGS) -c $^ -o $@
 	
 
-# Not a target:
-environment_utils.o:
+Parsing/syntax_error.o: Parsing/syntax_error.c
 #  Implicit rule search has been done.
-#  Last modified 2022-09-05 22:37:46
+#  Implicit/static pattern stem: `Parsing/syntax_error'
+#  Last modified 2022-09-13 22:38:40
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 84):
+	gcc $(CFLAGS) -c $^ -o $@
+	
 
-# Not a target:
-expanding.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-09-05 22:37:46
+all: minishell
+#  Phony target (prerequisite of .PHONY).
+#  Command-line target.
+#  Implicit rule search has not been done.
+#  File does not exist.
 #  File has been updated.
-#  Successfully updated.
+#  Needs to be updated (-q is set).
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+# Load=0/32=0%, Rehash=0, Collisions=0/20=0%
+#  commands to execute (from `Makefile', line 87):
+	@echo "$(C_L_BLUE)[EXECUTE MINISHELL ...]$(C_RES)"
+	./minishell
+	
 
-# Not a target:
-pars_utils.o:
-#  Implicit rule search has been done.
-#  Last modified 2022-09-05 22:37:46
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+.PHONY: all clean fclean re
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 .SUFFIXES:
@@ -237,68 +281,186 @@ pars_utils.o:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-05 22:37:43
+#  Last modified 2022-09-13 22:38:35
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-minishell: minishell.o ft_environment.o environment_utils.o tokenizer.o token_utils.o token_utils2.o expanding.o parser.o pars_utils.o libft/libft.a
-#  Implicit rule search has not been done.
-#  Last modified 2022-09-05 22:37:49
+# Not a target:
+Execution/pipes_redirections.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-09-13 22:34:18
+ 
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 36):
-	$(CONTROL)
-	$(CC) $(CFLAGS) $(OBJS) $(LFLAGS) $(LIBFT) -o $(NAME) 
+
+# Not a target:
+Parsing/token_utils2.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-09-13 22:34:18
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+Parsing/environment_utils.o: Parsing/environment_utils.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `Parsing/environment_utils'
+#  Last modified 2022-09-13 22:38:40
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 84):
+	gcc $(CFLAGS) -c $^ -o $@
+	
+
+Parsing/parser.o: Parsing/parser.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `Parsing/parser'
+#  Last modified 2022-09-13 22:38:40
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 84):
+	gcc $(CFLAGS) -c $^ -o $@
+	
+
+Parsing/expanding.o: Parsing/expanding.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `Parsing/expanding'
+#  Last modified 2022-09-13 22:38:40
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 84):
+	gcc $(CFLAGS) -c $^ -o $@
 	
 
 # Not a target:
-minishell.o:
+Execution/execution.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-05 22:37:45
+#  Last modified 2022-09-13 22:34:18
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-libft/libft.a:
-#  Implicit rule search has not been done.
-#  Last modified 2022-09-05 22:37:49
+Parsing/tools.o: Parsing/tools.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `Parsing/tools'
+#  Last modified 2022-09-13 22:38:40
 #  File has been updated.
 #  Successfully updated.
-#  commands to execute (from `Makefile', line 40):
-	cd ./libft && make
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 84):
+	gcc $(CFLAGS) -c $^ -o $@
 	
+
+# Not a target:
+Parsing/tokenizer.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-09-13 22:34:18
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+minishell: Parsing/syntax_error.o Parsing/ft_environment.o Parsing/environment_utils.o Parsing/tokenizer.o Parsing/token_utils.o Parsing/token_utils2.o Parsing/expanding.o Parsing/parser.o Parsing/parsing.o Parsing/tools.o minishell.o Execution/execution.o Execution/environment.o Execution/pipes_redirections.o
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `'
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := minishell
+# automatic
+# % := 
+# automatic
+# * := 
+# automatic
+# + := Parsing/syntax_error.o Parsing/ft_environment.o Parsing/environment_utils.o Parsing/tokenizer.o Parsing/token_utils.o Parsing/token_utils2.o Parsing/expanding.o Parsing/parser.o Parsing/parsing.o Parsing/tools.o minishell.o Execution/execution.o Execution/environment.o Execution/pipes_redirections.o
+# automatic
+# | := 
+# automatic
+# < := Parsing/syntax_error.o
+# automatic
+# ^ := Parsing/syntax_error.o Parsing/ft_environment.o Parsing/environment_utils.o Parsing/tokenizer.o Parsing/token_utils.o Parsing/token_utils2.o Parsing/expanding.o Parsing/parser.o Parsing/parsing.o Parsing/tools.o minishell.o Execution/execution.o Execution/environment.o Execution/pipes_redirections.o
+# automatic
+# ? := Parsing/syntax_error.o Parsing/ft_environment.o Parsing/environment_utils.o Parsing/tokenizer.o Parsing/token_utils.o Parsing/token_utils2.o Parsing/expanding.o Parsing/parser.o Parsing/parsing.o Parsing/tools.o minishell.o Execution/execution.o Execution/environment.o Execution/pipes_redirections.o
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=7/28=25%
+#  commands to execute (from `Makefile', line 91):
+	$(ALLIBFT)
+	$(ALLIBPL)
+	gcc $(OBJ) $(CFLAGS) $(ARLIB) $(ARPLS) $(CONTROL) $(LFLAGS) -o $(NAME)
+	@echo "$(C_GREEN)[MINISHELL MANDATORY CREATED!]$(C_RES)"
+	
+
+minishell.o: minishell.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `minishell'
+#  Last modified 2022-09-13 22:38:40
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 84):
+	gcc $(CFLAGS) -c $^ -o $@
+	
+
+# Not a target:
+Parsing/syntax_error.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-09-13 22:34:18
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 fclean: clean
+#  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
-#  Modification time never checked.
+#  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 47):
-	rm -f $(NAME)
-	cd ./libft && make fclean
+#  commands to execute (from `Makefile', line 103):
+	@$(FCLEANLIBFT)
+	@echo "$(C_RED)[LIBFT ARCHIVE DELETED!]$(C_RES)"
+	@$(FCLEANLIBPL)
+	@echo "$(C_RED)[LIBFT PLUS ARCHIVE DELETED!]$(C_RES)"
+	@rm -f $(NAME)
+	@echo "$(C_RED)[MINISHELL EXECUTABLES DELETED!]$(C_RES)"
 	
 
-# Not a target:
-token_utils2.o:
+Parsing/token_utils.o: Parsing/token_utils.c
 #  Implicit rule search has been done.
-#  Last modified 2022-09-05 22:37:46
+#  Implicit/static pattern stem: `Parsing/token_utils'
+#  Last modified 2022-09-13 22:38:40
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 84):
+	gcc $(CFLAGS) -c $^ -o $@
+	
 
-# Not a target:
-parser.o:
+Parsing/parsing.o: Parsing/parsing.c
 #  Implicit rule search has been done.
-#  Last modified 2022-09-05 22:37:46
+#  Implicit/static pattern stem: `Parsing/parsing'
+#  Last modified 2022-09-13 22:38:40
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 84):
+	gcc $(CFLAGS) -c $^ -o $@
+	
 
 # Not a target:
 .DEFAULT:
@@ -307,42 +469,160 @@ parser.o:
 #  File has not been updated.
 
 # Not a target:
-tokenizer.o:
+Parsing/environment_utils.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-09-05 22:37:46
+#  Last modified 2022-09-13 22:34:18
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+Parsing/parser.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-09-13 22:34:18
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+Parsing/expanding.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-09-13 22:34:18
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 re: fclean all
+#  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
-#  Modification time never checked.
+#  File does not exist.
 #  File has not been updated.
 
 clean:
+#  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
-#  Modification time never checked.
+#  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 43):
-	rm -f $(OBJS)
-	cd ./libft && make clean
+#  commands to execute (from `Makefile', line 97):
+	@$(CLEANLIBFT)
+	@$(CLEANLIBPL)
+	rm -f $(OBJ)
+	@echo "$(C_RED)[MINISHELL OBJECTS DELETED!]$(C_RES)"
+	
+
+Parsing/ft_environment.o: Parsing/ft_environment.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `Parsing/ft_environment'
+#  Last modified 2022-09-13 22:38:40
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 84):
+	gcc $(CFLAGS) -c $^ -o $@
+	
+
+Execution/environment.o: Execution/environment.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `Execution/environment'
+#  Last modified 2022-09-13 22:38:41
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 84):
+	gcc $(CFLAGS) -c $^ -o $@
+	
+
+# Not a target:
+Parsing/tools.c:
+ 
+#  Implicit rule search has been done.
+#  Last modified 2022-09-13 22:34:18
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+minishell.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-09-13 22:34:18
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+Parsing/token_utils.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-09-13 22:34:18
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+Parsing/parsing.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-09-13 22:34:18
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+Execution/pipes_redirections.o: Execution/pipes_redirections.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `Execution/pipes_redirections'
+#  Last modified 2022-09-13 22:38:41
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 84):
+	gcc $(CFLAGS) -c $^ -o $@
+	
+
+Parsing/token_utils2.o: Parsing/token_utils2.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `Parsing/token_utils2'
+#  Last modified 2022-09-13 22:38:40
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 84):
+	gcc $(CFLAGS) -c $^ -o $@
+	
+
+Execution/execution.o: Execution/execution.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `Execution/execution'
+#  Last modified 2022-09-13 22:38:40
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 84):
+	gcc $(CFLAGS) -c $^ -o $@
 	
 
 # files hash-table stats:
-# Load=18/1024=2%, Rehash=0, Collisions=0/45=0%
+# Load=37/1024=4%, Rehash=0, Collisions=0/115=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
 
 # No general (`VPATH' variable) search path.
 
- 
 # # of strings in strcache: 1
 # # of strcache buffers: 1
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Mon Sep  5 22:37:55 2022
+# Finished Make data base on Tue Sep 13 22:39:02 2022
 
  

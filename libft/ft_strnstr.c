@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anajmi <anajmi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/03 21:49:22 by ohrete            #+#    #+#             */
-/*   Updated: 2021/11/23 23:28:23 by ohrete           ###   ########.fr       */
+/*   Created: 2021/11/06 10:12:13 by anajmi            #+#    #+#             */
+/*   Updated: 2021/11/18 13:48:08 by anajmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,40 @@
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	size_t	i;
-	size_t	j;
+	char			*str;
+	unsigned int	i;
+	unsigned int	j;
 
+	str = (char *) haystack;
+	if (*needle == '\0')
+		return (str);
 	i = 0;
-	if (needle[0] == '\0')
-		return ((char *)haystack);
-	if (!needle || len == 0)
-		return (NULL);
-	while (haystack[i] != '\0' && i < len)
+	while (str[i] != '\0' && i < len)
 	{
 		j = 0;
-		while (needle[j] == haystack[i + j] && j < len - i)
+		while (str[i + j] == needle[j] && (i + j) < len)
 		{
 			if (needle[j + 1] == '\0')
-				return ((char *)&haystack[i]);
+				return (&str[i]);
 			j++;
 		}
 		i++;
 	}
+	return (NULL);
+}
+
+/*
+int	main(void)
+{
+	char	str[50];
+	char	to_find[50];
+
+	strcpy(str, "ghost every ");
+	strcpy(to_find, "t ");
+	puts(ft_strnstr(str, to_find, 6));
+	strcpy(str, "ghost every ");
+	strcpy(to_find, "t ");
+	puts(strnstr(str, to_find, 6));
 	return (0);
 }
-// #include<stdlib.h>
-// #include<string.h>
-// #include <stdio.h>
-// int main()
-// {
-// 	printf("%s\n",ft_strnstr("beautiful world hi to you", "hi",35));
-// 	printf("%s\n",strnstr("beautiful world hi to you", "hi", 35));
-// }
+*/

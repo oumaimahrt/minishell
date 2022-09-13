@@ -3,38 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anajmi <anajmi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/08 15:35:32 by ohrete            #+#    #+#             */
-/*   Updated: 2021/11/24 00:26:32 by ohrete           ###   ########.fr       */
+/*   Created: 2021/11/03 16:23:44 by anajmi            #+#    #+#             */
+/*   Updated: 2021/11/20 17:29:44 by anajmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "libft.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t len)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	size_t			i;
-	unsigned char	*d;
-	unsigned char	*s;
+	char	*firsts;
+	char	*firstd;
+	char	*lasts;
+	char	*lastd;
 
-	i = 0;
-	d = (unsigned char *)dest;
-	s = (unsigned char *)src;
-	if (!s && !d)
-		return (NULL);
-	if (d > s)
-		while (len--)
-			d[len] = s[len];
+	if (!dst && !src)
+		return (0);
+	firsts = (char *) src;
+	firstd = (char *) dst;
+	lasts = firsts + (len - 1);
+	lastd = firstd + (len - 1);
+	if (firstd < firsts)
+		while (len-- > 0)
+			*firstd++ = *firsts++;
 	else
-		ft_memcpy (d, s, len);
-	return (d);
+		while (len-- > 0)
+			*lastd-- = *lasts--;
+	return (dst);
 }
-// #include<stdio.h>
-// int main()
-// {
-// 	char a[100] = "helloworld";
-// 	char b[100] = "oumaima is nice";
-// 	ft_memmove(a, b, 8);
-// 	printf("%s\n", a);
-// }
+
+/*
+int	main(void)
+{
+	char dest[] = "123456";
+
+	strcpy(dest, "123456");
+	printf("Before dest = %s \n", dest);
+	memmove(&dest[3], dest, 4);
+	//memmove(dest, &dest[3], 4);
+	printf("After memmove dest = %s    ", dest);
+	strcpy(dest, "123456");
+	ft_memmove(&dest[3], dest, 4);
+	//ft_memmove(dest, &dest[3], 4);
+	printf("After ft_memmove dest = %s \n", dest);
+	return (0);
+}
+*/
