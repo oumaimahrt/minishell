@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 11:26:50 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/12 04:30:23 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/13 02:59:35 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,11 @@ int	main(int ac, char **av, char **env)
 			{
 				data = tokenizer(line,av, fst_link);
 				//printf("output data \n");
-				while (data != NULL)
-				{
-					printf("word1 = %s, id = %d\n", data->str, data->id);
-					data = data->next;
-				}
+				// while (data != NULL)
+				// {
+				// 	printf("word1 = %s, id = %d\n", data->str, data->id);
+				// 	data = data->next;
+				// }
 			}
 			else
 				printf("minishell: syntax error\n");
@@ -94,7 +94,7 @@ int	main(int ac, char **av, char **env)
 			// printf("after parser \n");
 			//@ft_output(final_data);
 			//*printf("data ===== %s\n", data->str);
-			//**free_tokens(data); //holaaa
+			free_tokens(data); //holaaa
 			//data = NULL;
 			// ft_freeparser(final_data);
 			// printf("****\n");
