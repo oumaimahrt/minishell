@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libftplus.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anajmi <anajmi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 11:58:11 by anajmi            #+#    #+#             */
-/*   Updated: 2022/09/14 00:12:53 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/06/28 20:11:34 by anajmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define LIBFTPLUS_H
 # include <stddef.h>
 # include <stdlib.h>
-# include "../libft/libft.h"
+# include "../Libft/libft.h"
 
 int	ft_islower(int c);
 int	ft_isupper(int c);

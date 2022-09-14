@@ -111,6 +111,7 @@
 // void ft_output(t_final *cmd);
 // void	free_parser(t_final *cmd);
 // int check_dollar(char *str);
+
 // void free_tokens(t_token *data);
 // // t_token	*create_node(void);
 // //void	add_last_list(t_token **head, t_token *new);

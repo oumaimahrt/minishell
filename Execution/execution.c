@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anajmi <anajmi@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 21:12:12 by anajmi            #+#    #+#             */
-/*   Updated: 2022/09/11 15:34:54 by anajmi           ###   ########.fr       */
+/*   Updated: 2022/09/14 22:13:32 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,13 @@
 
 void	trouble(char *s)
 {
-	printf("trouble in %s.\n", s);
-	exit(0);
+	printf("minishell: %s.\n", s);
+	exit(1);
+}
+
+void	troublep(char *s)
+{
+	printf("minishell: %s.\n", s);
 }
 
 int	fork1(void)
@@ -40,7 +45,7 @@ char	*dir()
 	return (ft_strdup(cwd));
 }
 
-int	echo_check(char *args)
+static int	echo_check(char *args)
 {
 	t_allways aws;
 
@@ -48,13 +53,13 @@ int	echo_check(char *args)
 	while (args[aws.j])
 	{
 		if (args[aws.j] != 'n')
-			return (0);
+			return (1);
 		aws.j++;
 	}
-	return (1);
+	return (0);
 }
 
-int	echo(t_vars *var, t_final *final)
+int	echo(t_vars *var, t_final *final)//putstr !!!
 {
 	t_allways aws;
 
@@ -63,7 +68,7 @@ int	echo(t_vars *var, t_final *final)
 	
 	if (final->cmd[aws.i][0] == '-' && final->cmd[aws.i][1])
 	{
-		while (final->cmd[aws.i] && final->cmd[aws.i][0] == '-' && echo_check(final->cmd[aws.i]))
+		while (final->cmd[aws.i] && final->cmd[aws.i][0] == '-' && !echo_check(final->cmd[aws.i]))
 		{
 			aws.k = 0;
 			aws.i++;
@@ -71,64 +76,52 @@ int	echo(t_vars *var, t_final *final)
 	}
 	while (final->cmd[aws.i])
 	{
-		printf("%s ", final->cmd[aws.i]);
+		ft_putstr_fd(final->cmd[aws.i], 1);
+		ft_putchar_fd(' ', 1);
 		aws.i++;
 	}
-	printf("\b");
+	ft_putchar_fd('\b', 1);
 	if (aws.k)
-		printf("\n");
-	return (1);
+		ft_putchar_fd('\n', 1);
+	return (0);
+}
+
+static int	change_directory(t_vars *var, char *chemin)
+{
+	free(var->tmp3);
+	var->tmp3 = dir();
+	if (chdir(chemin))
+	{
+		printf("minishell: cd: %s: No such file or directory\n", chemin);
+		return (1);
+	}
+	if (!check_env_var(var, "OLDPWD"))
+		ft_export(var, ft_strjoin("OLDPWD=", var->tmp3), 0);
+	if (!check_env_var(var, "PWD"))
+		ft_export(var, ft_strjoin("PWD=", dir()), 0);
+	return (0);
 }
 
 int	cd(t_vars *var, t_final *final)
 {
-	if (check_env_var(var, "HOME"))
+	if (ft_lstlen(final->cmd) == 1)
 	{
-		if (ft_lstlen(final->cmd) == 1)
-		{
-			final->cmd[1] = ft_strdup(get_env_var(var, "HOME"));// SIGFAULT
-			final->cmd[2] = NULL;
-		}
+		if (check_env_var(var, "HOME"))
+			troublep("cd: HOME not set");
+		else
+			return (change_directory(var, get_env_var(var, "HOME")));
 	}
+	else if (!ft_strcmp(final->cmd[1], "~"))
+		return (change_directory(var, var->tilda));
 	else
-		trouble("cd $HOME"); //bash: cd: HOME not set
-
-	if (!ft_strcmp(final->cmd[1], "~"))
-	{
-		free(final->cmd[1]);
-		final->cmd[1] = ft_strdup(var->tilda);
-	}
-	if (final->cmd[1][0] == '-')
-	{
-		printf("minishell: cd: %s: invalid option\n", final->cmd[0]);
-		return (0);
-	}
-	else if (ft_lstlen(final->cmd) > 2)
-	{
-		printf("minishell: cd: too many arguments\n");
-		return (0);
-	}
-	else
-	{
-		free(var->tmp3);
-		var->tmp3 = dir();
-		if (chdir(final->cmd[1]))
-		{
-			printf("minishell: cd: %s: No such file or directory\n", final->cmd[1]);
-			return (0);
-		}
-		ft_export(var, ft_strjoin("OLDPWD=", var->tmp3), 0);
-		ft_export(var, ft_strjoin("PWD=", dir()), 0);
-	}
-	// else
-	// 	trouble("cd $PWD");
-	return (1);
+		return (change_directory(var, final->cmd[1]));
+	return (0);
 }
 
 int	pwd(t_vars *var)
 {
 	printf("%s\n", dir());
-	return (1);
+	return (0);
 }
 
 int	export(t_vars *var, t_final *final)
@@ -149,7 +142,7 @@ int	export(t_vars *var, t_final *final)
 			aws.i++;
 		}
 	}
-	return (1);
+	return (0);
 }
 
 int	unset(t_vars *var, t_final *final)
@@ -159,10 +152,13 @@ int	unset(t_vars *var, t_final *final)
 	aws.i = 1;
 	while (final->cmd[aws.i])
 	{
-		ft_unset(var, final->cmd[aws.i]);
+		if (little_checker(final->cmd[aws.i]))
+			printf("bash: unset: `%s': not a valid identifier\n", final->cmd[aws.i]);
+		else
+			ft_unset(var, final->cmd[aws.i]);
 		aws.i++;
 	}
-	return (1);
+	return (0);
 }
 
 int	environment(t_vars *var, t_final *final)
@@ -170,8 +166,11 @@ int	environment(t_vars *var, t_final *final)
 	if (!final->cmd[1])
 		show_env(var); // update SHLVL=4
 	else
+	{
 		printf("env: ‘%s’: No such file or directory\n", final->cmd[1]);
-	return (1);
+		return (1);
+	}
+	return (0);
 }
 
 static int	check_exit(char *cmds)
@@ -183,14 +182,14 @@ static int	check_exit(char *cmds)
 	if (cmds[aws.i] == '-' || cmds[aws.i] == '+')
 		aws.i++;
 	if (cmds[aws.i] == '\0')
-		return (0);
+		return (1);
 	while (cmds[aws.i])
 	{
 		if (!ft_isdigit(cmds[aws.i]))
-			return (0);
+			return (1);
 		aws.i++;
 	}
-	return (1);
+	return (0);
 }
 
 int	exiting(t_vars *var, t_final *final)
@@ -198,30 +197,25 @@ int	exiting(t_vars *var, t_final *final)
 	t_allways aws;
 
 	aws.i = ft_lstlen(final->cmd);
-	// unsigned char c = 656884651669684;
-	// printf("%d\n", c);
 	if (aws.i == 1)
 	{
 		printf("exit\n");
 		exit(EXIT_SUCCESS);
 	}
+	else if (aws.i > 2 && !check_exit(final->cmd[1]))
+	{
+		printf("exit\nminishell: exit: too many arguments\n");
+		return (1);
+	}
 	else if (aws.i >= 2 && check_exit(final->cmd[1]))
 	{
-		printf("exit\n");
-		// aws.e = (unsigned char)ft_atoi(final->cmd[1]);
-		// // printf("%d\n", aws.e);
-		// exit((int)aws.e);
-		exit(ft_atoi(final->cmd[1])%256);
+		printf("exit\nminishell: exit: numeric argument required\n");
+		exit(255);
 	}
 	else if (aws.i >= 2 && !check_exit(final->cmd[1]))
 	{
-		printf ("minishell: exit: numeric argument required\n");
-		exit(255);
-	}
-	else if (aws.i > 2 && check_exit(final->cmd[1]))
-	{
-		printf("exit\nminishell: exit: too many arguments\n");
-		// status = 1;
+		printf("exit\n");
+		exit(ft_atoi(final->cmd[1])%256);
 	}
 	else
 		exit(EXIT_FAILURE);
@@ -234,13 +228,16 @@ int	builtincheck(char *name)
 		|| !ft_strcmp(name, "pwd") || !ft_strcmp(name, "export")
 		|| !ft_strcmp(name, "unset") || !ft_strcmp(name, "env")
 		|| !ft_strcmp(name, "exit"))
-		return (1);
-	return (0);
+		return (0);
+	return (1);
 }
 
 int	builtin(t_vars *var, t_final *final)
 {
-/*	◦ exit with no options */
+	// free(var->tmp);
+	printf("*****************************%s\n", final->cmd[0]); //to check for segfault
+	if (final->cmd[0] == 0)
+		return (1);
 	if (!ft_strcmp(final->cmd[0], "echo"))
 		return (echo(var, final));
 	else if (!ft_strcmp(final->cmd[0], "cd"))
@@ -255,13 +252,16 @@ int	builtin(t_vars *var, t_final *final)
 		return (environment(var, final));
 	else if (!ft_strcmp(final->cmd[0], "exit"))
 		return (exiting(var, final));
-	return (0);
+	return (1);
 }
 
 char	*exe_path_set(t_vars *var, char *exe)
 {
 	t_allways aws;
 
+	if (check_env_var(var, "PATH"))
+		trouble("PATH");
+	fill_path(var);
 	aws.i = 0;
 	while (var->exepath[aws.i])
 	{
@@ -271,6 +271,56 @@ char	*exe_path_set(t_vars *var, char *exe)
 	}
 	return (NULL);
 }
+
+void	fill_path(t_vars *var)
+{
+	t_allways aws;
+
+	free1(var->temp);
+	var->temp = ft_split(get_env_var(var, "PATH"), ':');
+	free1(var->exepath);
+	var->exepath = malloc(sizeof(char *) * (ft_lstlen(var->temp) + 3));
+	aws.i = 0;
+	while (var->temp[aws.i])
+	{
+		var->exepath[aws.i] = ft_strjoin(var->temp[aws.i], "/");
+		aws.i++;
+	}
+	var->exepath[aws.i] = ft_strdup("./");
+	var->exepath[aws.i + 1] = ft_strdup("");
+	var->exepath[aws.i + 2] = NULL;
+}
+
+void	initialisation(t_vars *var, char **env)
+{
+	var->tmp = malloc(sizeof(char));
+	var->tmp1 = malloc(sizeof(char));
+	var->tmp2 = malloc(sizeof(char));
+	var->tmp3 = malloc(sizeof(char));
+	var->temp = malloc(sizeof(char *));
+	var->temp[0] = NULL;
+	var->temp1 = malloc(sizeof(char *));
+	var->temp2 = malloc(sizeof(char *));
+	var->exepath = malloc(sizeof(char *));
+	var->exepath[0] = NULL;
+
+	var->env.env = env;
+	var->tilda = ft_strdup("/Users/anajmi"); // ohrete
+	// var->cmd = (t_cmd **)malloc(sizeof(t_cmd *) * FILENAME_MAX);
+	var->cod = 0;
+	if (!env)
+	{
+		var->env.env = malloc(sizeof(char *));
+		var->env.env[0] = NULL;
+		return;
+	}
+	init_environment(var);
+	init_export(var);
+
+	ft_unset(var, "OLDPWD");
+	ft_export(var, "OLDPWD", 1);
+}
+
 
 /* void	runcmd(t_cmd *cmd, t_vars *var)
 {
@@ -345,52 +395,6 @@ char	*exe_path_set(t_vars *var, char *exe)
 		trouble("runcmd");
 	// exit(0);
 } */
-
-void	fill_path(t_vars *var)
-{
-	t_allways aws;
-
-	// if (!var->env.env[0])
-	// 	return ;
-	if (!check_env_var(var, "PATH"))
-		trouble("fill_path");
-	free1(var->temp);
-	var->temp = ft_split(get_env_var(var, "PATH"), ':');
-	var->exepath = malloc(sizeof(char *) * (ft_lstlen(var->temp) + 3));
-	aws.i = 0;
-	while (var->temp[aws.i])
-	{
-		var->exepath[aws.i] = ft_strjoin(var->temp[aws.i], "/");
-		aws.i++;
-	}
-	var->exepath[aws.i] = ft_strdup("./");
-	var->exepath[aws.i + 1] = ft_strdup("");
-	var->exepath[aws.i + 2] = NULL;
-}
-
-void	initialisation(t_vars *var, char **env)
-{
-	var->tmp = malloc(sizeof(char));
-	var->tmp1 = malloc(sizeof(char));
-	var->tmp2 = malloc(sizeof(char));
-	var->tmp3 = malloc(sizeof(char));
-	var->temp = malloc(sizeof(char *));
-	var->temp[0] = NULL;
-	var->temp1 = malloc(sizeof(char *));
-	var->temp2 = malloc(sizeof(char *));
-	// var->buff = malloc(sizeof(char));
-	var->env.env = env;
-	
-	var->tilda = ft_strdup("/Users/anajmi"); // ohrete
-	// var->cmd = (t_cmd **)malloc(sizeof(t_cmd *) * FILENAME_MAX);
-	var->cod = 0;
-	// if (!env[0])
-	// 	return;
-	init_environment(var);
-	init_export(var);
-	fill_path(var);
-}
-
 
 /* int	main(int ac, char *av[], char **env)
 {

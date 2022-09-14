@@ -6,13 +6,13 @@
 #    By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/25 14:07:31 by anajmi            #+#    #+#              #
-#    Updated: 2022/09/14 01:04:00 by ohrete           ###   ########.fr        #
+#    Updated: 2022/09/14 22:12:47 by ohrete           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-CFLAGS = -fsanitize=address -g #-Wall -Werror -Wextra
+CFLAGS = # -fsanitize=address -g #-Wall -Werror -Wextra
 
 PARSE =	\
 	./Parsing/syntax_error.c		\
@@ -23,6 +23,7 @@ PARSE =	\
 	./Parsing/token_utils2.c		\
 	./Parsing/expanding.c			\
 	./Parsing/parser.c				\
+	./Parsing/signals.c				\
 	./Parsing/tools.c				\
 	# ./Parsing/pars_utils.c 		\
 	# ./Parsing/pars_utils2.c 		\
@@ -37,7 +38,7 @@ EXEC =	\
 SRCS = $(PARSE) $(EXEC)
 #/Users/anajmi/goinfre/brew/opt/readline
 # LFLAGS = -lreadline -L./Users/anajmi/goinfre/brew/opt/readline/8.1.2/lib -I./Users/anajmi/goinfre/brew/opt/readline/8.1.2/include
-LFLAGS = -lreadline -L/Users/orete/.brew/opt/readline/lib -I/Users/ohrete/.brew/opt/readline/include
+LFLAGS = -lreadline -L/Users/anajmi/.brew/opt/readline/lib -I/Users/anajmi/.brew/opt/readline/include
 
 OBJ = $(SRCS:.c=.o)
 

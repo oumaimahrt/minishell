@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 23:00:09 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/14 00:38:40 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/13 03:09:21 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,14 +89,14 @@ void	tokens(char *line, t_token **temp, t_save *save, int *i)
 		setting_word(save, temp, line, i); //still
 }
 
-t_token	*tokenizer(char *line, char **av, t_env *env)
+t_token *tokenizer(char *line, char **av, t_env *env)
 {
 	int		i;
 	t_token	*temp;
 	t_save	*save;
 
 	save = (t_save *)malloc(sizeof(t_save));
-	save->av = av;
+	save->av =av;
 	save->env = env;
 	i = 0;
 	temp = NULL;

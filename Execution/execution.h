@@ -116,7 +116,6 @@ void	trouble(char *s);
 int		fork1(void);
 void	free1(char **tofree);
 
-// void	runcmd(t_cmd *cmd, t_vars *var);
 void	fill_path(t_vars *var);
 void	initialisation(t_vars *var, char **env);
 void	hostname(t_vars *var);
@@ -127,7 +126,6 @@ void	hostname(t_vars *var);
 
 int		builtin(t_vars *var, t_final *final);
 
-int		echo_check(char *args);
 int		echo(t_vars *var, t_final *fianl);
 int		cd(t_vars *var, t_final *fianl);
 int		pwd(t_vars *var);
@@ -159,7 +157,7 @@ int		var_into_var(t_vars *var, char **to_check, t_allways aws);
 int		name_into_var(t_vars *var, char **to_check, t_allways aws);
 int		outside_search_variable(t_vars *var, char *to_search, char *variable);
 int		inside_search_variable(t_vars *var, char *to_search, int gen);
-int		little_checker(t_vars *var);
+int		little_checker(char *to_check);
 int		validate_variable(t_vars *var, char *to_check);
 
 void	sort_export(t_vars *var);

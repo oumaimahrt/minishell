@@ -42,16 +42,16 @@ int	replace_variable(t_vars *var, char *to_check, char *value)
 	return (0);
 }
 
-int	little_checker(t_vars *var)
+int	little_checker(char *to_check)
 {
 	t_allways aws;
 
-	if (ft_isalpha(var->temp[0][0]) || var->temp[0][0] == '_')
+	if (ft_isalpha(to_check[0]) || to_check[0] == '_')
 	{
 		aws.i = 0;
-		while (var->temp[0][++aws.i])
+		while (to_check[++aws.i])
 		{
-			if (!ft_isalnum(var->temp[0][aws.i]) && var->temp[0][aws.i] != '_')
+			if (!ft_isalnum(to_check[aws.i]) && to_check[aws.i] != '_')
 				return (1);
 		}
 	}
@@ -68,9 +68,11 @@ int	validate_variable(t_vars *var, char *to_check)
 	free1(var->temp);
 	var->temp = ft_split(to_check, '=');
 	aws.i = ft_lstlen(var->temp);
-	if (replace_variable(var, var->temp[0], to_check))
+	if (!ft_strchr(to_check, '='))
 		return (0);
-	if (little_checker(var))
+	else if (replace_variable(var, var->temp[0], to_check))
+		return (0);
+	if (little_checker(var->temp[0]))
 		return (2);
 	return (1);
 }
@@ -95,7 +97,7 @@ void	init_environment(t_vars *var)
 	t_allways aws;
 
 	aws.i = 0;
-	var->env.newenv = malloc(sizeof(char *) * 1024);
+	var->env.newenv = malloc(sizeof(char *) * 4096);
 	while (var->env.env[aws.i])
 	{
 		var->env.newenv[aws.i] = ft_strdup(var->env.env[aws.i]);
@@ -110,7 +112,7 @@ void	init_export(t_vars *var)
 	t_allways aws;
 
 	aws.i = 0;
-	var->env.newexp = malloc(sizeof(char **) * 1024);
+	var->env.newexp = malloc(sizeof(char **) * 4096);
 	while (var->env.env[aws.i])
 	{
 		var->env.newexp[aws.i] = malloc(sizeof(char *) * 3);
@@ -123,8 +125,8 @@ void	init_export(t_vars *var)
 	}
 	var->env.newexp[aws.i] = NULL;
 	var->env.sizeofexp = ft_lstslen(var->env.newexp);
-	// if (!var->env.env[0])
-	// 	return ;
+	if (!var->env.env[0])
+		return ;
 	sort_export(var);
 }
 
@@ -158,6 +160,18 @@ void	show_exp(t_vars *var)
 void	ft_export(t_vars *var, char *to_add, int pass)
 {
 	// TODO : parsing !!!!!!
+	/*
+	bash-3.2$ export B=OK
+	bash-3.2$ export | grep B
+	declare -x B="OK"
+	declare -x HOMEBREW_CACHE="/tmp/anajmi/Homebrew/Caches"
+	declare -x HOMEBREW_TEMP="/tmp/anajmi/Homebrew/Temp"
+	bash-3.2$ export B
+	bash-3.2$ export | grep B
+	declare -x B="OK"
+	declare -x HOMEBREW_CACHE="/tmp/anajmi/Homebrew/Caches"
+	declare -x HOMEBREW_TEMP="/tmp/anajmi/Homebrew/Temp"
+	*/
 	if (!pass)
 		pass = validate_variable(var, to_add);
 	if (pass == 1)
@@ -257,7 +271,7 @@ int	check_env_var(t_vars *var, char *to_check)
 	while (++aws.j < var->env.sizeofexp - 1)
 	{
 		if (!ft_strcmp(var->env.newexp[aws.j][0], to_check))
-			return (1);
+			return (0);
 	}
-	return (0);
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 23:50:30 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/14 00:15:56 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/14 22:08:56 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,6 @@ int	list_size(t_cmd *list)
 	}
 	return (i);
 }
-
-// void	clear_list(t_token **list)
-// {
-// 	t_token	*tmp;
-
-// 	if (!(*list))
-// 		return ;
-// 	while (*list)
-// 	{
-// 		tmp = (*list)->next;
-// 		//free((*list)->str);
-// 		free(*list);
-// 		*list = tmp;
-// 	}
-// 	list = NULL;
-// }
 
 void	to_array(t_final *node)
 {
@@ -159,6 +143,11 @@ t_final	*ft_parser(t_token *data)
 		{
 			if (redirect(data->str))
 			{
+				if (data->str[0] == redirect(data->str) || data->next == NULL)
+				{
+					printf("minishell: syntax error\n");
+					return (0);
+				}
 				type = redirect(data->str);
 				data = data->next;
 				node_file = file_node(data->str, type);

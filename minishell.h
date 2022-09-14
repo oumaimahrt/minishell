@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:11:06 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/14 00:19:18 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/06 18:14:58 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-# include "libft/libft.h"
+# include "Libft/libft.h"
 # include "LibftPlus/libftplus.h"
 #define HERE fprintf(stderr, "HERE   %s  in  %d\n", __FILE__, __LINE__);
 
@@ -41,6 +41,7 @@ typedef struct s_vars t_vars;
 # define HERE_DOC 'H' // <<
 # define WORD 'W'
 
+// int	WEXITSTATUS(int g_status);
 int g_status;
 //env
 typedef struct s_env

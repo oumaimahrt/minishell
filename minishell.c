@@ -3,31 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anajmi <anajmi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 11:15:08 by anajmi            #+#    #+#             */
-/*   Updated: 2022/09/14 00:27:16 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/11 16:45:01 by anajmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-
-void	control_c(int sig)
-{
-	(void)sig;
-
-	// rl_replace_line("", 0);
-	// ft_putchar_fd('\n', 1);
-	// rl_on_new_line();
-	// rl_redisplay();
-	return ;
-}
-void	ft_signals(void)
-{
-	signal(SIGINT, control_c);
-	signal(SIGQUIT, SIG_IGN);
-}
 
 /* int	main(int ac, char *av[], char **env)
 {
@@ -90,20 +73,25 @@ int	main(int ac, char **av, char **env)
 			add_history(line);
 			if (syntax_error(line) != 0)
 			{
-				/* echo "|" // | ls // ls | // syntax test directly // $USER segv // "./execution" // */
+				/* echo "|" // | ls // ls | // syntax test directly // $USER segv // "./execution" //  */ 
+				/*
+					minishell→ export A
+					minishell→ $A
+					AddressSanitizer:DEADLYSIGNAL
+				*/
 				data = tokenizer(line, av, fst_link);
 				// while (data != NULL)
 				// {
 				// 	printf("word1 = %s, id = %d\n", data->str, data->id);
 				// 	data = data->next;
-				// }
-				
+
+				// var->final = final_data;	
 				final_data = ft_parser(data);
 				//iterate(&final_data);
 				executor(var, &final_data);
 				//ft_output(final_data);
 				//printf("len ==> \n\n\n");
-				
+
 				//printf("end output \n");
 				// printf("before parser %s\n", data->str);
 				//@final_data = ft_parser(data);
@@ -111,18 +99,17 @@ int	main(int ac, char **av, char **env)
 				// // // printf("output %s\n", data->str);
 				//@ft_output(final_data);
 				//*printf("data ===== %s\n", data->str);
-				//@free_tokens(data); //holaaa
+				free_tokens(data); //holaaa
 				//data = NULL;
 				// ft_freeparser(final_data);
 				//execution;
 				free(line);
 				//system("leaks minishell");
+					// }
 			}
 			else
 				printf("minishell: syntax error\n");
-
 		}
-		// var->final = final_data;
 	}
 }
 
