@@ -6,7 +6,7 @@
 #    By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/25 14:07:31 by anajmi            #+#    #+#              #
-#    Updated: 2022/09/13 23:16:13 by ohrete           ###   ########.fr        #
+#    Updated: 2022/09/14 01:04:00 by ohrete           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,6 @@ PARSE =	\
 	./Parsing/token_utils2.c		\
 	./Parsing/expanding.c			\
 	./Parsing/parser.c				\
-	./Parsing/parsing.c				\
 	./Parsing/tools.c				\
 	# ./Parsing/pars_utils.c 		\
 	# ./Parsing/pars_utils2.c 		\

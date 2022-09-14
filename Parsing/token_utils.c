@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 18:25:58 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/11 19:13:37 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/14 00:37:24 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	double_quote(t_save *save, t_token **temp, char *line, int *i)
 		add_token_last(temp, new_node(expand, DQ));
 	}
 	else
-		add_token_last(temp, new_node(str, DQ));	
+		add_token_last(temp, new_node(str, DQ));
 	(*i)++;
 }
 
@@ -110,7 +110,7 @@ void	setting_word(t_save *save, t_token **temp, char *line, int *i)
 	int		index;
 	char	*str;
 	char	*expand;
-	
+
 	index = *i;
 	while (line[*i] && skip_char(line[*i]))
 		(*i)++;

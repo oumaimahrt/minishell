@@ -6,11 +6,28 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 11:15:08 by anajmi            #+#    #+#             */
-/*   Updated: 2022/09/13 23:19:18 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/14 00:27:16 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+
+void	control_c(int sig)
+{
+	(void)sig;
+
+	// rl_replace_line("", 0);
+	// ft_putchar_fd('\n', 1);
+	// rl_on_new_line();
+	// rl_redisplay();
+	return ;
+}
+void	ft_signals(void)
+{
+	signal(SIGINT, control_c);
+	signal(SIGQUIT, SIG_IGN);
+}
 
 /* int	main(int ac, char *av[], char **env)
 {
@@ -94,7 +111,7 @@ int	main(int ac, char **av, char **env)
 				// // // printf("output %s\n", data->str);
 				//@ft_output(final_data);
 				//*printf("data ===== %s\n", data->str);
-				free_tokens(data); //holaaa
+				//@free_tokens(data); //holaaa
 				//data = NULL;
 				// ft_freeparser(final_data);
 				//execution;

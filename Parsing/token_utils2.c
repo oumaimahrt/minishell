@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 18:30:42 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/11 03:05:41 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/14 00:38:07 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_token	*new_node(char *str, int id)
 
 	new = (t_token *)malloc(sizeof(t_token));
 	if (new == NULL)
-		return NULL;
+		return (NULL);
 	new->str = str;
 	new->id = id;
 	new->next = NULL;
@@ -63,6 +63,6 @@ void	add_token_last(t_token **head, t_token *new)
 		{
 			last = last->next;
 		}
-		last->next= new;
+		last->next = new;
 	}
 }
