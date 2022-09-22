@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 23:50:30 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/22 22:00:57 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/22 23:44:17 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_cmd	*cmd_node(char *str)
 	new_node =  (t_cmd *)malloc(sizeof (t_cmd));
 	if (!new_node)
 		return (NULL);
-	new_node->str = ft_strdup(str);
+	new_node->str = my_strdup(str);
 	new_node->next = NULL;
 	return (new_node);
 }
@@ -289,7 +289,7 @@ t_final	*ft_parser(t_token *data)
 			{
 				if (data->str[0] == redirect(data->str) || data->next == NULL)
 				{
-					printf("redirect error\n");
+					ft_putstr_fd("minishell: syntax error\n", 2);
 					return (0);
 				}
 				data = data->next;

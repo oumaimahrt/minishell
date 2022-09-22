@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 16:52:39 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/22 22:35:20 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/22 22:59:30 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ void free_tokens(t_token *data)
 //     new = (t_node)malloc(sizeof(t_node));
 //     if (!new)
 //         return ;
-//     new->data = ft_strdup(data);
+//     new->data = my_strdup(data);
 //     new->next = NULL;
 //     if (*head == NULL)
 //         head = new;

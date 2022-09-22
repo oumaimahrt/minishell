@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 23:00:09 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/22 22:47:21 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/22 22:59:30 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*convert_char_str(char c)
 
 void	pipe_sign(t_token **head, int *i)
 {
-	add_token_last(head, new_node(ft_strdup("|"), PIPE));
+	add_token_last(head, new_node(my_strdup("|"), PIPE));
 	(*i)++;
 }
 

@@ -63,7 +63,7 @@ t_file	*file_node(char *str, int type)
 	if (!new_node)
 		return (NULL);
 	new_node->next = NULL;
-	new_node->str = ft_strdup(str);
+	new_node->str = my_strdup(str);
 	new_node->id = type;
 	return (new_node);
 }
@@ -80,7 +80,7 @@ void	to_array(t_final *node)
 		i = 0;
 		while (node->name)
 		{
-			node->cmd[i] = ft_strdup(node->name->str);
+			node->cmd[i] = my_strdup(node->name->str);
 			node->name = node->name->next;
 			i++;
 		}

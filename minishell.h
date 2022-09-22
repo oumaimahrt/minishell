@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:11:06 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/22 22:45:27 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/22 23:42:27 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@
 
 typedef struct s_final t_final;
 typedef struct s_vars t_vars;
-# include "Parsing/parsing.h"
 # include "Execution/execution.h"
 
 # define OUTPUT '>'
@@ -84,6 +83,7 @@ typedef struct s_file
 	int id;
 	struct s_file *next;
 }	t_file;
+
 typedef struct s_final
 {
 	int		type;
@@ -96,7 +96,7 @@ typedef struct s_final
 }	t_final;
 /*** end struct of parser ***/
 
-int syntax_error(char *str);
+int		syntax_error(char *str);
 char	*search_name(char *name, int i);
 char	*search_value(char *value, int i);
 t_env	*fill_struct(char *name, char *value);
@@ -118,19 +118,18 @@ char	*dollar(t_save *save, t_token **temp, char *line, int *i);
 void	pipe_sign(t_token **head, int *i);
 char	*convert_char_str(char c);
 void	tokens(char *line, t_token **temp, t_save *save, int *i);
-t_token *	tokenizer(char *line, char **av, t_env *env);
+t_token *tokenizer(char *line, char **av, t_env *env);
 t_final	*ft_parser(t_token *data);
-void ft_output(t_final *cmd);
+void	ft_output(t_final *cmd);
 void	free_parser(t_final *cmd);
-int check_dollar(char *str);
-void free_tokens(t_token *data);
+int		check_dollar(char *str);
+void	free_tokens(t_token *data);
 void	ft_signals(void);
 void	rl_replace_line (const char *text, int clear_undo);
 void	to_array(t_final *node);
-int	list_size(t_cmd *list);
-int redirect(char *str);
+int		list_size(t_cmd *list);
+int		redirect(char *str);
 t_file	*file_node(char *str, int type);
 t_final	*create_node(void);
-
 
 #endif
