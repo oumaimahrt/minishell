@@ -6,7 +6,7 @@
 #    By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/25 14:07:31 by anajmi            #+#    #+#              #
-#    Updated: 2022/09/22 21:12:59 by ohrete           ###   ########.fr        #
+#    Updated: 2022/09/22 22:02:17 by ohrete           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,9 +23,10 @@ PARSE =	\
 	./Parsing/token_utils2.c			\
 	./Parsing/expanding.c				\
 	./Parsing/parser.c					\
+	./Parsing/pars_utils.c				\
 	./Parsing/signals.c					\
 	./Parsing/tools.c					\
- 
+
 
 EXEC = \
 	./minishell.c							\
@@ -44,7 +45,7 @@ EXEC = \
 
 SRCS = $(PARSE) $(EXEC)
 CONTROL = @stty -echoctl
-RE_PATH = ~/.brew/opt/readline
+RE_PATH = ~/.brew/opt/readline/
 LFLAGS = -lreadline -L $(RE_PATH)/lib -I $(RE_PATH)/include
 OBJ = $(SRCS:.c=.o)
 

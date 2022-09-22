@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 18:25:58 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/22 21:11:54 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/22 22:46:04 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*single_quote(t_token **head, char *line, int *i)
 {
-	char 	*value;
-	int	index;
+	char	*value;
+	int		index;
 
 	index = *i;
 	(*i)++;
@@ -40,7 +40,7 @@ char	*double_quote(t_save *save, t_token **temp, char *line, int *i)
 	(*i)++;
 	while (line[*i] && line[*i] != '\"')
 		(*i)++;
-	if (!line[*i]) 
+	if (!line[*i])
 		ft_putstr_fd("ERROR: inclosed double quotes\n", 2);
 	value = ft_substr(line, index + 1, *i - index - 1);
 	if (check_dollar(value) != 0)
@@ -100,21 +100,6 @@ void	redirection(t_token **head, char *str, int *i)
 	(*i)++;
 }
 
-char	*convert_char_str(char c)
-{
-	char	*str;
-	
-	str = malloc (sizeof (char) * 2);
-	if (!str)
-	{
-		ft_putstr_fd("error allocation\n", 2);
-		return (NULL);
-	}
-	str[0] = c;
-	str[1] = '\0';
-	return (str);
-}
-
 void	setting_word(t_save *save, t_token **temp, char *line, int *i)
 {
 	char	*value;
@@ -128,21 +113,21 @@ void	setting_word(t_save *save, t_token **temp, char *line, int *i)
 		if (line[*i] == '\'')
 		{
 			str = single_quote(temp, line, i);
-			value = ft_strjoin (value, str);
+			value = my_strjoin (value, str);
 		}
 		else if (line[*i] == '\"')
 		{
 			str = double_quote(save, temp, line, i);
-			value = ft_strjoin (value, str);
+			value = my_strjoin (value, str);
 		}
 		else
 		{
 			if (line[*i] == '$')
-				value = ft_strjoin(value, dollar(save, temp, line, i));
+				value = my_strjoin(value, dollar(save, temp, line, i));
 			else
 			{
 				str = convert_char_str(line[*i]);
-				value = ft_strjoin (value, str);
+				value = my_strjoin (value, str);
 				(*i)++;
 			}
 		}

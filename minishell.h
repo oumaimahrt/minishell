@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:11:06 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/22 21:10:34 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/22 22:45:27 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,34 +107,30 @@ t_env	*setting_env(char **env);
 int		space(char c);
 t_token	*new_node(char *str, int id);
 void	add_token_last(t_token **head, t_token *new);
-// void	single_quote(t_token **head, char *line, int *i);
 char	*single_quote(t_token **head, char *line, int *i);
 char	*ft_expand(char *str, t_env *env, char **av);
-// void	double_quote(t_save *save, t_token **temp, char *line, int *i);
 char	*double_quote(t_save *save, t_token **temp, char *line, int *i);
 int		skip_char(char c);
 void	setting_word(t_save *save, t_token **temp, char *line, int *i);
 void	redirection(t_token **head, char *str, int *i);
 int		other_char(char c);
-// void	dollar(t_save *save, t_token **temp, char *line, int *i);
 char	*dollar(t_save *save, t_token **temp, char *line, int *i);
 void	pipe_sign(t_token **head, int *i);
+char	*convert_char_str(char c);
 void	tokens(char *line, t_token **temp, t_save *save, int *i);
 t_token *	tokenizer(char *line, char **av, t_env *env);
 t_final	*ft_parser(t_token *data);
 void ft_output(t_final *cmd);
 void	free_parser(t_final *cmd);
 int check_dollar(char *str);
-
 void free_tokens(t_token *data);
-// t_token	*create_node(void);
-//void	add_last_list(t_token **head, t_token *new);
-//int		 list_size(t_token *list);
-//void	clear_list(t_token **list);
-//int		my_errors(int e);
 void	ft_signals(void);
 void	rl_replace_line (const char *text, int clear_undo);
 void	to_array(t_final *node);
-void	control_c(int sig);
+int	list_size(t_cmd *list);
+int redirect(char *str);
+t_file	*file_node(char *str, int type);
+t_final	*create_node(void);
+
 
 #endif

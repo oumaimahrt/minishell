@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 16:52:39 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/13 02:57:04 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/22 22:35:20 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,21 +129,18 @@ void free_tokens(t_token *data)
 
 	while (new != NULL)
 	{
-		// printf("FREED ?\n");
 		//printf("|%s|\n", data->str);
 		tmp = new->next;
-		// printf("%s\n", new->str);
-		// printf("%p\n", new->str);
+		//#printf("%s\n", new->str);
+		//#printf("%p\n", new->str);
 		//printf("%s\n",new->next->str);
 		//printf("%p\n",new->next->str);
 		free(new->str);
 		free(new);
 		new = tmp;
 	}
-	
-	// printf("end free \n");
+	//#printf("end free \n");
 }
-
 
 
 // void    creat_node(t_node *head, char *data)
@@ -154,7 +151,7 @@ void free_tokens(t_token *data)
 //     new = (t_node)malloc(sizeof(t_node));
 //     if (!new)
 //         return ;
-//     new->data = my_strdup(data);
+//     new->data = ft_strdup(data);
 //     new->next = NULL;
 //     if (*head == NULL)
 //         head = new;

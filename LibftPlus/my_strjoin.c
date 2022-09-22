@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 19:33:51 by ohrete            #+#    #+#             */
-/*   Updated: 2022/08/23 18:28:44 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/22 22:32:50 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,5 @@ char	*my_strjoin(char*s1, char *s2)
 // #include<stdio.h>
 // int main()
 // {
-// 	printf("%s\n", ft_strjoin("hello","world"));
+// 	printf("%s\n", my_strjoin("hello","world"));
 // }

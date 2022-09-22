@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anajmi <anajmi@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 11:15:08 by anajmi            #+#    #+#             */
-/*   Updated: 2022/09/11 16:45:01 by anajmi           ###   ########.fr       */
+/*   Updated: 2022/09/22 22:35:04 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	main(int ac, char **av, char **env)
 	t_token	*data;
 	t_env	*fst_link;
 	t_final *final_data;
+	char	*line;
 	
 	int id ;
 	id = 1;
@@ -86,25 +87,25 @@ int	main(int ac, char **av, char **env)
 		*/
 		
 		// ft_signals();
-		var->line = readline("minishell→ ");
+		line = readline("minishell→ ");
 		ft_signals();
-		if (!var->line) 
+		if (!line) 
 		{
 			ft_putendl_fd("exit", 1);
 			exit(0); //control_D
 		}
-		if (var->line[0] != '\0') //for skipping \n
+		if (line[0] != '\0') //for skipping \n
 		{
-			if (syntax_error(var->line) != 0)
+			if (syntax_error(line) != 0)
 			{
-				add_history(var->line);
+				add_history(line);
 				/* echo "|" */
-				data = tokenizer(var->line, av, fst_link);
+				data = tokenizer(line, av, fst_link);
 				// while (data != NULL)
 				// {
 				// 	printf("word1 = %s, id = %d\n", data->str, data->id);
 				// 	data = data->next;
-
+				// }
 				// var->final = final_data;	
 				final_data = ft_parser(data);
 				//iterate(&final_data);
@@ -124,7 +125,7 @@ int	main(int ac, char **av, char **env)
 				//data = NULL;
 				// ft_freeparser(final_data);
 				//execution;
-				free(var->line);
+				free(line);
 				// system("leaks minishell");
 					// }
 			}
@@ -133,4 +134,3 @@ int	main(int ac, char **av, char **env)
 		}
 	}
 }
-
