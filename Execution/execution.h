@@ -6,7 +6,7 @@
 /*   By: anajmi <anajmi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 21:12:21 by anajmi            #+#    #+#             */
-/*   Updated: 2022/09/11 16:42:12 by anajmi           ###   ########.fr       */
+/*   Updated: 2022/09/22 01:44:11 by anajmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <sys/stat.h>
 # include <sys/wait.h>
 # include <readline/history.h>
 # include <readline/readline.h>
@@ -28,47 +29,6 @@
 # define C_BLUE		"\033[1;34m"
 # define C_CYAN		"\033[1;36m"
 
-// # define EXEC	1
-// # define REDIR	2
-// # define PIPE	3
-
-# define MAXARG	10
-
-
-/* typedef struct s_cmd t_cmd;
-
-typedef struct s_execcmd
-{
-	int type;
-	char name[MAXARG];
-	char *args[MAXARG];
-}	t_execcmd;
-
-typedef struct s_redircmd
-{
-	int type;
-	t_cmd *cmd;
-	char *file;
-	char *efile;
-	int mode;
-	int fd;
-}	t_redircmd;
-
-typedef struct s_pipecmd
-{
-	int type;
-	t_cmd *left;
-	t_cmd *right;
-}	t_pipecmd;
-
-struct s_cmd
-{
-	int type;
-	t_execcmd	*exe;
-	t_pipecmd	*pip;
-	t_redircmd	*red;
-}; */
-
 typedef struct s_envp
 {
 	size_t	sizeofexp;
@@ -78,97 +38,91 @@ typedef struct s_envp
 	char	***newexp;
 }	t_envp;
 
-typedef struct	s_allways
+typedef struct s_allways
 {
 	size_t	i;
 	size_t	j;
 	size_t	k;
-	int		e;
+	size_t	len;
+	int		pid;
+	int		status;
 }	t_allways;
 
-typedef struct	s_vars
+typedef struct s_vars
 {
-	int		exit_code;
+	char	*hdocs;
 
-	/* environment */
 	t_envp	env;
 	char	*tmp;
 	char	*tmp1;
-	char	*tmp2;
-	char	*tmp3;
-	char	**temp;
-	char	**temp1;
-	char	**temp2;
-	char	***temp3;
+	char	**tmpp;
 
 	char	**exepath;
-	char	*tilda;
-	char	*buff;
-	// t_cmd	**cmd;
-	size_t	cod;
+	int		*pid;
+	char	*line;
 }	t_vars;
 
 /* ************************************************************************** */
 /*								MAIN FUNCTIONS								  */
 /* ************************************************************************** */
 
-void	trouble(char *s);
-int		fork1(void);
-void	free1(char **tofree);
+int		trouble(char *cmd, char *arg, char *msg, int error_status);
+void	trouble_exit(char *cmd, char *arg, char *msg, int error_status);
+int		ft_fork(void);
 
 void	fill_path(t_vars *var);
 void	initialisation(t_vars *var, char **env);
-void	hostname(t_vars *var);
 
 /* ************************************************************************** */
 /*								BUILTIN FUNCTIONS							  */
 /* ************************************************************************** */
 
-int		builtin(t_vars *var, t_final *final);
+int		builtin(t_vars *var, t_final *node);
 
-int		echo(t_vars *var, t_final *fianl);
-int		cd(t_vars *var, t_final *fianl);
-int		pwd(t_vars *var);
-int		export(t_vars *var, t_final *fianl);
-int		unset(t_vars *var, t_final *fianl);
-int		environment(t_vars *var, t_final *fianl);
+int		echo(t_vars *var, t_final *node);
+int		cd(t_vars *var, t_final *node);
+int		pwd(t_vars *var, t_final *node);
+int		export(t_vars *var, t_final *node);
+int		unset(t_vars *var, t_final *node);
+int		environment(t_vars *var, t_final *node);
+int		exiting(t_vars *var, t_final *node);
 
 int		builtincheck(char *name);
-int		builtin(t_vars *var, t_final *fianl);
-
-char	*exe_path_set(t_vars *var, char *exe);
-void	executor(t_vars *var, t_final **n);
-int		list_size1(t_final *list);
-int		iterate(t_final **node);
+int		builtin(t_vars *var, t_final *node);
 
 /* ******************** */
 /*		DIRECTORY		*/
 /* ******************** */
 
-char	*dir();
+char	*dir(void);
 
 /* ******************** */
 /*		ENVIRONMENT		*/
 /* ******************** */
 
-void	free1(char **tofree);
 int		replace_variable(t_vars *var, char *to_check, char *value);
-int		var_into_var(t_vars *var, char **to_check, t_allways aws);
-int		name_into_var(t_vars *var, char **to_check, t_allways aws);
-int		outside_search_variable(t_vars *var, char *to_search, char *variable);
-int		inside_search_variable(t_vars *var, char *to_search, int gen);
 int		little_checker(char *to_check);
 int		validate_variable(t_vars *var, char *to_check);
 
 void	sort_export(t_vars *var);
 void	init_environment(t_vars *var);
 void	init_export(t_vars *var);
-void	ft_export(t_vars *var, char *to_add, int pass);
+int		ft_export(t_vars *var, char *to_add, int pass);
 void	export_add(t_vars *var, char *to_add);
 void	ft_unset(t_vars *var, char *to_del);
 void	show_env(t_vars *var);
 void	show_exp(t_vars *var);
 char	*get_env_var(t_vars *var, char *to_get);
 int		check_env_var(t_vars *var, char *to_check);
+
+/* ******************** */
+/*		EXECUTION		*/
+/* ******************** */
+
+char	*heredoc(t_vars *var, char *str);
+char	*exe_path_set(t_vars *var, char *exe);
+void	executor(t_vars *var, t_final **node);
+int		list_size1(t_final *list);
+int		iterate(t_final **node);
 
 #endif

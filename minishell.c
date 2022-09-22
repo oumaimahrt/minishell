@@ -23,10 +23,10 @@
 	while (1)
 	{
 		getcwd(cwd, sizeof(cwd));
-		free(var->temp);
-		var->temp = ft_split(cwd, '/');
-		if (ft_lstlen(var->temp) > 0)
-			printf("%s$ %s%s@%s %s%s %s|%s", C_GREEN, C_YELOW, get_env_var(var, "USER"), get_env_var(var, "HOSTNAME"), C_CYAN, var->temp[ft_lstlen(var->temp) - 1], C_RED, C_RES);
+		free(var->tmpp);
+		var->tmpp = ft_split(cwd, '/');
+		if (ft_lstlen(var->tmpp) > 0)
+			printf("%s$ %s%s@%s %s%s %s|%s", C_GREEN, C_YELOW, get_env_var(var, "USER"), get_env_var(var, "HOSTNAME"), C_CYAN, var->tmpp[ft_lstlen(var->tmpp) - 1], C_RED, C_RES);
 		else
 			printf("%s$ %s%s@%s %s%s %s|%s", C_GREEN, C_YELOW, get_env_var(var, "USER"), get_env_var(var, "HOSTNAME"), C_CYAN, cwd, C_RED, C_RES);
 		free(var->buff);
@@ -45,7 +45,6 @@
 
 int	main(int ac, char **av, char **env)
 {
-	char	*line;
 	t_vars	*var;
 	t_token	*data;
 	t_env	*fst_link;
@@ -59,27 +58,48 @@ int	main(int ac, char **av, char **env)
 	initialisation(var, env);
 	fst_link = setting_env(env);
 	fst_link->env_var = var;
+	ft_signals();
 	while (1)
 	{
-		ft_signals();
-		line = readline("minishell→ ");
-		if (!line) 
+		/*
+		
+		int	fd[2];
+		pipe(fd);
+		while (1)
 		{
-			printf("exit");
+			var->line = readline("minishell→ ");
+			write(fd[1], var->line, ft_strlen(var->line));
+			if (ft_strcmp(var->line, "limit"))
+				break;
+		}
+		close(fd[1]);
+		int child = fork();
+		if (!child)
+		{
+			char *aeee[] = {"/bin/cat", NULL};
+			dup2(fd[0], 0);
+			execve(aeee[0], aeee, env);
+		}
+		wait(NULL);
+		exit(0);
+		
+		*/
+		
+		// ft_signals();
+		var->line = readline("minishell→ ");
+		ft_signals();
+		if (!var->line) 
+		{
+			ft_putendl_fd("exit", 1);
 			exit(0); //control_D
 		}
-		if (line[0] != '\0') //for skipping \n
+		if (var->line[0] != '\0') //for skipping \n
 		{
-			add_history(line);
-			if (syntax_error(line) != 0)
+			if (syntax_error(var->line) != 0)
 			{
-				/* echo "|" // | ls // ls | // syntax test directly // $USER segv // "./execution" //  */ 
-				/*
-					minishell→ export A
-					minishell→ $A
-					AddressSanitizer:DEADLYSIGNAL
-				*/
-				data = tokenizer(line, av, fst_link);
+				add_history(var->line);
+				/* echo "|" */
+				data = tokenizer(var->line, av, fst_link);
 				// while (data != NULL)
 				// {
 				// 	printf("word1 = %s, id = %d\n", data->str, data->id);
@@ -88,6 +108,7 @@ int	main(int ac, char **av, char **env)
 				// var->final = final_data;	
 				final_data = ft_parser(data);
 				//iterate(&final_data);
+				// heredoc(var, final_data);
 				executor(var, &final_data);
 				//ft_output(final_data);
 				//printf("len ==> \n\n\n");
@@ -103,8 +124,8 @@ int	main(int ac, char **av, char **env)
 				//data = NULL;
 				// ft_freeparser(final_data);
 				//execution;
-				free(line);
-				//system("leaks minishell");
+				free(var->line);
+				// system("leaks minishell");
 					// }
 			}
 			else

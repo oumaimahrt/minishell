@@ -6,14 +6,15 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 18:25:58 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/11 19:13:37 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/22 21:11:54 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	single_quote(t_token **head, char *line, int *i)
+char	*single_quote(t_token **head, char *line, int *i)
 {
+	char 	*value;
 	int	index;
 
 	index = *i;
@@ -22,42 +23,37 @@ void	single_quote(t_token **head, char *line, int *i)
 		(*i)++;
 	if (!line[*i])
 	{
-		printf("ERROR: inclosed quotes\n");
-		return ;
+		ft_putstr_fd("ERROR: inclosed single quotes\n", 2);
 	}
-	add_token_last(head, new_node
-		(ft_substr(line, index + 1, *i - index - 1), SQ));
+	value = ft_substr(line, index + 1, *i - index - 1);
 	(*i)++;
+	return (value);
 }
 
-void	double_quote(t_save *save, t_token **temp, char *line, int *i)
+char	*double_quote(t_save *save, t_token **temp, char *line, int *i)
 {
 	int		index;
-	char	*str;
 	char	*expand;
+	char	*value;
 
 	index = *i;
 	(*i)++;
 	while (line[*i] && line[*i] != '\"')
 		(*i)++;
-	if (!line[*i])
+	if (!line[*i]) 
+		ft_putstr_fd("ERROR: inclosed double quotes\n", 2);
+	value = ft_substr(line, index + 1, *i - index - 1);
+	if (check_dollar(value) != 0)
 	{
-		printf("ERROR: inclosed quotes\n");
-		return ;
+		expand = value;
+		value = ft_expand(value, save->env, save->av);
+		free (expand);
 	}
-	str = ft_substr(line, index + 1, *i - index - 1);
-	if (check_dollar(str) != 0)
-	{
-		expand = ft_expand(str, save->env, save->av);
-		free (str);
-		add_token_last(temp, new_node(expand, DQ));
-	}
-	else
-		add_token_last(temp, new_node(str, DQ));	
 	(*i)++;
+	return (value);
 }
 
-void	dollar(t_save *save, t_token **temp, char *line, int *i)
+char	*dollar(t_save *save, t_token **temp, char *line, int *i)
 {
 	int		index;
 	char	*str;
@@ -74,8 +70,7 @@ void	dollar(t_save *save, t_token **temp, char *line, int *i)
 	{
 		if (copy && ft_strcmp(copy->str, "<<") == 0)
 		{
-			add_token_last(temp, new_node(str, EXPAND));
-			return ;
+			return (str);
 		}
 		else if (copy->next == NULL)
 			break ;
@@ -83,43 +78,74 @@ void	dollar(t_save *save, t_token **temp, char *line, int *i)
 	}
 	expand = ft_expand(str, save->env, save->av);
 	free(str);
-	add_token_last(temp, new_node(expand, EXPAND));
+	return (expand);
 }
 
 void	redirection(t_token **head, char *str, int *i)
 {
 	if (str[*i] == '>' && str[*i + 1] == '>')
 	{
-		add_token_last(head, new_node(my_strdup(">>"), APPEND));
+		add_token_last(head, new_node(ft_strdup(">>"), APPEND));
 		(*i)++;
 	}
 	else if (str[*i] == '<' && str[*i + 1] == '<')
 	{
-		add_token_last(head, new_node(my_strdup("<<"), HERE_DOC));
+		add_token_last(head, new_node(ft_strdup("<<"), HERE_DOC));
 		(*i)++;
 	}
 	else if (str[*i] == '>')
-		add_token_last(head, new_node(my_strdup(">"), OUTPUT));
+		add_token_last(head, new_node(ft_strdup(">"), OUTPUT));
 	else if (str[*i] == '<')
-		add_token_last(head, new_node(my_strdup("<"), INPUT));
+		add_token_last(head, new_node(ft_strdup("<"), INPUT));
 	(*i)++;
+}
+
+char	*convert_char_str(char c)
+{
+	char	*str;
+	
+	str = malloc (sizeof (char) * 2);
+	if (!str)
+	{
+		ft_putstr_fd("error allocation\n", 2);
+		return (NULL);
+	}
+	str[0] = c;
+	str[1] = '\0';
+	return (str);
 }
 
 void	setting_word(t_save *save, t_token **temp, char *line, int *i)
 {
-	int		index;
+	char	*value;
 	char	*str;
 	char	*expand;
-	
-	index = *i;
+
+	value = malloc (sizeof (char));
+	value[0] = '\0';
 	while (line[*i] && skip_char(line[*i]))
-		(*i)++;
-	str = ft_substr(line, index, *i - index);
-	if (check_dollar(str) != 0)
 	{
-		expand = ft_expand(str, save->env, save->av);
-		add_token_last(temp, new_node(expand, WORD));
+		if (line[*i] == '\'')
+		{
+			str = single_quote(temp, line, i);
+			value = ft_strjoin (value, str);
+		}
+		else if (line[*i] == '\"')
+		{
+			str = double_quote(save, temp, line, i);
+			value = ft_strjoin (value, str);
+		}
+		else
+		{
+			if (line[*i] == '$')
+				value = ft_strjoin(value, dollar(save, temp, line, i));
+			else
+			{
+				str = convert_char_str(line[*i]);
+				value = ft_strjoin (value, str);
+				(*i)++;
+			}
+		}
 	}
-	else
-		add_token_last(temp, new_node(str, WORD));
+	add_token_last(temp, new_node(value, WORD));
 }

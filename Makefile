@@ -6,40 +6,46 @@
 #    By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/25 14:07:31 by anajmi            #+#    #+#              #
-#    Updated: 2022/09/14 22:12:47 by ohrete           ###   ########.fr        #
+#    Updated: 2022/09/22 21:12:59 by ohrete           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-CFLAGS = # -fsanitize=address -g #-Wall -Werror -Wextra
+CFLAGS = # -Wall -Werror -Wextra # -fsanitize=address -g
 
 PARSE =	\
-	./Parsing/syntax_error.c		\
-	./Parsing/ft_environment.c		\
-	./Parsing/environment_utils.c 	\
-	./Parsing/tokenizer.c			\
-	./Parsing/token_utils.c			\
-	./Parsing/token_utils2.c		\
-	./Parsing/expanding.c			\
-	./Parsing/parser.c				\
-	./Parsing/signals.c				\
-	./Parsing/tools.c				\
-	# ./Parsing/pars_utils.c 		\
-	# ./Parsing/pars_utils2.c 		\
-	# ./Parsing/parsing/parse.c 
+	./Parsing/syntax_error.c			\
+	./Parsing/ft_environment.c			\
+	./Parsing/environment_utils.c		\
+	./Parsing/tokenizer.c				\
+	./Parsing/token_utils.c				\
+	./Parsing/token_utils2.c			\
+	./Parsing/expanding.c				\
+	./Parsing/parser.c					\
+	./Parsing/signals.c					\
+	./Parsing/tools.c					\
+ 
 
-EXEC =	\
-	./minishell.c					\
-	./Execution/execution.c			\
-	./Execution/environment.c		\
-	./Execution/pipes_redirections.c			\
+EXEC = \
+	./minishell.c							\
+	./Execution/builtin.c					\
+	./Execution/directory.c					\
+	./Execution/echo.c						\
+	./Execution/execution.c					\
+	./Execution/exiting.c					\
+	./Execution/pipes_redirections.c		\
+	./Execution/environment/environment0.c	\
+	./Execution/environment/environment1.c	\
+	./Execution/environment/init.c			\
+	./Execution/environment/show.c			\
+	./Execution/environment/tools.c			\
+	./Execution/environment/unset.c			\
 
 SRCS = $(PARSE) $(EXEC)
-#/Users/anajmi/goinfre/brew/opt/readline
-# LFLAGS = -lreadline -L./Users/anajmi/goinfre/brew/opt/readline/8.1.2/lib -I./Users/anajmi/goinfre/brew/opt/readline/8.1.2/include
-LFLAGS = -lreadline -L/Users/anajmi/.brew/opt/readline/lib -I/Users/anajmi/.brew/opt/readline/include
-
+CONTROL = @stty -echoctl
+RE_PATH = ~/.brew/opt/readline
+LFLAGS = -lreadline -L $(RE_PATH)/lib -I $(RE_PATH)/include
 OBJ = $(SRCS:.c=.o)
 
 #*******************************#
@@ -89,6 +95,7 @@ all : $(NAME)
 $(NAME) : $(OBJ)
 	$(ALLIBFT)
 	$(ALLIBPL)
+	$(CONTROL) 
 	gcc $(OBJ) $(CFLAGS) $(ARLIB) $(ARPLS) $(LFLAGS) -o $(NAME)
 	@echo "$(C_GREEN)[MINISHELL MANDATORY CREATED!]$(C_RES)"
 

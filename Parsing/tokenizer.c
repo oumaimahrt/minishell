@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 23:00:09 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/13 03:09:21 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/22 21:11:49 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 
 void	pipe_sign(t_token **head, int *i)
 {
-	add_token_last(head, new_node(my_strdup("|"), PIPE));
+	add_token_last(head, new_node(ft_strdup("|"), PIPE));
 	(*i)++;
 }
 
@@ -71,25 +71,28 @@ void	pipe_sign(t_token **head, int *i)
 // 	}
 // }
 
+// void	quotes(char *line, t_token **temp, t_save *save, int *i)
+// {
+// 	if (line[*i] == '\'')
+// 		single_quote(temp, line, i);
+// 	if (line[*i] == '\"')
+// 		double_quote(save, temp, line, i);
+// 	//return ;
+// }
+
 void	tokens(char *line, t_token **temp, t_save *save, int *i)
 {
-	if (line[*i] == '\'')
-		single_quote(temp, line, i); //done with leaks
-	else if (line[*i] == '\"')
-		double_quote(save, temp, line, i); //still
-	else if (space(line[*i]))
+	if (space(line[*i]))
 		(*i)++;
-	else if (line[*i] == '$')
-		dollar(save, temp, line, i); //DONE
 	else if (line[*i] == '<' || line[*i] == '>')
-		redirection(temp, line, i); // done
+		redirection(temp, line, i);
 	else if (line[*i] == '|')
-		pipe_sign(temp, i); //done 
+		pipe_sign(temp, i);
 	else
-		setting_word(save, temp, line, i); //still
+		setting_word(save, temp, line, i);
 }
 
-t_token *tokenizer(char *line, char **av, t_env *env)
+t_token	*tokenizer(char *line, char **av, t_env *env)
 {
 	int		i;
 	t_token	*temp;
