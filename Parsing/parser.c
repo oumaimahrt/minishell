@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anajmi <anajmi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 23:50:30 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/22 23:44:17 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/23 15:55:09 by anajmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,7 +265,7 @@ void	cmd_name(t_final *tmp,t_cmd **save_cmd, t_cmd *node_cmd)
 // 	return (sv->head);
 // }
 
-t_final	*ft_parser(t_token *data)
+t_final	*ft_parser0(t_token *data)
 {
 	t_final	*head;
 	t_final	*tmp;
@@ -287,14 +287,16 @@ t_final	*ft_parser(t_token *data)
 		{
 			if (redirect(data->str))
 			{
-				if (data->str[0] == redirect(data->str) || data->next == NULL)
+				if (((1 <= redirect(data->str) && redirect(data->str) <= 4)
+						&& (data->next == NULL || !ft_isalnum(data->next->str[0]))))
 				{
-					ft_putstr_fd("minishell: syntax error\n", 2);
+					trouble(NULL, NULL, "syntax error", 258);
 					return (0);
 				}
 				data = data->next;
 				node_file = file_node(data->str, redirect(data->str));
 				redir_cmd(tmp, &save_file, node_file);
+				printf("node_file->str -> %s,  node_file->id -> %d\n", node_file->str, node_file->id);
 			}
 			else
 			{
@@ -304,6 +306,90 @@ t_final	*ft_parser(t_token *data)
 			//my_cmd(data);
 			data = data->next;
 		}
+		if (data != NULL)
+			data = data->next;
+	}
+	to_array(head);
+	return (head);
+}
+
+
+t_final	*ft_parser(t_token *data)
+{
+	t_final *head;
+	t_final *tmp;
+	t_final *link;
+	t_token *save;
+	t_file *save_file;
+	t_file *node_file;
+	t_cmd *save_cmd;
+	t_cmd *node_cmd;
+	int		type;
+
+	head = NULL;
+	save = data;
+	while (data)
+	{
+		tmp = create_node();
+		if (head == NULL)
+		{
+			head = tmp;
+			link = head;
+			tmp->file = NULL;
+			tmp->name = NULL;
+		}
+		else
+		{
+			link->next = tmp;
+			link = tmp;
+			tmp->file = NULL;
+			tmp->name = NULL;
+		}
+		while (data && data->str && ft_strcmp(data->str, "|") != 0)
+		{
+			if (redirect(data->str))
+			{
+				if (((1 <= redirect(data->str) && redirect(data->str) <= 4)
+						&& (data->next == NULL || !ft_isalnum(data->next->str[0]))))
+				{
+					printf("minishell: syntax error\n");
+					return (0);
+				}
+				type = redirect(data->str);
+				data = data->next;
+				node_file = file_node(data->str, type);
+				if (tmp->file == NULL)
+				{
+					tmp->file = node_file;
+					save_file = node_file;
+				}
+				else
+				{
+					save_file->next = node_file;
+					save_file = node_file;
+				}
+				// printf("node_file->str -> %s,  node_file->id -> %d\n", node_file->str, node_file->id);
+			}
+			else
+			{
+				node_cmd = cmd_node(data->str);
+				if (tmp->name == NULL)
+				{
+					tmp->name = node_cmd;
+					save_cmd = node_cmd;
+				}
+				else
+				{
+					save_cmd->next = node_cmd;
+					save_cmd = node_cmd;
+				}
+			}
+			data = data->next;
+		}
+		if (tmp->name)
+			node_cmd->next = NULL;
+		if (tmp->file)
+			node_file->next = NULL;
 		if (data != NULL)
 			data = data->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:11:06 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/22 23:42:27 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/23 21:32:01 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@
 
 # include "Libft/libft.h"
 # include "LibftPlus/libftplus.h"
-#define HERE fprintf(stderr, "HERE   %s  in  %d\n", __FILE__, __LINE__);
 
-typedef struct s_final t_final;
-typedef struct s_vars t_vars;
+typedef struct s_final	t_final;
+typedef struct s_vars	t_vars;
+
 # include "Execution/execution.h"
 
 # define OUTPUT '>'
@@ -40,7 +40,7 @@ typedef struct s_vars t_vars;
 # define HERE_DOC 'H' // <<
 # define WORD 'W'
 
-int g_status;
+int	g_status;
 //env
 typedef struct s_env
 {
@@ -68,6 +68,8 @@ typedef struct s_save
 {
 	t_env *env;
 	char **av;
+	char	*value;
+	char	*str;
 }	t_save;
 
 /*** strcut for parser ***/
@@ -107,9 +109,9 @@ t_env	*setting_env(char **env);
 int		space(char c);
 t_token	*new_node(char *str, int id);
 void	add_token_last(t_token **head, t_token *new);
-char	*single_quote(t_token **head, char *line, int *i);
+char	*single_quote(char *line, int *i);
 char	*ft_expand(char *str, t_env *env, char **av);
-char	*double_quote(t_save *save, t_token **temp, char *line, int *i);
+char	*double_quote(t_save *save, char *line, int *i);
 int		skip_char(char c);
 void	setting_word(t_save *save, t_token **temp, char *line, int *i);
 void	redirection(t_token **head, char *str, int *i);

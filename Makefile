@@ -6,13 +6,13 @@
 #    By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/25 14:07:31 by anajmi            #+#    #+#              #
-#    Updated: 2022/09/22 22:02:17 by ohrete           ###   ########.fr        #
+#    Updated: 2022/09/23 21:27:31 by ohrete           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-CFLAGS = # -Wall -Werror -Wextra # -fsanitize=address -g
+CFLAGS = -Wall -Werror -Wextra #-fsanitize=address -g 
 
 PARSE =	\
 	./Parsing/syntax_error.c			\
@@ -26,7 +26,7 @@ PARSE =	\
 	./Parsing/pars_utils.c				\
 	./Parsing/signals.c					\
 	./Parsing/tools.c					\
-
+ 
 
 EXEC = \
 	./minishell.c							\

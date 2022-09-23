@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   directory.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anajmi <anajmi@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 23:02:13 by anajmi            #+#    #+#             */
-/*   Updated: 2022/09/22 01:43:22 by anajmi           ###   ########.fr       */
+/*   Updated: 2022/09/23 21:34:47 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	cd(t_vars *var, t_final *node)
 	return (0);
 }
 
-int	pwd(t_vars *var, t_final *node)
+int	pwd(t_final *node)
 {
 	ft_putstr_fd(dir(), node->outfile);
 	ft_putchar_fd('\n', node->outfile);

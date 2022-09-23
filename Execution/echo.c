@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anajmi <anajmi@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 23:18:46 by anajmi            #+#    #+#             */
-/*   Updated: 2022/09/22 01:44:42 by anajmi           ###   ########.fr       */
+/*   Updated: 2022/09/23 21:37:10 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,31 +26,35 @@ static int	echo_check(char *args)
 	return (0);
 }
 
-int	echo(t_vars *var, t_final *node)
+static int	echo_core(t_final *node, t_allways aws)
+{
+	if (node->cmd[aws.i][0] == '-' && node->cmd[aws.i][1])
+	{
+		while (node->cmd[aws.i] && node->cmd[aws.i][0] == '-'
+			&& !echo_check(node->cmd[aws.i]))
+		{
+			aws.k = 0;
+			aws.i++;
+		}
+	}
+	while (node->cmd[aws.i])
+	{
+		ft_putstr_fd(node->cmd[aws.i], node->outfile);
+		aws.i++;
+		if (node->cmd[aws.i])
+			ft_putchar_fd(' ', node->outfile);
+	}
+	return (aws.k);
+}
+
+int	echo(t_final *node)
 {
 	t_allways	aws;
 
 	aws.i = 1;
 	aws.k = 1;
 	if (node->cmd[aws.i])
-	{
-		if (node->cmd[aws.i][0] == '-' && node->cmd[aws.i][1])
-		{
-			while (node->cmd[aws.i] && node->cmd[aws.i][0] == '-'
-				&& !echo_check(node->cmd[aws.i]))
-			{
-				aws.k = 0;
-				aws.i++;
-			}
-		}
-		while (node->cmd[aws.i])
-		{
-			ft_putstr_fd(node->cmd[aws.i], node->outfile);
-			aws.i++;
-			if (node->cmd[aws.i])
-				ft_putchar_fd(' ', node->outfile);
-		}
-	}
+		aws.k = echo_core(node, aws);
 	if (aws.k)
 		ft_putchar_fd('\n', node->outfile);
 	return (0);
