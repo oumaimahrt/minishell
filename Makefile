@@ -6,7 +6,7 @@
 #    By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/25 14:07:31 by anajmi            #+#    #+#              #
-#    Updated: 2022/09/24 00:57:35 by ohrete           ###   ########.fr        #
+#    Updated: 2022/09/24 20:10:43 by ohrete           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,14 +30,18 @@ PARSE =	\
 
 EXEC = \
 	./minishell.c							\
+	./Execution/breaking.c					\
 	./Execution/builtin.c					\
 	./Execution/directory.c					\
 	./Execution/echo.c						\
+	./Execution/environment.c				\
 	./Execution/execution.c					\
-	./Execution/exiting.c					\
-	./Execution/pipes_redirections.c		\
-	./Execution/environment/environment0.c	\
-	./Execution/environment/environment1.c	\
+	./Execution/executor_tools.c			\
+	./Execution/executor.c					\
+	./Execution/heredoc.c					\
+	./Execution/iterate_files.c				\
+	./Execution/iterate_pipes.c				\
+	./Execution/environment/export_env.c	\
 	./Execution/environment/init.c			\
 	./Execution/environment/show.c			\
 	./Execution/environment/tools.c			\
