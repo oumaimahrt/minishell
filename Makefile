@@ -6,7 +6,7 @@
 #    By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/25 14:07:31 by anajmi            #+#    #+#              #
-#    Updated: 2022/09/24 20:10:43 by ohrete           ###   ########.fr        #
+#    Updated: 2022/09/25 19:17:38 by ohrete           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ EXEC = \
 	./Execution/executor.c					\
 	./Execution/heredoc.c					\
 	./Execution/iterate_files.c				\
+	./Execution/iterate_heredoc.c			\
 	./Execution/iterate_pipes.c				\
 	./Execution/environment/export_env.c	\
 	./Execution/environment/init.c			\
@@ -49,7 +50,7 @@ EXEC = \
 
 SRCS = $(PARSE) $(EXEC)
 CONTROL = @stty -echoctl
-RE_PATH = ~/.brew/opt/readline/
+RE_PATH = ~/.brew/opt/readline
 LFLAGS = -lreadline -L $(RE_PATH)/lib -I $(RE_PATH)/include
 OBJ = $(SRCS:.c=.o)
 
@@ -100,7 +101,7 @@ all : $(NAME)
 $(NAME) : $(OBJ)
 	$(ALLIBFT)
 	$(ALLIBPL)
-	$(CONTROL) 
+	$(CONTROL)
 	gcc $(OBJ) $(CFLAGS) $(ARLIB) $(ARPLS) $(LFLAGS) -o $(NAME)
 	@echo "$(C_GREEN)[MINISHELL MANDATORY CREATED!]$(C_RES)"
 

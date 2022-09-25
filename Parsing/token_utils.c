@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 18:25:58 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/24 22:49:59 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/25 21:42:18 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*single_quote(char *line, int *i)
 	if (!line[*i])
 	{
 		trouble("syntax error", NULL, "inclosed single quotes", 258);
-		return (0);
+		return (NULL);
 	}
 	value = ft_substr(line, index + 1, *i - index - 1);
 	(*i)++;
@@ -116,30 +116,24 @@ int	setting_word(t_save *save, t_token **temp, char *line, int *i)
 		if (line[*i] == '\'')
 		{
 			str = single_quote(line, i);
-			{
 			if (!str)
 				return (1);
-			}
 			value = my_strjoin (value, str);
 		}
 		else if (line[*i] == '\"')
 		{
 			str = double_quote(save, line, i);
-			{
-				if (!str)
-					return (1);
-			}
+			if (!str)
+				return (1);
 			value = my_strjoin(value, str);
 		}
 		else if (line[*i] == '$')
-			value = my_strjoin(value, dollar(save, temp, line, i));
+			value = ft_strjoin(value, dollar(save, temp, line, i));
 		else
 		{
 			str = convert_char_str(line[(*i)++]);
-			{
-				if (!str)
-					return (1);
-			}
+			if (!str)
+				return (1);
 			value = my_strjoin (value, str);
 		}
 	}
