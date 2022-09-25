@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 11:15:08 by anajmi            #+#    #+#             */
-/*   Updated: 2022/09/25 22:13:02 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/25 23:31:47 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,8 @@ int	main(int ac, char **av, char **env)
 		if (var->line[0] != '\0') //for skipping \n
 		{
 			/*
-			cat <<'$p'
-			echo "'$USER'"
-
-			sleep 1 || ls
-			sleep 1 | | ls
-			
+			cat << $USER 
+			cat << "$USER"
 			*/
 			//printf("syntax_error(var->line) = %d\n", syntax_error(var->line));
 			add_history(var->line);
