@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 23:00:09 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/26 22:37:30 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/27 00:36:50 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ t_token	*tokenizer(char *line, char **av, t_env *env)
 	while (line[i])
 	{
 		tokens(line, &temp, save, &i);
-		if (temp->error == 1)
+		if (temp && temp->error == 1)
 			break ;
 	}
 	if (temp->error != 1)
