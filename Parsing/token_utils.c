@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 18:25:58 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/25 21:42:18 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/26 20:05:15 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,7 @@ char	*dollar(t_save *save, t_token **temp, char *line, int *i)
 	while (copy != NULL)
 	{
 		if (copy && ft_strcmp(copy->str, "<<") == 0)
-		{
 			return (str);
-		}
 		else if (copy->next == NULL)
 			break ;
 		copy = copy->next;

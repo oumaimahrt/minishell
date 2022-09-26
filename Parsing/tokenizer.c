@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 23:00:09 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/25 22:20:34 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/26 22:37:30 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ t_token	*ft_lstlast1(t_token *lst)
 
 void	tokens(char *line, t_token **temp, t_save *save, int *i)
 {
-	t_token *tmp;
-	
+	t_token	*tmp;
+
 	tmp = *temp;
 	if (space(line[*i]))
 		(*i)++;
@@ -59,6 +59,9 @@ void	tokens(char *line, t_token **temp, t_save *save, int *i)
 	}
 	else
 		(*temp)->error = setting_word(save, temp, line, i);
+	// printf("'%c'\n", line[*i + 1]);
+	// if (line[*i] == '\0')
+	// 	return ;
 }
 
 void	check_last_word(t_token **temp)
@@ -75,6 +78,20 @@ void	check_last_word(t_token **temp)
 		(*temp)->error = trouble(NULL, NULL, "syntax error", 258);
 }
 
+int allspaces(char *line)
+{
+	int i;
+	
+	i = 0;
+	while(line[i])
+	{
+		if (line[i] != ' ')
+			return (0);
+		i++;
+	}
+	return(1);
+}
+
 t_token	*tokenizer(char *line, char **av, t_env *env)
 {
 	int		i;
@@ -86,11 +103,13 @@ t_token	*tokenizer(char *line, char **av, t_env *env)
 	save->env = env;
 	i = 0;
 	temp = NULL;
+	if (allspaces(line))
+		return (NULL);
 	while (line[i])
 	{
 		tokens(line, &temp, save, &i);
 		if (temp->error == 1)
-			break;
+			break ;
 	}
 	if (temp->error != 1)
 		check_last_word(&temp);

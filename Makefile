@@ -6,7 +6,7 @@
 #    By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/25 14:07:31 by anajmi            #+#    #+#              #
-#    Updated: 2022/09/25 23:25:22 by ohrete           ###   ########.fr        #
+#    Updated: 2022/09/26 19:53:40 by ohrete           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ EXEC = \
 	./Execution/environment.c				\
 	./Execution/execution.c					\
 	./Execution/executor_tools.c			\
-	./Execution/executor.c					\
+	./Execution/executor1.c					\
+	./Execution/executor2.c					\
 	./Execution/heredoc.c					\
 	./Execution/iterate_files.c				\
 	./Execution/iterate_heredoc.c			\

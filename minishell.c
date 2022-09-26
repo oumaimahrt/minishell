@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 11:15:08 by anajmi            #+#    #+#             */
-/*   Updated: 2022/09/25 23:31:47 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/26 22:20:45 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,14 @@ int	main(int ac, char **av, char **env)
 		if (var->line[0] != '\0') //for skipping \n
 		{
 			/*
-			cat << $USER 
-			cat << "$USER"
+			ls $l
 			*/
 			//printf("syntax_error(var->line) = %d\n", syntax_error(var->line));
 			add_history(var->line);
 			if (syntax_error(var->line) == 1)
 			{
 				data = tokenizer(var->line, av, fst_link);
-				if (data->error == 0)
+				if (data && data->error == 0)
 				{
 					// while (data != NULL)
 					// {
@@ -63,7 +62,7 @@ int	main(int ac, char **av, char **env)
 					// // // printf("output %s\n", data->str);
 					//@ft_output(final_data);
 					//*printf("data ===== %s\n", data->str);
-					//#free_tokens(data); //holaaa
+					free_tokens(data); //holaaa
 					// ft_freeparser(final_data);
 					free(var->line);
 					// system("leaks minishell");
