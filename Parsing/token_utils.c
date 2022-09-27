@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 18:25:58 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/26 20:05:15 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/27 01:12:39 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void	redirection(t_token **head, char *str, int *i)
 	(*i)++;
 }
 
+/*
 int	setting_word(t_save *save, t_token **temp, char *line, int *i)
 {
 	char	*value;
@@ -132,6 +133,50 @@ int	setting_word(t_save *save, t_token **temp, char *line, int *i)
 			str = convert_char_str(line[(*i)++]);
 			if (!str)
 				return (1);
+			value = my_strjoin (value, str);
+		}
+	}
+	add_token_last(temp, new_node(value, WORD));
+	return (0);
+}
+*/
+
+char	*quoting(t_save *save, char *line, int *i, char *value)
+{
+	char	*str;
+	
+	if (line[*i] == '\'')
+	{
+		str = single_quote(line, i);
+		if (!str)
+			return (0);
+		value = my_strjoin (value, str);
+	}
+	else if (line[*i] == '\"')
+	{
+		str = double_quote(save, line, i);
+		if (!str)
+			return (0);
+		value = my_strjoin(value, str);
+	}
+	return (value);
+}
+
+int	setting_word(t_save *save, t_token **temp, char *line, int *i)
+{
+	char	*value;
+	char	*str;
+
+	value = ft_strdup("");
+	while (line[*i] && skip_char(line[*i]))
+	{
+		if (line[*i] == '\'' || line[*i] == '\"')
+			value = quoting(save, line, i, value);
+		else if (line[*i] == '$')
+			value = ft_strjoin(value, dollar(save, temp, line, i));
+		else
+		{
+			str = convert_char_str(line[(*i)++]);
 			value = my_strjoin (value, str);
 		}
 	}

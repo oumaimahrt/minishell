@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 11:15:08 by anajmi            #+#    #+#             */
-/*   Updated: 2022/09/26 22:20:45 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/27 01:14:04 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@ int	main(int ac, char **av, char **env)
 					final_data = ft_parser(data);
 					//iterate(&final_data);
 					// heredoc(var, final_data);
-					executor(var, &final_data);
+					//**executor(var, &final_data);
 					// parser (&data);
 					// // // printf("output %s\n", data->str);
-					//@ft_output(final_data);
+					ft_output(final_data);
 					//*printf("data ===== %s\n", data->str);
-					free_tokens(data); //holaaa
+					//**free_tokens(data); //holaaa
 					// ft_freeparser(final_data);
 					free(var->line);
 					// system("leaks minishell");

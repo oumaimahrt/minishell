@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 23:00:09 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/27 00:36:50 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/27 01:13:18 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,6 @@ void	tokens(char *line, t_token **temp, t_save *save, int *i)
 	}
 	else
 		(*temp)->error = setting_word(save, temp, line, i);
-	// printf("'%c'\n", line[*i + 1]);
-	// if (line[*i] == '\0')
-	// 	return ;
 }
 
 void	check_last_word(t_token **temp)
