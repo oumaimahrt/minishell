@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anajmi <anajmi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 23:00:09 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/27 01:13:18 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/27 19:12:03 by anajmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ t_token	*tokenizer(char *line, char **av, t_env *env)
 		if (temp && temp->error == 1)
 			break ;
 	}
-	if (temp->error != 1)
+	if (temp && temp->error != 1)
 		check_last_word(&temp);
 	free(save);
 	return (temp);
