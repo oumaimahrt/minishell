@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 23:50:30 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/27 21:15:14 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/27 22:32:19 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,11 +163,11 @@ void	cmd_name(t_final *tmp,t_cmd **save_cmd, t_cmd *node_cmd, t_token *data)
 }
 
 
-void	norm_while(t_token **data, t_final **tmp)
+void	norm_while(t_token **data, t_final **tmp, t_cmd *node_cmd)
 {
 	int type;
 	t_cmd *save_cmd;
-	t_cmd *node_cmd;
+	//t_cmd *node_cmd;
 	t_file *node_file;
 	t_file *save_file;
 	
@@ -197,21 +197,18 @@ t_final	*ft_parser(t_token *data)
 	t_final	*head;
 	t_final	*tmp;
 	t_token	*save;
-	t_file	*node_file;
-	t_cmd	*node_cmd;
 	t_final	*link;
-	t_file	*save_file;
-	t_cmd	*save_cmd;
-	int		type;
+	t_cmd	*node_cmd;
 
 	head = NULL;
 	link = head;
 	save = data;
+	node_cmd = NULL;
 	while (data)
 	{
 		tmp = create_node();
 		head = link_nodes(head, &link, tmp);
-		norm_while(&data, &tmp);
+		norm_while(&data, &tmp, node_cmd);
 		if (data != NULL)
 			data = data->next;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anajmi <anajmi@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 13:52:36 by anajmi            #+#    #+#             */
-/*   Updated: 2022/09/26 12:53:19 by anajmi           ###   ########.fr       */
+/*   Updated: 2022/09/27 22:32:52 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int	executor_core(t_vars *var, t_final **node, t_allways w)
 int	executor(t_vars *var, t_final **node)
 {
 	t_allways	w;
-	t_final		*n;
 
 	w.i = 0;
 	w.j = 0;
