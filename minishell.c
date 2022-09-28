@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 11:15:08 by anajmi            #+#    #+#             */
-/*   Updated: 2022/09/28 00:22:49 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/28 18:39:56 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	main(int ac, char **av, char **env)
 	t_final *final_data;
 	t_save	*save;
 
-	
 	int id ;
 	id = 1;
 	if (ac > 1)
@@ -44,10 +43,6 @@ int	main(int ac, char **av, char **env)
 		}
 		if (var->line[0] != '\0') //for skipping \n
 		{
-			/*
-			ls $l
-			*/
-			//printf("syntax_error(var->line) = %d\n", syntax_error(var->line));
 			add_history(var->line);
 			if (syntax_error(var->line) == 1)
 			{
@@ -59,25 +54,15 @@ int	main(int ac, char **av, char **env)
 					// 	printf("word1 = %s, id = %d\n", data->str, data->id);
 					// 	data = data->next;
 					// }
-					//#final_data = ft_parser(data);
-					//iterate(&final_data);
-					// heredoc(var, final_data);
-					//#executor(var, &final_data);
-					// parser (&data);
-					// // // printf("output %s\n", data->str);
+					final_data = ft_parser(data);
+					executor(var, &final_data);
+					free_parser(final_data);
 					//@ft_output(final_data);
-					//*printf("data ===== %s\n", data->str);
-					// free_tokens(data); //holaaa
-					// ft_freeparser(final_data);
-					// system("leaks minishell");
-				// }
 				}
 				free_tokens(data);
-				
 			}
 			else
-				trouble(NULL, NULL, "syntax error", 258);
-			
+				trouble(NULL, NULL, "syntax error", 258);	
 		}
 		free(var->line);
 	}
