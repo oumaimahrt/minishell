@@ -6,13 +6,13 @@
 #    By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/25 14:07:31 by anajmi            #+#    #+#              #
-#    Updated: 2022/09/28 17:42:03 by ohrete           ###   ########.fr        #
+#    Updated: 2022/09/28 21:03:03 by ohrete           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-CFLAGS = -g #-fsanitize=address -g#-Wall -Werror -Wextra # 
+CFLAGS = -Wall -Werror -Wextra 
 
 PARSE =	\
 	./Parsing/syntax_error.c			\
@@ -97,14 +97,12 @@ C_RES = \033[0m
 	gcc $(CFLAGS) -c $^ -o $@
 
 all : $(NAME)
-	@echo "$(C_L_BLUE)[EXECUTE MINISHELL ...]$(C_RES)"
-	./minishell
 
 $(NAME) : $(OBJ)
 	$(ALLIBFT)
 	$(ALLIBPL)
 	$(CONTROL)
-	gcc $(OBJ) $(CFLAGS) $(ARLIB) $(ARPLS) $(LFLAGS) -o $(NAME)
+	gcc $(CFLAGS) $(OBJ) $(ARLIB) $(ARPLS) $(LFLAGS) -o $(NAME)
 	@echo "$(C_GREEN)[MINISHELL MANDATORY CREATED!]$(C_RES)"
 
 clean :

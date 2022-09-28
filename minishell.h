@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anajmi <anajmi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:11:06 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/28 19:04:32 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/28 19:17:14 by anajmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,29 +18,27 @@
 # include <stdlib.h>
 # include <signal.h>
 # include <fcntl.h>
+# include <sys/stat.h>
 # include <sys/wait.h>
+# include <sys/types.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-
 # include "Libft/libft.h"
 # include "LibftPlus/libftplus.h"
-# include "Execution/execution.h"
-
-typedef struct s_final	t_final;
-typedef struct s_vars	t_vars;
 
 # define OUTPUT '>'
 # define INPUT '<'
 # define PIPE "¶"
-# define APPEND 'A' // >>
+# define APPEND 'A'
 # define EXPAND '$'
 # define SQ '\''
 # define DQ '\"'
-# define HERE_DOC 'H' // <<
+# define HERE_DOC 'H'
 # define WORD 'W'
 
-int	g_status;
-
+typedef struct s_final	t_final;
+typedef struct s_vars	t_vars;
+int						g_status;
 //env
 typedef struct s_env
 {
@@ -97,6 +95,48 @@ typedef struct s_final
 }	t_final;
 /*** end struct of parser ***/
 
+/*** strcut for execution ***/
+typedef struct s_envp
+{
+	size_t	sizeofexp;
+	size_t	sizeofenv;
+	char	**env;
+	char	**newenv;
+	char	***newexp;
+}	t_envp;
+
+typedef struct s_allways
+{
+	int		h;
+	size_t	i;
+	size_t	j;
+	size_t	k;
+	size_t	len;
+	pid_t	pid;
+	int		status;
+}	t_allways;
+
+typedef struct s_vars
+{
+	char	*hdocs;
+
+	t_envp	env;
+	char	*tmp;
+	char	*tmp0;
+	char	*tmp1;
+	char	*tmp2;
+	char	**tmpp;
+
+	int		h;
+	int		infile;
+	char	*main_name;
+	char	**exepath;
+	int		*pid;
+	char	*line;
+	char	*gnl;
+}	t_vars;
+/*** end struct of execution ***/
+
 int		syntax_error(char *str);
 char	*search_name(char *name, int i);
 char	*search_value(char *value, int i);
@@ -136,4 +176,144 @@ t_final	*link_nodes(t_final *head, t_final **link, t_final *tmp);
 t_token	*ft_lstlast1(t_token *lst);
 void	check_last_word(t_token **temp, t_save *save);
 int		allspaces(char *line);
+
+/* ************************************************************************** */
+/*								EXPORT_ENV.C								  */
+/* ************************************************************************** */
+
+int		replace_variable(t_vars *var, char *to_check, char *value);
+int		little_checker(char *to_check);
+int		validate_variable(t_vars *var, char *to_check);
+int		ft_export(t_vars *var, char *to_add, int pass);
+void	export_add(t_vars *var, char *to_add);
+
+/* ************************************************************************** */
+/*								INIT.C										  */
+/* ************************************************************************** */
+
+void	init_environment(t_vars *var);
+void	init_export(t_vars *var);
+
+/* ************************************************************************** */
+/*								SHOW.C										  */
+/* ************************************************************************** */
+
+void	show_env(t_vars *var, t_final *node);
+void	show_exp(t_vars *var, t_final *node);
+
+/* ************************************************************************** */
+/*								TOOLS.C										  */
+/* ************************************************************************** */
+
+void	sort_export(t_vars *var);
+char	*get_env_var(t_vars *var, char *to_get);
+int		check_env_var(t_vars *var, char *to_check);
+
+/* ************************************************************************** */
+/*								UNSET.C										  */
+/* ************************************************************************** */
+
+void	ft_unset(t_vars *var, char *to_del);
+
+/* ************************************************************************** */
+/*								BUILTIN.C									  */
+/* ************************************************************************** */
+
+int		builtincheck(char *name);
+int		builtin(t_vars *var, t_final *node);
+
+/* ************************************************************************** */
+/*								BREAKING.C									  */
+/* ************************************************************************** */
+
+int		exiting(t_final *node);
+int		trouble(char *cmd, char *arg, char *msg, int error_status);
+void	trouble_exit(char *cmd, char *arg, char *msg, int exit_status);
+
+/* ************************************************************************** */
+/*								DIRECTORY.C									  */
+/* ************************************************************************** */
+
+char	*dir(void);
+int		cd(t_vars *var, t_final *node);
+int		pwd(t_final *node);
+
+/* ************************************************************************** */
+/*								ECHO.C										  */
+/* ************************************************************************** */
+
+int		echo(t_final *node);
+
+/* ************************************************************************** */
+/*								ENVIRONMENT.C								  */
+/* ************************************************************************** */
+
+int		export(t_vars *var, t_final *node);
+int		unset(t_vars *var, t_final *node);
+int		environment(t_vars *var, t_final *node);
+
+/* ************************************************************************** */
+/*								EXECUTION.C									  */
+/* ************************************************************************** */
+
+int		ft_fork(void);
+void	fill_path(t_vars *var);
+char	*exe_path_set(t_vars *var, char *exe);
+void	initialisation(t_vars *var, char **av, char **env);
+
+/* ************************************************************************** */
+/*								EXECUTOR_TOOLS.C							  */
+/* ************************************************************************** */
+
+void	node_close(t_final *node);
+void	full_close(t_final **node);
+void	duping(t_final **node);
+void	wait_status(t_vars *var, t_allways w);
+void	waiting(t_vars *var, t_final **node);
+
+/* ************************************************************************** */
+/*								EXECUTOR1.C									  */
+/* ************************************************************************** */
+
+void	execute_builtin(t_vars *var, t_final **node);
+void	execute_builtin_fork(t_vars *var, t_final **node);
+void	execute_execve_fork(t_vars *var, t_final **node, t_final **n);
+
+/* ************************************************************************** */
+/*								EXECUTOR2.C									  */
+/* ************************************************************************** */
+
+int		terminate(t_final **node, int rtn);
+int		execute_fork(t_vars *var, t_final **node, t_final **n, t_allways w);
+int		executor_core(t_vars *var, t_final **node, t_allways w);
+int		executor(t_vars *var, t_final **node);
+
+/* ************************************************************************** */
+/*								HEREDOC.C									  */
+/* ************************************************************************** */
+
+char	*var_into_heredoc(t_vars *var, char *to_check, t_allways aws);
+char	*heredoc_expand(t_vars *var, char *to_search);
+char	*heredoc_core(t_vars *var, char *delimiter);
+void	wait_exit(t_allways w);
+void	heredoc(t_vars *var, char *delimiter, int *fd);
+
+/* ************************************************************************** */
+/*								ITERATE_FILES.C								  */
+/* ************************************************************************** */
+
+int		iterate_files(t_vars *var, t_final **node);
+
+/* ************************************************************************** */
+/*								ITERATE_HEREDOC.C							  */
+/* ************************************************************************** */
+
+int		iterate_heredoc(t_vars *var, t_final **node);
+
+/* ************************************************************************** */
+/*								ITERATE_PIPES.C								  */
+/* ************************************************************************** */
+
+int		iterate_pipes(t_final **node);
+
 #endif
