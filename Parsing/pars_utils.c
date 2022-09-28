@@ -68,35 +68,6 @@ t_file	*file_node(char *str, int type)
 	return (new_node);
 }
 
-// void	to_array(t_final **node)
-// {
-// 	t_final	*save_final;
-// 	t_cmd	*save_cmd;
-// 	int		i;
-
-// 	save_final = *node;
-// 	save_cmd = (*node)->name;
-// 	while ((*node))
-// 	{
-// 		(*node)->cmd = malloc((list_size((*node)->name) + 1) \
-// 						* sizeof(char *));
-// 		i = 0;
-// 		while ((*node)->name)
-// 		{
-// 			if ((*node)->name->str[0] != '\0')
-// 			{
-// 				(*node)->cmd[i] = my_strdup((*node)->name->str);
-// 				i++;
-// 			}
-// 			(*node)->name = (*node)->name->next;
-// 		}
-// 		(*node)->cmd[i] = NULL;
-// 		(*node) = (*node)->next;
-// 	}
-// 	*node = save_final;
-// 	(*node)->name = save_cmd;
-// }
-
 void	to_array(t_final *node)
 {
 	int		i;
@@ -124,4 +95,3 @@ void	to_array(t_final *node)
 		parent_node = parent_node->next;
 	}
 }
-

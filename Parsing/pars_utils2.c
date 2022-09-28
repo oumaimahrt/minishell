@@ -59,7 +59,6 @@ void	free_parser(t_final *cmd)
 	parent_node = cmd;
 	while (parent_node)
 	{
-		
 		child_node = parent_node->name;
 		while (child_node)
 		{

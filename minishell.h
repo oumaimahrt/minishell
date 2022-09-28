@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:11:06 by ohrete            #+#    #+#             */
-/*   Updated: 2022/09/28 17:57:59 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/09/28 19:04:32 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,10 @@
 
 # include "Libft/libft.h"
 # include "LibftPlus/libftplus.h"
+# include "Execution/execution.h"
 
 typedef struct s_final	t_final;
 typedef struct s_vars	t_vars;
-
-# include "Execution/execution.h"
 
 # define OUTPUT '>'
 # define INPUT '<'
@@ -41,6 +40,7 @@ typedef struct s_vars	t_vars;
 # define WORD 'W'
 
 int	g_status;
+
 //env
 typedef struct s_env
 {
@@ -126,8 +126,7 @@ int		check_dollar(char *str);
 void	free_tokens(t_token *data);
 void	free_parser(t_final *cmd);
 void	ft_signals(void);
-void	rl_replace_line (const char *text, int clear_undo);
-//void	to_array(t_final **node);
+void	rl_replace_line(const char *text, int clear_undo);
 void	to_array(t_final *node);
 int		list_size(t_cmd *list);
 int		redirect(char *str);
@@ -136,6 +135,5 @@ t_final	*create_node(void);
 t_final	*link_nodes(t_final *head, t_final **link, t_final *tmp);
 t_token	*ft_lstlast1(t_token *lst);
 void	check_last_word(t_token **temp, t_save *save);
-int allspaces(char *line);
-
+int		allspaces(char *line);
 #endif
