@@ -80,18 +80,15 @@ void	to_array(t_final *node)
 	{
 		len = list_size(parent_node->name);
 		parent_node->cmd = malloc((len + 1) * sizeof(char *));
-		parent_node->cmd[len] = NULL;
 		child_node = parent_node->name;
 		i = 0;
 		while (child_node)
 		{
-			if (child_node->str[0] != '\0')
-			{
-				parent_node->cmd[i] = my_strdup(child_node->str);
-				i++;
-			}
+			parent_node->cmd[i] = my_strdup(child_node->str);
 			child_node = child_node->next;
+			i++;
 		}
+		parent_node->cmd[i] = NULL;
 		parent_node = parent_node->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: anajmi <anajmi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/23 17:46:31 by anajmi            #+#    #+#             */
-/*   Updated: 2022/09/27 19:54:57 by anajmi           ###   ########.fr       */
+/*   Updated: 2022/10/02 17:05:25 by anajmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,25 @@
 
 char	*var_into_heredoc(t_vars *var, char *to_check, t_allways aws)
 {
-	free(var->tmp1);
-	var->tmp1 = ft_substr(to_check, 0, aws.i);
-	free(var->tmp);
-	var->tmp = ft_substr(to_check, aws.i + 1, aws.k - aws.i - 1);
 	free(var->tmp2);
-	var->tmp2 = ft_substr(to_check, aws.k, ft_strlen(to_check));
-	if (!get_env_var(var, var->tmp))
-		return (ft_strjoin(var->tmp1, var->tmp2));
-	return (heredoc_expand(var,
-			ft_strjoin(ft_strjoin(var->tmp1,
-					get_env_var(var, var->tmp)), var->tmp2)));
+	var->tmp2 = ft_substr(to_check, 0, aws.i);
+	free(var->tmp3);
+	var->tmp3 = ft_substr(to_check, aws.i + 1, aws.k - aws.i - 1);
+	free(var->tmp4);
+	var->tmp4 = ft_substr(to_check, aws.k, ft_strlen(to_check));
+	if (check_env_var(var, var->tmp3))
+	{
+		free(var->tmp5);
+		var->tmp5 = ft_strjoin(var->tmp2, var->tmp4);
+		return (heredoc_expand(var, var->tmp5));
+	}
+	free(var->tmp5);
+	var->tmp5 = get_env_var(var, var->tmp3);
+	free(var->tmp6);
+	var->tmp6 = ft_strjoin(var->tmp2, var->tmp5);
+	free(var->tmp7);
+	var->tmp7 = ft_strjoin(var->tmp6, var->tmp4);
+	return (heredoc_expand(var, var->tmp7));
 }
 
 char	*heredoc_expand(t_vars *var, char *to_search)
@@ -41,8 +49,7 @@ char	*heredoc_expand(t_vars *var, char *to_search)
 			{
 				free(var->tmp);
 				var->tmp = ft_substr(to_search, aws.i + 1, aws.k - aws.i - 1);
-				if (!(check_env_var(var, var->tmp) || to_search[aws.k] == '_'
-						|| ft_isalpha(to_search[aws.k])))
+				if (!(to_search[aws.k] == '_' || ft_isalnum(to_search[aws.k])))
 					break ;
 			}
 			return (var_into_heredoc(var, to_search, aws));
@@ -68,8 +75,11 @@ char	*heredoc_core(t_vars *var, char *delimiter)
 		if (i == 0)
 			var->hdocs = ft_strjoin(heredoc_expand(var, var->gnl), "\n");
 		else
-			var->hdocs = ft_strjoin(var->hdocs,
-					ft_strjoin(heredoc_expand(var, var->gnl), "\n"));
+		{
+			free(var->tmp1);
+			var->tmp1 = ft_strjoin(heredoc_expand(var, var->gnl), "\n");
+			var->hdocs = ft_strjoin(var->hdocs, var->tmp1);
+		}
 		free(var->gnl);
 		i++;
 	}

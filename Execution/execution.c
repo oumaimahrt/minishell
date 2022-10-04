@@ -6,15 +6,15 @@
 /*   By: anajmi <anajmi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 21:12:12 by anajmi            #+#    #+#             */
-/*   Updated: 2022/09/28 14:38:53 by anajmi           ###   ########.fr       */
+/*   Updated: 2022/10/01 14:32:11 by anajmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_fork(void)
+pid_t	ft_fork(void)
 {
-	int	pid;
+	pid_t	pid;
 
 	pid = fork();
 	if (pid == -1)
@@ -26,8 +26,10 @@ void	fill_path(t_vars *var)
 {
 	t_allways	aws;
 
+	free(var->tmp);
+	var->tmp = get_env_var(var, "PATH");
 	ft_free(var->tmpp);
-	var->tmpp = ft_split(get_env_var(var, "PATH"), ':');
+	var->tmpp = ft_split(var->tmp, ':');
 	ft_free(var->exepath);
 	var->exepath = malloc(sizeof(char *) * (ft_lstlen(var->tmpp) + 3));
 	aws.i = 0;
@@ -55,19 +57,31 @@ char	*exe_path_set(t_vars *var, char *exe)
 	aws.i = 0;
 	while (var->exepath[aws.i])
 	{
-		if (!access(ft_strjoin(var->exepath[aws.i], exe), F_OK))
-			return (ft_strjoin(var->exepath[aws.i], exe));
+		free(var->tmp);
+		var->tmp = ft_strjoin(var->exepath[aws.i], exe);
+		if (!access(var->tmp, F_OK))
+			return (var->tmp);
 		aws.i++;
 	}
 	return (NULL);
 }
 
-void	initialisation(t_vars *var, char **av, char **env)
+static void	initialisation_tmp(t_vars *var)
 {
-	var->tmp = malloc(sizeof(char));
-	var->tmp2 = malloc(sizeof(char));
+	var->tmp = NULL;
+	var->tmp3 = NULL;
+	var->tmp4 = NULL;
+	var->tmp5 = NULL;
+	var->tmp6 = NULL;
+	var->tmp7 = NULL;
+	var->tmp8 = NULL;
 	var->tmpp = malloc(sizeof(char *));
 	var->tmpp[0] = NULL;
+}
+
+void	initialisation(t_vars *var, char **av, char **env)
+{
+	initialisation_tmp(var);
 	var->main_name = ft_strdup(av[0]);
 	var->exepath = malloc(sizeof(char *));
 	var->exepath[0] = NULL;
@@ -84,9 +98,10 @@ void	initialisation(t_vars *var, char **av, char **env)
 	}
 	init_environment(var);
 	init_export(var);
-	var->tmp0 = ft_itoa(ft_atoi(get_env_var(var, "SHLVL")) + 1);
-	var->tmp1 = ft_strjoin("SHLVL=", var->tmp0);
-	ft_export(var, var->tmp1, 0);
+	var->tmp0 = get_env_var(var, "SHLVL");
+	var->tmp1 = ft_itoa(ft_atoi(var->tmp0) + 1);
+	var->tmp2 = ft_strjoin("SHLVL=", var->tmp1);
+	ft_export(var, var->tmp2, 0);
 	ft_unset(var, "OLDPWD");
 	ft_export(var, "OLDPWD", 1);
 }

@@ -6,7 +6,7 @@
 /*   By: anajmi <anajmi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 01:20:26 by anajmi            #+#    #+#             */
-/*   Updated: 2022/09/27 19:54:32 by anajmi           ###   ########.fr       */
+/*   Updated: 2022/10/03 14:44:57 by anajmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,11 @@ char	*get_env_var(t_vars *var, char *to_get)
 	while (++aws.i < var->env.sizeofexp)
 	{
 		if (!ft_strcmp(var->env.newexp[aws.i][0], to_get))
-			return (var->env.newexp[aws.i][1]);
+		{
+			if (var->env.newexp[aws.i][1])
+				return (ft_strdup(var->env.newexp[aws.i][1]));
+			break ;
+		}
 	}
 	return (ft_strdup(""));
 }

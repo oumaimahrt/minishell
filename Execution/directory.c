@@ -6,24 +6,11 @@
 /*   By: anajmi <anajmi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 23:02:13 by anajmi            #+#    #+#             */
-/*   Updated: 2022/09/24 11:37:04 by anajmi           ###   ########.fr       */
+/*   Updated: 2022/10/01 14:33:58 by anajmi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-static int	change_directory(t_vars *var, char *chemin)
-{
-	free(var->tmp1);
-	var->tmp1 = dir();
-	if (chdir(chemin))
-		return (trouble("cd", chemin, "No such file or directory", 1));
-	if (!check_env_var(var, "OLDPWD"))
-		ft_export(var, ft_strjoin("OLDPWD=", var->tmp1), 0);
-	if (!check_env_var(var, "PWD"))
-		ft_export(var, ft_strjoin("PWD=", dir()), 0);
-	return (0);
-}
 
 char	*dir(void)
 {
@@ -33,6 +20,29 @@ char	*dir(void)
 	return (ft_strdup(cwd));
 }
 
+static int	change_directory(t_vars *var, char *chemin)
+{
+	free(var->tmp1);
+	var->tmp1 = dir();
+	if (chdir(chemin))
+		return (trouble("cd", chemin, "No such file or directory", 1));
+	if (!check_env_var(var, "OLDPWD"))
+	{
+		free(var->tmp2);
+		var->tmp2 = ft_strjoin("OLDPWD=", var->tmp1);
+		ft_export(var, var->tmp2, 0);
+	}
+	if (!check_env_var(var, "PWD"))
+	{
+		free(var->tmp1);
+		var->tmp1 = dir();
+		free(var->tmp2);
+		var->tmp2 = ft_strjoin("PWD=", var->tmp1);
+		ft_export(var, var->tmp2, 0);
+	}
+	return (0);
+}
+
 int	cd(t_vars *var, t_final *node)
 {
 	if (ft_lstlen(node->cmd) == 1)
@@ -40,7 +50,11 @@ int	cd(t_vars *var, t_final *node)
 		if (check_env_var(var, "HOME"))
 			return (trouble("cd", NULL, "HOME not set", 1));
 		else
-			return (change_directory(var, get_env_var(var, "HOME")));
+		{
+			free(var->tmp);
+			var->tmp = get_env_var(var, "HOME");
+			return (change_directory(var, var->tmp));
+		}
 	}
 	else
 		return (change_directory(var, node->cmd[1]));
@@ -49,7 +63,11 @@ int	cd(t_vars *var, t_final *node)
 
 int	pwd(t_final *node)
 {
-	ft_putstr_fd(dir(), node->outfile);
+	char	*pwd;
+
+	pwd = dir();
+	ft_putstr_fd(pwd, node->outfile);
 	ft_putchar_fd('\n', node->outfile);
+	free(pwd);
 	return (0);
 }
