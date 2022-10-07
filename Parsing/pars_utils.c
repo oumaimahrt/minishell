@@ -50,6 +50,7 @@ t_final	*create_node(void)
 	if (!new_node)
 		return (NULL);
 	new_node->next = NULL;
+	new_node->herein = -1;
 	new_node->infile = -1;
 	new_node->outfile = -1;
 	return (new_node);

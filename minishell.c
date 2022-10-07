@@ -6,7 +6,7 @@
 /*   By: ohrete <ohrete@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 11:15:08 by anajmi            #+#    #+#             */
-/*   Updated: 2022/10/04 02:35:42 by ohrete           ###   ########.fr       */
+/*   Updated: 2022/10/04 09:31:09 by ohrete           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,3 @@ int	main(int ac, char **av, char **env)
 		free(var->line);
 	}
 }
-
-// while true; do leaks minishell ; sleep 1; done
-// echo "$"
-// echo $
-// exit status in cas : jdglaghgas -> cmd not found, sould keep his status value 127 not 0
